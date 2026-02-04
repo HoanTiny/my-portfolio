@@ -1,0 +1,53 @@
+{
+  "common": {
+    "home": "Trang chủ",
+    "about": "Giới thiệu",
+    "projects": "Dự án",
+    "skills": "Kỹ năng",
+    "contact": "Liên hệ",
+    "resume": "Hồ sơ"
+  },
+  "hero": {
+    "greeting": "Xin chào, tôi là",
+    "title": "Lập trình viên Full Stack",
+    "description": "Tôi xây dựng các ứng dụng web đẹp và chức năng",
+    "cta": "Xem Dự Án"
+  },
+  "about": {
+    "title": "Về Tôi",
+    "description": "Tôi là một lập trình viên đam mê với kinh nghiệm xây dựng ứng dụng web."
+  },
+  "projects": {
+    "title": "Dự Án Của Tôi",
+    "viewProject": "Xem Dự Án",
+    "viewCode": "Xem Mã Nguồn"
+  },
+  "skills": {
+    "title": "Kỹ Năng",
+    "frontend": "Giao diện",
+    "backend": "Máy chủ",
+    "tools": "Công cụ & Khác"
+  },
+  "contact": {
+    "title": "Liên Hệ",
+    "name": "Họ tên",
+    "email": "Email",
+    "message": "Tin nhắn",
+    "send": "Gửi Tin Nhắn",
+    "success": "Tin nhắn đã được gửi thành công!",
+    "error": "Gửi tin nhắn thất bại. Vui lòng thử lại."
+  },
+  "footer": {
+    "copyright": "Bản quyền đã được bảo hộ."
+  },
+  "theme": {
+    "light": "Sáng",
+    "dark": "Tối",
+    "system": "Hệ thống"
+  },
+  "language": {
+    "en": "English",
+    "vi": "Tiếng Việt",
+    "zh": "中文"
+  }
+}
