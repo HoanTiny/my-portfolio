@@ -15,14 +15,17 @@ import Footer from "@/components/portfolio/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#f5f5f5] dark:bg-[#000000] transition-colors duration-300 py-6 space-y-6">
+    <div className="min-h-screen bg-[#f5f5f5] dark:bg-[#1f1f24] transition-colors duration-300 py-6 space-y-6 relative">
+      <div className="absolute top-0 start-0 w-full h-full ">
+        <img className="bg-w" src="/bg.png" alt="zelio" />
+      </div>
       {/* Header */}
-      <div className="p-6 max-w-[1920px] mx-auto">
+      <div className="p-6 max-w-330 mx-auto">
         <Header />
       </div>
 
       {/* Main Content */}
-      <main className="max-w-[1920px] mx-auto px-6 space-y-6">
+      <main className="max-w-330 mx-auto px-6 space-y-6">
         {/* Hero Section */}
         <Hero />
 
