@@ -1,14 +1,7 @@
 // Icon components from design system - using RemixIcon
 // https://remixicon.com
 
-export const RiDownloadLine = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path
-      d="M3 19H21V21H3V19ZM13 13.172L19.071 7.1L20.485 8.514L12 17L3.515 8.515L4.929 7.1L11 13.17V2H13V13.172Z"
-      fill="currentColor"
-    />
-  </svg>
-);
+export const RiDownloadLine = () => <img src="/ri-download-line.svg" alt="" />;
 
 export const RiArrowRightLine = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">

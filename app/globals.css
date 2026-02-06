@@ -38,6 +38,12 @@
   --neutral-800: #24242d;
   --neutral-900: #272730;
   --neutral-1000: #1f1f24;
+  --tc-bg-3: #ffffff;
+  --tc-bg-dark-3: #272730;
+  --tc-theme-primary-2: #62a92b;
+  --tc-theme-dark-primary-2: #a8ff53;
+  --btn-bg: #8c71ff;
+  --btn-bg-dark: #8c71ff;
 
   /* Semantic aliases - Light mode */
   --primary: #6e4ef2;
@@ -73,6 +79,8 @@
   --card: #272730;
   --card-foreground: #e5e5e6;
   --gray-light: #2a2a31;
+  --tc-bg-3: var(--tc-bg-dark-3);
+  --btn-bg: var(--btn-bg-dark);
 }
 
 @theme inline {
@@ -103,7 +111,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-dm-mono), Arial, Helvetica, sans-serif;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
@@ -263,12 +271,16 @@ body {
 .border-animation::before {
   content: "";
   display: block;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(102, 102, 102, 0.75) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--tc-theme-primary-2), var(--tc-bg-3)) padding-box,
+    linear-gradient(
+        var(--angle),
+        var(--tc-bg-3) 90%,
+        var(--tc-theme-primary-2) 100%
+      )
+      border-box;
+
   height: 1108px;
   width: 300px;
   transform: translate(0);
@@ -280,6 +292,17 @@ body {
 }
 
 @keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate {
   from {
     transform: rotate(0);
   }
@@ -287,4 +310,56 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* From Uiverse.io by Peary74 */
+.download_btn {
+  font-family: inherit;
+  font-size: 20px;
+  background: #212121;
+  color: white;
+  fill: rgb(155, 153, 153);
+  padding: 0.7em 1em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  font-weight: 1000;
+}
+
+.download_btn span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+.download_btn img {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.download_btn:hover {
+  background: #000;
+}
+
+.download_btn:hover .svg-wrapper {
+  transform: scale(1.25);
+  transition: 0.5s linear;
+}
+
+.download_btn:hover img {
+  transform: translateX(3.8em) scale(1.1);
+  fill: #fff;
+}
+
+.download_btn:hover span {
+  opacity: 0;
+  transition: 0.5s linear;
+}
+
+.download_btn:active {
+  transform: scale(0.95);
 }
