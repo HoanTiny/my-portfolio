@@ -33,9 +33,9 @@ export default function Home() {
         <Stats />
 
         {/* Cooperation & Git Journal */}
-        <div className="grid grid-cols-[866px,1fr] gap-6">
-          <Cooperation />
-          <GitJournal />
+        <div className="grid grid-cols-3 gap-6">
+          <Cooperation className="col-span-2" />
+          <GitJournal className="col-span-1" />
         </div>
 
         {/* Services Section */}

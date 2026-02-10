@@ -16,7 +16,7 @@ export default function Stats() {
           />
         </svg>
       ),
-      value: "12",
+      value: "2",
       label: "Year Experience",
     },
     {
@@ -35,7 +35,7 @@ export default function Stats() {
           />
         </svg>
       ),
-      value: "250",
+      value: "50",
       label: "Projects Completed",
     },
     {
@@ -54,7 +54,7 @@ export default function Stats() {
           />
         </svg>
       ),
-      value: "680",
+      value: "20",
       label: "Satisfied Clients",
     },
     {
@@ -73,7 +73,7 @@ export default function Stats() {
           />
         </svg>
       ),
-      value: "18",
+      value: "5",
       label: "Awards Winner",
     },
   ];

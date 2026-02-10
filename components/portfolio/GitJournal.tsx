@@ -1,4 +1,4 @@
-export default function GitJournal() {
+export default function GitJournal({ className }: { className?: string }) {
   const commits = [
     { date: "15 Jul:", title: "Muzzilla-streaming-API-services-for-Python" },
     { date: "30 Jun:", title: "ChatHub-Chat-application-VueJs-Mongodb" },
@@ -8,7 +8,9 @@ export default function GitJournal() {
   ];
 
   return (
-    <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-12 relative overflow-hidden transition-colors duration-300">
+    <section
+      className={`bg-white dark:bg-[#0e0e0f] rounded-2xl p-12 relative overflow-hidden transition-colors duration-300 ${className}`}
+    >
       {/* Gradient Overlay */}
       <div className="absolute bottom-0 left-0 right-0 h-[383px] bg-gradient-to-t from-white dark:from-[#0e0e0f] to-transparent pointer-events-none" />
 
