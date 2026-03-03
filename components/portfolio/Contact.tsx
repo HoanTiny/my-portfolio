@@ -52,9 +52,9 @@ export default function Contact() {
   ];
 
   return (
-    <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-16 transition-colors duration-300">
+    <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-10 lg:p-16 transition-colors duration-300">
       <div className="max-w-[1271px] mx-auto">
-        <div className="grid grid-cols-[743px,1fr] gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr,auto] xl:grid-cols-[743px,1fr] gap-8 lg:gap-16">
           {/* Form */}
           <div>
             <h2 className="text-[var(--foreground)] text-[32px] font-urbanist font-bold mb-8">
@@ -63,7 +63,7 @@ export default function Contact() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Row 1 */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FormInput
                   label="Your name"
                   name="name"
@@ -83,7 +83,7 @@ export default function Contact() {
               </div>
 
               {/* Row 2 */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FormInput
                   label="Email"
                   name="email"

@@ -23,7 +23,7 @@ export default function Education() {
   ];
 
   return (
-    <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-12 relative overflow-hidden border border-[#c0dcbc] dark:border-[#2a2a2a] transition-colors duration-300">
+    <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-8 lg:p-12 relative overflow-hidden border border-[#c0dcbc] dark:border-[#2a2a2a] transition-colors duration-300">
       {/* Header */}
       <div className="flex items-center gap-3 mb-12">
         <svg
@@ -34,7 +34,7 @@ export default function Education() {
           <path d="M16 2L4 8v10c0 7.73 5.13 13.62 12 15 6.87-1.38 12-7.27 12-15V8L16 2zm0 2.89L26 9.54v8.46c0 6.67-4.46 11.73-10 13-5.54-1.27-10-6.33-10-13V9.54l10-4.65z" />
           <path d="M12 14h8v2h-8v-2zm0 4h8v2h-8v-2z" />
         </svg>
-        <h2 className="text-[#1f1f24] dark:text-[#e5e5e6] text-[32px] font-medium">
+        <h2 className="text-[#1f1f24] dark:text-[#e5e5e6] text-[24px] sm:text-[32px] font-medium">
           Education
         </h2>
       </div>

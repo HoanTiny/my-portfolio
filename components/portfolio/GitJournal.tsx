@@ -74,7 +74,7 @@ export default function GitJournal({ className }: { className?: string }) {
 
   return (
     <section
-      className={`bg-white dark:bg-[#0e0e0f] rounded-2xl p-12 relative overflow-hidden transition-colors duration-300 ${className}`}
+      className={`bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-8 lg:p-12 relative overflow-hidden transition-colors duration-300 ${className}`}
     >
       <div className="relative max-w-[370px]">
         {/* Header */}

@@ -21,7 +21,7 @@ export default function Research() {
   ];
 
   return (
-    <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-12 relative overflow-hidden border border-[#c0dcbc] dark:border-[#2a2a2a] transition-colors duration-300">
+    <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-8 lg:p-12 relative overflow-hidden border border-[#c0dcbc] dark:border-[#2a2a2a] transition-colors duration-300">
       {/* Header */}
       <div className="flex items-center gap-3 mb-12">
         <svg
@@ -32,7 +32,7 @@ export default function Research() {
           <path d="M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14 14-6.268 14-14S23.732 2 16 2zm0 26c-6.617 0-12-5.383-12-12S9.383 4 16 4s12 5.383 12 12-5.383 12-12 12z" />
           <path d="M16 8c-.552 0-1 .448-1 1v7c0 .552.448 1 1 1s1-.448 1-1V9c0-.552-.448-1-1-1zm-5 4H9c-.552 0-1 .448-1 1s.448 1 1 1h2c.552 0 1-.448 1-1s-.448-1-1-1zm10 0h-2c-.552 0-1 .448-1 1s.448 1 1 1h2c.552 0 1-.448 1-1s-.448-1-1-1z" />
         </svg>
-        <h2 className="text-[#1f1f24] dark:text-[#e5e5e6] text-[32px] font-medium">
+        <h2 className="text-[#1f1f24] dark:text-[#e5e5e6] text-[24px] sm:text-[32px] font-medium">
           Researched
         </h2>
       </div>

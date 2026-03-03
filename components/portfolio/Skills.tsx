@@ -12,7 +12,7 @@ export default function Skills() {
   ];
 
   return (
-    <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-16 relative overflow-hidden transition-colors duration-300">
+    <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-10 lg:p-16 relative overflow-hidden transition-colors duration-300">
       {/* Background Circle */}
       <div className="absolute right-0 top-0 w-[400px] h-[400px] pointer-events-none opacity-20">
         <svg viewBox="0 0 377 386" fill="none" className="w-full h-full">
@@ -52,7 +52,7 @@ export default function Skills() {
       </div>
 
       <div className="relative max-w-[1314px] mx-auto">
-        <div className="grid grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
           {/* Left: Skills Icons */}
           <div>
             {/* Header */}
@@ -79,25 +79,25 @@ export default function Skills() {
               </div>
 
               {/* Row 1 */}
-              <div className="flex justify-center gap-6">
+              <div className="flex flex-wrap justify-center gap-3 sm:gap-6">
                 {[1, 2, 3, 4, 5].map((i) => (
                   <div
                     key={i}
-                    className="w-[90px] h-[90px] bg-white dark:bg-[#1a1a1a] rounded-lg border border-[#c0dcbc] dark:border-[#2a2a2a] flex items-center justify-center hover:border-[#129840] dark:hover:border-[#33a381] transition-colors"
+                    className="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] bg-white dark:bg-[#1a1a1a] rounded-lg border border-[#c0dcbc] dark:border-[#2a2a2a] flex items-center justify-center hover:border-[#129840] dark:hover:border-[#33a381] transition-colors"
                   >
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#129840] to-[#33a381] rounded" />
+                    <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-[#129840] to-[#33a381] rounded" />
                   </div>
                 ))}
               </div>
 
               {/* Row 2 */}
-              <div className="flex justify-center gap-6">
+              <div className="flex flex-wrap justify-center gap-3 sm:gap-6">
                 {[1, 2, 3, 4].map((i) => (
                   <div
                     key={i}
-                    className="w-[90px] h-[90px] bg-white dark:bg-[#1a1a1a] rounded-lg border border-[#c0dcbc] dark:border-[#2a2a2a] flex items-center justify-center hover:border-[#129840] dark:hover:border-[#33a381] transition-colors"
+                    className="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] bg-white dark:bg-[#1a1a1a] rounded-lg border border-[#c0dcbc] dark:border-[#2a2a2a] flex items-center justify-center hover:border-[#129840] dark:hover:border-[#33a381] transition-colors"
                   >
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#129840] to-[#33a381] rounded" />
+                    <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-[#129840] to-[#33a381] rounded" />
                   </div>
                 ))}
               </div>
@@ -106,7 +106,7 @@ export default function Skills() {
 
           {/* Right: Skills Text */}
           <div className="flex items-center">
-            <div className="border-l-2 border-[#c0dcbc] dark:border-[#2a2a2a] pl-12">
+            <div className="border-l-2 border-[#c0dcbc] dark:border-[#2a2a2a] pl-6 sm:pl-12">
               <p className="text-[#5e5e65] dark:text-[#9999a1] text-base leading-relaxed space-y-4">
                 <span className="block">
                   <strong className="text-[#1f1f24] dark:text-[#e5e5e6]">

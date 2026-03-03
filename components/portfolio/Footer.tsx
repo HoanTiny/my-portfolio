@@ -67,7 +67,7 @@ export default function Footer() {
           </div>
 
           {/* Navigation */}
-          <nav className="flex items-center gap-[37px] font-['DM_Mono'] text-[16px] text-[#1f1f24] dark:text-[#e5e5e6] p-[10px]">
+          <nav className="flex flex-wrap items-center justify-center gap-4 sm:gap-[37px] font-['DM_Mono'] text-[14px] sm:text-[16px] text-[#1f1f24] dark:text-[#e5e5e6] p-[10px]">
             <a href="#about" className="hover:opacity-100">
               About me
             </a>

@@ -50,7 +50,7 @@ export default function Cooperation({ className }: { className?: string }) {
   };
   return (
     <section
-      className={`bg-white dark:bg-[#0e0e0f] rounded-2xl p-12 relative overflow-hidden transition-colors duration-300 ${className}`}
+      className={`bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-8 lg:p-12 relative overflow-hidden transition-colors duration-300 ${className}`}
       onMouseMove={handleMouseMove}
     >
       {/* Background Circle */}
@@ -64,7 +64,7 @@ export default function Cooperation({ className }: { className?: string }) {
               Technologies & Tools
             </span>
           </div>
-          <h2 className="text-[#1f1f24] dark:text-[#e5e5e6] text-[40px] leading-tight font-medium">
+          <h2 className="text-[#1f1f24] dark:text-[#e5e5e6] text-[24px] sm:text-[32px] lg:text-[40px] leading-tight font-medium">
             My technical expertise and tools_
           </h2>
         </div>
@@ -91,7 +91,7 @@ export default function Cooperation({ className }: { className?: string }) {
         </div>
 
         {/* Contact Info */}
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
           {/* 1. THE MORPHING HUB (Vòng tròn xanh biến hình) */}
           <div className="relative flex-shrink-0 w-20 h-20 flex items-center justify-center">
             {/* Các vòng tròn trang trí background (giống radar) */}
@@ -158,7 +158,7 @@ export default function Cooperation({ className }: { className?: string }) {
               setActive={setActiveType}
             />
           </div>
-          <div className="relative w-[700px] h-[400px] flex items-center justify-center overflow-hidden rounded-full ">
+          <div className="relative w-full sm:w-[400px] lg:w-[700px] h-[250px] sm:h-[300px] lg:h-[400px] flex items-center justify-center overflow-hidden rounded-full ">
             {/* --- BACKGROUND EFFECTS --- */}
             {/* Lưới mờ phía sau */}
             <div className="absolute inset-0 "></div>

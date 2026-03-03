@@ -46,7 +46,7 @@ export default function Projects() {
   };
 
   return (
-    <section className="bg-[#f5f5f5] dark:bg-[#0a0a0a] rounded-2xl p-16 relative overflow-hidden transition-colors duration-300">
+    <section className="bg-[#f5f5f5] dark:bg-[#0a0a0a] rounded-2xl p-6 sm:p-10 lg:p-16 relative overflow-hidden transition-colors duration-300">
       {/* Background */}
       <div className="absolute inset-0 opacity-5 dark:opacity-10">
         <svg
@@ -79,10 +79,10 @@ export default function Projects() {
         </div>
 
         {/* Project Display */}
-        <div className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-12 transition-colors duration-300">
-          <div className="grid grid-cols-[472px,1fr] gap-16">
+        <div className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-4 sm:p-8 lg:p-12 transition-colors duration-300">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr,1fr] xl:grid-cols-[472px,1fr] gap-8 lg:gap-16">
             {/* Project Image */}
-            <div className="relative h-[458px] bg-gradient-to-br from-[#129840] to-[#33a381] dark:from-[#33a381] dark:to-[#129840] rounded-xl overflow-hidden">
+            <div className="relative h-[250px] sm:h-[350px] lg:h-[458px] bg-gradient-to-br from-[#129840] to-[#33a381] dark:from-[#33a381] dark:to-[#129840] rounded-xl overflow-hidden">
               <div className="absolute inset-0 flex items-center justify-center text-white text-2xl font-semibold">
                 Project Preview
               </div>
@@ -91,7 +91,7 @@ export default function Projects() {
             {/* Project Info */}
             <div className="flex flex-col justify-between">
               <div>
-                <h3 className="text-[#1f1f24] dark:text-[#e5e5e6] text-[40px] leading-tight font-bold mb-6">
+                <h3 className="text-[#1f1f24] dark:text-[#e5e5e6] text-[24px] sm:text-[32px] lg:text-[40px] leading-tight font-bold mb-4 sm:mb-6">
                   {project.title}
                 </h3>
                 <p className="text-[#5e5e65] dark:text-[#9999a1] text-lg leading-relaxed mb-12">

@@ -55,7 +55,7 @@ export default function Experience() {
   const activeExperience = experiences[activeTab];
 
   return (
-    <section className="bg-[#f5f5f5] dark:bg-[#0a0a0a] rounded-2xl p-16 relative overflow-hidden transition-colors duration-300">
+    <section className="bg-[#f5f5f5] dark:bg-[#0a0a0a] rounded-2xl p-6 sm:p-10 lg:p-16 relative overflow-hidden transition-colors duration-300">
       {/* Background */}
       <div className="absolute inset-0 opacity-5 dark:opacity-10">
         <svg
@@ -82,12 +82,12 @@ export default function Experience() {
               Expericence
             </span>
           </div>
-          <h2 className="text-[#1f1f24] dark:text-[#e5e5e6] text-[48px] leading-tight font-medium">
+          <h2 className="text-[#1f1f24] dark:text-[#e5e5e6] text-[28px] sm:text-[36px] lg:text-[48px] leading-tight font-medium">
             +12 years of passion for programming techniques
           </h2>
         </div>
 
-        <div className="grid grid-cols-[397px,1fr] gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-[300px,1fr] lg:grid-cols-[397px,1fr] gap-6 lg:gap-12">
           {/* Tabs */}
           <div className="space-y-2">
             {experiences.map((exp, index) => (

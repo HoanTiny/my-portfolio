@@ -7,17 +7,17 @@ import Marquee from "react-fast-marquee";
 
 export default function Hero() {
   return (
-    <div className="bg-white border-animation dark:bg-[#0e0e0f] border border-[#d0d0d0] dark:border-[#272730] rounded-lg overflow-hidden relative min-h-143.5 transition-colors duration-300">
+    <div className="bg-white border-animation dark:bg-[#0e0e0f] border border-[#d0d0d0] dark:border-[#272730] rounded-lg overflow-hidden relative min-h-0 md:min-h-143.5 transition-colors duration-300">
       {/* Background Pattern */}
       <div className="inner">
-        <div className="absolute -top-120    left-0 w-full h-[1108px] opacity-10 dark:opacity-5 pointer-events-none">
+        <div className="absolute -top-120 left-0 w-full h-[1108px] opacity-10 dark:opacity-5 pointer-events-none">
           <div className="absolute left-0 w-1/2 h-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-900" />
           <div className="absolute right-0 w-1/2 h-full bg-gradient-to-bl from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-900" />
         </div>
 
-        <div className="relative mx-auto px-[36px] py-[54px] flex gap-12 bg-white dark:bg-[#0e0e0f] ">
+        <div className="relative mx-auto px-4 sm:px-[36px] py-8 sm:py-[54px] flex flex-col md:flex-row gap-6 md:gap-12 bg-white dark:bg-[#0e0e0f] ">
           {/* Left Side - Image */}
-          <div className="relative w-[512px] h-[461px] flex-shrink-0">
+          <div className="relative w-full md:w-[320px] lg:w-[512px] h-[280px] sm:h-[350px] md:h-[461px] flex-shrink-0 mx-auto md:mx-0">
             <div className="absolute inset-0 rounded-2xl">
               <img
                 src="/avt.jpg"
@@ -31,7 +31,7 @@ export default function Hero() {
           </div>
 
           {/* Right Side - Content */}
-          <div className="flex-1 pt-11">
+          <div className="flex-1 pt-0 md:pt-11">
             {/* Name Tag */}
             <p className="font-dm-mono text-[16px] mb-2">
               <span className="text-[var(--theme-primary-1)]">
@@ -46,7 +46,7 @@ export default function Hero() {
             </p>
 
             {/* Title */}
-            <h1 className="font-urbanist font-bold text-[50px] leading-[1.2] mb-6">
+            <h1 className="font-urbanist font-bold text-[28px] sm:text-[36px] lg:text-[50px] leading-[1.2] mb-4 sm:mb-6">
               <span className="text-[var(--foreground)]">Junior </span>
               <span className="bg-[var(--gradient-primary)] bg-clip-text text-transparent">
                 {`{Full Stack}`}
@@ -58,7 +58,7 @@ export default function Hero() {
             </h1>
 
             {/* Description */}
-            <p className="font-dm-mono text-[16px] leading-[1.5] text-[var(--neutral-300)] dark:text-[var(--secondary)] mb-8">
+            <p className="font-dm-mono text-[14px] sm:text-[16px] leading-[1.5] text-[var(--neutral-300)] dark:text-[var(--secondary)] mb-6 sm:mb-8">
               <span className="text-[var(--theme-primary-1)]">&lt;p&gt;</span>
               With expertise in cutting-edge technologies such as{" "}
               <span className="text-[var(--theme-primary-1)]">
@@ -72,32 +72,32 @@ export default function Hero() {
 
             {/* Tech Stack Icons */}
             <div className="flex gap-[8px] items-center mb-6">
-              <div className="w-full max-w-[400px] overflow-hidden">
+              <div className="w-full max-w-[280px] sm:max-w-[400px] overflow-hidden">
                 <Marquee speed={30} gradient={false} pauseOnHover={true}>
-                  <div className="size-[67px] rounded-xl bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center mx-1">
+                  <div className="size-[50px] sm:size-[67px] rounded-xl bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center mx-1">
                     <img src="/nextjs.svg" alt="" />
                   </div>
-                  <div className="size-[67px] rounded-xl bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center mx-1">
+                  <div className="size-[50px] sm:size-[67px] rounded-xl bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center mx-1">
                     <img src="/nodejs.svg" alt="" />
                   </div>
-                  <div className="size-[67px] rounded-xl bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center mx-1">
+                  <div className="size-[50px] sm:size-[67px] rounded-xl bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center mx-1">
                     <img src="/firebase.svg" alt="" />
                   </div>
-                  <div className="size-[67px] rounded-xl bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center mx-1">
+                  <div className="size-[50px] sm:size-[67px] rounded-xl bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center mx-1">
                     <img src="/mongodb.svg" alt="" />
                   </div>
-                  <div className="size-[67px] rounded-xl bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center mx-1">
+                  <div className="size-[50px] sm:size-[67px] rounded-xl bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center mx-1">
                     <img src="/Photoshop.svg" alt="" />
                   </div>
-                  <div className="size-[67px] rounded-xl bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center mx-1">
+                  <div className="size-[50px] sm:size-[67px] rounded-xl bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center mx-1">
                     <img src="/tailwind.svg" alt="" />
                   </div>
-                  <div className="size-[67px] rounded-xl bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center mx-1">
+                  <div className="size-[50px] sm:size-[67px] rounded-xl bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center mx-1">
                     <img src="/React.svg" alt="" />
                   </div>
                 </Marquee>
               </div>
-              <span className="font-dm-mono text-[16px] text-[var(--neutral-300)] dark:text-[var(--secondary)] flex-shrink-0">
+              <span className="font-dm-mono text-[14px] sm:text-[16px] text-[var(--neutral-300)] dark:text-[var(--secondary)] flex-shrink-0">
                 ...and more
               </span>
             </div>

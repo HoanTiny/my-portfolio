@@ -30,7 +30,7 @@ export default function Blog() {
   ];
 
   return (
-    <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-16 transition-colors duration-300">
+    <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-10 lg:p-16 transition-colors duration-300">
       <div className="max-w-[1305px] mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -46,14 +46,14 @@ export default function Blog() {
         </div>
 
         {/* Blog Grid */}
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
           {posts.map((post, index) => (
             <article
               key={index}
               className="bg-[#f5f5f5] dark:bg-[#1a1a1a] rounded-2xl p-4 group hover:shadow-lg transition-all duration-300"
             >
               {/* Image */}
-              <div className="relative h-[274px] bg-gradient-to-br from-[#129840] to-[#33a381] dark:from-[#33a381] dark:to-[#129840] rounded-xl overflow-hidden mb-6">
+              <div className="relative h-[200px] sm:h-[274px] bg-gradient-to-br from-[#129840] to-[#33a381] dark:from-[#33a381] dark:to-[#129840] rounded-xl overflow-hidden mb-4 sm:mb-6">
                 {/* Tag */}
                 <div className="absolute bottom-4 left-4">
                   <span className="px-4 py-1 bg-white/90 dark:bg-black/80 text-[#1f1f24] dark:text-[#e5e5e6] text-sm rounded backdrop-blur-sm">
