@@ -108,6 +108,8 @@
   font-family: var(--font-urbanist), sans-serif;
 }
 
+
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -115,6 +117,13 @@ body {
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
+}
+
+.text-color {
+  background: linear-gradient(270deg, #659932 0%, #A8FF53 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Theme Switch Styles */
@@ -362,4 +371,56 @@ body {
 
 .download_btn:active {
   transform: scale(0.95);
+}
+
+/* Animated gradient border */
+@keyframes border-rotate {
+  0% {
+    --border-angle: 0deg;
+  }
+  100% {
+    --border-angle: 360deg;
+  }
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.animated-border {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.animated-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--border-angle),
+    transparent 25%,
+    #129840 50%,
+    #33a381 75%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-rotate 3s linear infinite;
+  pointer-events: none;
+}
+
+:is(.dark) .animated-border::before {
+  background: conic-gradient(
+    from var(--border-angle),
+    transparent 25%,
+    #33a381 50%,
+    #129840 75%,
+    transparent 100%
+  );
 }

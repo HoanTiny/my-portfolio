@@ -16,7 +16,7 @@ import Footer from "@/components/portfolio/Footer";
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#f5f5f5] dark:bg-[#1f1f24] transition-colors duration-300 py-3 sm:py-6 space-y-3 sm:space-y-6 relative">
-      <div className="absolute top-0 start-0 w-full h-full ">
+      <div className="absolute top-0 start-0 w-full  ">
         <img className="bg-w" src="/bg.png" alt="zelio" />
       </div>
       {/* Header */}

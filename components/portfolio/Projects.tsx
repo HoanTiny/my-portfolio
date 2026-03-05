@@ -1,5 +1,6 @@
 "use client";
 
+import { title } from "process";
 import { useState } from "react";
 
 export default function Projects() {
@@ -7,31 +8,85 @@ export default function Projects() {
 
   const projects = [
     {
-      title: "E-Commerce Platform Redesign",
+      title: "Myshop Pro BIDV WebApp",
       description:
-        "A comprehensive redesign of an online marketplace to improve user experience and increase conversions.",
-      client: "TechCorp Inc.",
-      year: "2023-2024",
-      role: "Lead Developer & UI/UX Designer",
-      image: "/project-1.jpg",
+        "A comprehensive e-commerce platform for BIDV's Myshop Pro, featuring product listings, shopping cart, and secure checkout. Built with a focus on performance and user experience.",
+      tech: "TypeScript, Next.js, Tailwind CSS, websocket, payment gateway",
+      year: "2023 - 2024",
+      role: "Frontend Developer",
+      link: "https://myshoppro.bidv.com.vn/",
+      liveUrl:
+        "https://bidv.com.vn/vn/ho-kinh-doanh-tieu-thuong/san-pham-dich-vu/ngan-hang-so/bidv-smartshop",
     },
     {
-      title: "Mobile Banking App",
+      title: "Movie Streaming App",
       description:
-        "Developed a secure and intuitive mobile banking application for iOS and Android platforms.",
-      client: "FinanceHub",
-      year: "2022-2023",
+        "A Netflix-inspired movie browsing application with search, filtering, and detailed movie information. Features responsive layout and smooth animations for an immersive experience.",
+      tech: "TypeScript, Next.js, TMDB API",
+      year: "2024",
+      role: "Frontend Developer",
+      github: "https://github.com/HoanTiny/Movie-App",
+      liveUrl: "https://netflop.vercel.app/",
+    },
+    {
+      title: "CMS Club Management Swimming",
+      description:
+        "A content management system for managing swimming club activities, events, and member information. Features a user-friendly interface for club administrators to create and manage content.",
+      tech: "TypeScript, Next.js, Tailwind CSS",
+      year: "2024",
+      role: "Frontend Developer",
+      github: "https://github.com/HoanTiny/cms-landing-swimming",
+      liveUrl: "https://cms-landing-swimming.vercel.app",
+    },
+    {
+      title: "Landing Page for Swimming Club",
+      description:
+        "A visually appealing landing page for a swimming club, showcasing club information, upcoming events, and membership benefits. Designed with a focus on aesthetics and user engagement.",
+      tech: "TypeScript, Next.js, Tailwind CSS",
+      year: "2025",
+      role: "Frontend Developer",
+      liveUrl: "https://www.clbthudo.com/",
+    },
+    {
+      title: "TikTok Website Clone",
+      description:
+        "A pixel-perfect clone of TikTok's web interface featuring video feeds, user interactions, and dynamic content rendering. One of the largest personal projects with rich UI/UX.",
+      tech: "JavaScript, React, SCSS",
+      year: "2023 - 2025",
+      role: "Frontend Developer",
+      github: "https://github.com/HoanTiny/Tiktok-Website",
+      liveUrl: "https://toptoptv.vercel.app/",
+    },
+    {
+      title: "Infinity Network App",
+      description:
+        "A full-featured social networking platform with user profiles, real-time feeds, and interactive community features. Built with modern frontend architecture and responsive design.",
+      tech: "TypeScript, Next.js, Tailwind CSS",
+      year: "2024 - 2025",
+      role: "Frontend Developer",
+      github: "https://github.com/HoanTiny/Infinity-Network-App",
+      liveUrl: "https://infinity-network-app.vercel.app",
+    },
+
+    {
+      title: "Chat Realtime",
+      description:
+        "A real-time messaging application with instant message delivery, online status, and conversation management. Powered by WebSocket for seamless bidirectional communication.",
+      tech: "TypeScript, Next.js, Socket.IO, MongoDB",
+      year: "2024",
       role: "Full Stack Developer",
-      image: "/project-2.jpg",
+      github: "https://github.com/HoanTiny/Chat-realtime",
+      liveUrl: "https://chat-realtime-nu.vercel.app",
     },
     {
-      title: "AI-Powered Analytics Dashboard",
+      title: "Budget Management App",
       description:
-        "Built an advanced analytics platform using machine learning for real-time data insights.",
-      client: "DataViz Pro",
-      year: "2023",
-      role: "Frontend Developer & Data Engineer",
-      image: "/project-3.jpg",
+        "A personal finance tracker to manage income, expenses, and budgets with visual charts and analytics. Clean UI with dark mode support and data persistence.",
+      tech: "TypeScript, React, Vercel",
+      year: "2025 - 2026",
+      role: "Full Stack Developer",
+      github: "https://github.com/HoanTiny/Quan-ly-chi-tieu",
+      liveUrl: "https://v0-reactjs-budget-app.vercel.app",
     },
   ];
 
@@ -80,11 +135,41 @@ export default function Projects() {
 
         {/* Project Display */}
         <div className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-4 sm:p-8 lg:p-12 transition-colors duration-300">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr,1fr] xl:grid-cols-[472px,1fr] gap-8 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr,1fr] lg:grid-cols-2 xl:grid-cols-[472px,1fr] gap-8 lg:gap-16">
             {/* Project Image */}
-            <div className="relative h-[250px] sm:h-[350px] lg:h-[458px] bg-gradient-to-br from-[#129840] to-[#33a381] dark:from-[#33a381] dark:to-[#129840] rounded-xl overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center text-white text-2xl font-semibold">
-                Project Preview
+            <div className="relative h-[250px] sm:h-[350px] lg:h-[458px] bg-[#1a1a1a] rounded-xl overflow-hidden border border-[#2a2a2a]">
+              {/* Browser Chrome */}
+              <div className="flex items-center gap-2 px-4 py-2.5 bg-[#2a2a2a] border-b border-[#333]">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                  <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
+                  <div className="w-3 h-3 rounded-full bg-[#28c840]" />
+                </div>
+                <div className="flex-1 ml-2">
+                  <div className="bg-[#1a1a1a] rounded-md px-3 py-1 text-[#9999a1] text-xs font-mono truncate">
+                    {project.liveUrl.replace(/^https?:\/\//, "")}
+                  </div>
+                </div>
+              </div>
+              {/* Live Preview */}
+              <div className="relative w-full h-[calc(100%-40px)] overflow-hidden">
+                <iframe
+                  key={currentProject}
+                  src={project.liveUrl}
+                  title={`${project.title} preview`}
+                  className="w-[200%] h-[200%] origin-top-left scale-50 pointer-events-none"
+                  loading="lazy"
+                  sandbox="allow-scripts allow-same-origin"
+                />
+                {/* Overlay to click through to live site */}
+                <button
+                  onClick={() => window.open(project.liveUrl, "_blank")}
+                  className="absolute inset-0 bg-transparent hover:bg-black/20 transition-colors cursor-pointer group"
+                >
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-black/70 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                    Open Live Site ↗
+                  </span>
+                </button>
               </div>
             </div>
 
@@ -106,10 +191,10 @@ export default function Projects() {
 
                   <div className="flex justify-between items-center py-3 border-b border-[#c0dcbc] dark:border-[#2a2a2a]">
                     <span className="text-[#5e5e65] dark:text-[#9999a1] text-base">
-                      Client:
+                      Tech Stack:
                     </span>
                     <span className="text-[#1f1f24] dark:text-[#e5e5e6] text-base font-medium">
-                      {project.client}
+                      {project.tech}
                     </span>
                   </div>
 
@@ -135,7 +220,10 @@ export default function Projects() {
 
               {/* Action Buttons */}
               <div className="flex gap-6">
-                <button className="flex items-center gap-2 text-[#1f1f24] dark:text-[#e5e5e6] hover:text-[#129840] dark:hover:text-[#33a381] transition-colors">
+                <button
+                  onClick={() => window.open(project.liveUrl, "_blank")}
+                  className="flex items-center gap-2 text-[#1f1f24] dark:text-[#e5e5e6] hover:text-[#129840] dark:hover:text-[#33a381] transition-colors cursor-pointer"
+                >
                   <svg
                     className="w-6 h-6"
                     viewBox="0 0 24 24"
@@ -147,7 +235,10 @@ export default function Projects() {
                   <span className="text-base font-medium">Live Preview</span>
                 </button>
 
-                <button className="flex items-center gap-2 text-[#1f1f24] dark:text-[#e5e5e6] hover:text-[#129840] dark:hover:text-[#33a381] transition-colors">
+                <button
+                  onClick={() => window.open(project.github, "_blank")}
+                  className="flex items-center gap-2 text-[#1f1f24] dark:text-[#e5e5e6] hover:text-[#129840] dark:hover:text-[#33a381] transition-colors cursor-pointer"
+                >
                   <svg
                     className="w-6 h-6"
                     viewBox="0 0 24 24"

@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="flex items-center gap-[9px]">
             <div className="size-[36px] rounded-full bg-gradient-to-br from-emerald-500 to-green-600" />
             <p className="text-[24px] font-['DM_Mono'] font-medium text-[#1f1f24] dark:text-[#e5e5e6]">
-              James.dev
+              Tiny.dev
             </p>
           </div>
 

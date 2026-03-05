@@ -142,7 +142,11 @@ export default function Stats() {
   ];
 
   return (
-    <div className="bg-white dark:bg-[#0e0e0f] border border-[#c0dcbc] dark:border-[#2a2a2a] rounded-lg overflow-hidden relative py-8 sm:py-[61px]">
+    <div className="bg-white dark:bg-[#0e0e0f] border border-[#c0dcbc] dark:border-[#2a2a2a] rounded-lg overflow-hidden relative py-8 sm:py-[61px]"
+    style={{
+      backgroundImage: "url(/bg-static.png)",
+    }}
+    >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10 dark:opacity-5 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900" />

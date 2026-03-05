@@ -1,63 +1,135 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 
 export default function Experience() {
   const [activeTab, setActiveTab] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const experiences = [
     {
-      company: "Google",
-      period: "2018 - Present",
-      logo: "google",
-      role: "Senior Software Engineer",
+      company: "FPT Software",
+      period: "2023 - 2024",
+      logo: "/fpt.png",
+      role: "Intern Software Engineer",
       description:
-        "Led development of scalable web applications, improving performance and user experience for millions of users. Implemented machine learning algorithms to enhance search functionality. Collaborated with cross-functional teams to integrate new features seamlessly.",
-      skills: ["Python", "TensorFlow", "Angular", "Kubernetes", "GCP"],
+        "Developed and deployed a machine learning model for image classification, achieving 95% accuracy. Collaborated with cross-functional teams to integrate the model into a web application, improving user experience. Optimized model performance by implementing techniques such as data augmentation and hyperparameter tuning.",
+      skills: ["JavaScript", "React"],
     },
     {
-      company: "Twitter (X)",
-      period: "2012 - 2015",
-      logo: "twitter",
-      role: "Backend Engineer",
+      company: "VTV Live",
+      period: "2024 - Present",
+      logo: "/vtv.png",
+      role: "Frontend Developer",
       description:
-        "Optimized server-side operations and database management, ensuring reliable and fast tweet processing. Implemented caching mechanisms to reduce server load. Enhanced data security measures to protect user information.",
-      skills: ["Scala", "Redis", "PostgreSQL", "Docker", "Apache Kafka"],
-    },
-    {
-      company: "Amazon",
-      period: "2018 - Present",
-      logo: "amazon",
-      role: "Software Development Engineer",
-      description:
-        "Developed and maintained e-commerce platform features, enhancing functionality and efficiency. Designed APIs to streamline communication between services. Optimized database queries, reducing latency and improving load times.",
-      skills: ["Java", "AWS", "DynamoDB", "Node.js", "React"],
-    },
-    {
-      company: "PayPal",
-      period: "2010 - 2012",
-      logo: "paypal",
-      role: "Database Engineer",
-      description:
-        "Designed and optimized database schemas to support high-volume transaction processing. Developed and maintained data migration scripts to ensure data integrity and consistency. Implemented database security measures to protect sensitive user information.",
-      skills: [
-        "MySQL",
-        "PL/SQL",
-        "MongoDB",
-        "PostgreSQL",
-        "ETL Processes",
-        "MS SQL",
-      ],
-    },
+        "Designed and implemented responsive user interfaces for live streaming platforms, enhancing user engagement. Collaborated with backend developers to integrate APIs, ensuring seamless data flow and real-time updates. Optimized frontend performance, reducing load times by 30% through code splitting and lazy loading techniques.",
+      skills: ["TypeScript", "Next.js", "Tailwind CSS", "Framer Motion", "WebSocket", "MongoDB"],
+    }
+    // {
+    //   company: "Twitter (X)",
+    //   period: "2012 - 2015",
+    //   logo: "twitter",
+    //   role: "Backend Engineer",
+    //   description:
+    //     "Optimized server-side operations and database management, ensuring reliable and fast tweet processing. Implemented caching mechanisms to reduce server load. Enhanced data security measures to protect user information.",
+    //   skills: ["Scala", "Redis", "PostgreSQL", "Docker", "Apache Kafka"],
+    // },
+    // {
+    //   company: "Amazon",
+    //   period: "2018 - Present",
+    //   logo: "amazon",
+    //   role: "Software Development Engineer",
+    //   description:
+    //     "Developed and maintained e-commerce platform features, enhancing functionality and efficiency. Designed APIs to streamline communication between services. Optimized database queries, reducing latency and improving load times.",
+    //   skills: ["Java", "AWS", "DynamoDB", "Node.js", "React"],
+    // },
+    // {
+    //   company: "PayPal",
+    //   period: "2010 - 2012",
+    //   logo: "paypal",
+    //   role: "Database Engineer",
+    //   description:
+    //     "Designed and optimized database schemas to support high-volume transaction processing. Developed and maintained data migration scripts to ensure data integrity and consistency. Implemented database security measures to protect sensitive user information.",
+    //   skills: [
+    //     "MySQL",
+    //     "PL/SQL",
+    //     "MongoDB",
+    //     "PostgreSQL",
+    //     "ETL Processes",
+    //     "MS SQL",
+    //   ],
+    // },
   ];
 
   const activeExperience = experiences[activeTab];
 
+  // Animation variants
+  const headerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" } as const,
+    },
+  };
+
+  const tabContainerVariants = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.1, delayChildren: 0.3 } as const,
+    },
+  };
+
+  const tabItemVariants = {
+    hidden: { opacity: 0, x: -40 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.5, ease: "easeOut" } as const,
+    },
+  };
+
+  const contentVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: "easeOut" } as const,
+    },
+    exit: {
+      opacity: 0,
+      y: -10,
+      transition: { duration: 0.2 } as const,
+    },
+  };
+
+  const skillVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: (i: number) => ({
+      opacity: 1,
+      scale: 1,
+      transition: { delay: i * 0.05, duration: 0.3, ease: "easeOut" } as const,
+    }),
+  };
+
   return (
-    <section className="bg-[#f5f5f5] dark:bg-[#0a0a0a] rounded-2xl p-6 sm:p-10 lg:p-16 relative overflow-hidden transition-colors duration-300">
+    <section
+      ref={sectionRef}
+      className="bg-[#f5f5f5] dark:bg-[#0a0a0a] rounded-2xl p-6 sm:p-10 lg:p-16 relative overflow-hidden transition-colors duration-300"
+    >
       {/* Background */}
-      <div className="absolute inset-0 opacity-5 dark:opacity-10">
+      <motion.div
+        className="absolute inset-0 opacity-5 dark:opacity-10"
+        animate={
+          isInView
+            ? { scale: [1, 1.05, 1], opacity: [0.05, 0.08, 0.05] }
+            : {}
+        }
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      >
         <svg
           className="absolute top-1/4 right-1/4 w-[1106px] h-[1106px]"
           viewBox="0 0 1106 1106"
@@ -71,40 +143,79 @@ export default function Experience() {
             className="text-[#129840] dark:text-[#33a381]"
           />
         </svg>
-      </div>
+      </motion.div>
 
       <div className="relative max-w-[1314px] mx-auto">
         {/* Header */}
-        <div className="mb-12">
+        <motion.div
+          className="mb-12"
+          variants={headerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#129840] dark:bg-[#33a381]" />
+            <motion.div
+              className="w-1.5 h-1.5 rounded-full bg-[#129840] dark:bg-[#33a381]"
+              animate={isInView ? { scale: [1, 1.5, 1] } : {}}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
             <span className="text-[#5e5e65] dark:text-[#9999a1] text-base">
               Expericence
             </span>
           </div>
           <h2 className="text-[#1f1f24] dark:text-[#e5e5e6] text-[28px] sm:text-[36px] lg:text-[48px] leading-tight font-medium">
-            +12 years of passion for programming techniques
+            +2 years of passion for programming techniques
           </h2>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-[300px,1fr] lg:grid-cols-[397px,1fr] gap-6 lg:gap-12">
           {/* Tabs */}
-          <div className="space-y-2">
+          <motion.div
+            className="space-y-2"
+            variants={tabContainerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
             {experiences.map((exp, index) => (
-              <button
+              <motion.button
                 key={index}
+                variants={tabItemVariants}
                 onClick={() => setActiveTab(index)}
-                className={`w-full p-6 rounded-lg text-left transition-colors ${
+                whileHover={{ x: 6 }}
+                whileTap={{ scale: 0.98 }}
+                className={`w-full p-6 rounded-lg text-left transition-colors cursor-pointer relative ${
                   activeTab === index
-                    ? "bg-white dark:bg-[#1a1a1a] border-l-4 border-[#129840] dark:border-[#33a381]"
-                    : "bg-transparent hover:bg-white/50 dark:hover:bg-[#1a1a1a]/50 border-l-4 border-transparent"
+                    ? "bg-white dark:bg-[#1a1a1a]"
+                    : "bg-transparent hover:bg-white/50 dark:hover:bg-[#1a1a1a]/50"
                 }`}
               >
+                {/* Animated sliding border indicator */}
+                {activeTab === index && (
+                  <motion.div
+                    layoutId="activeTabBorder"
+                    className="absolute left-0 top-0 bottom-0 w-1 rounded-full bg-[#129840] dark:bg-[#33a381]"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
                 <div className="flex items-center gap-4">
                   {/* Logo Placeholder */}
-                  <div className="w-12 h-12 rounded-lg bg-[#f1f5f9] dark:bg-[#2a2a2a] flex items-center justify-center">
-                    <div className="w-8 h-8 rounded bg-[#129840] dark:bg-[#33a381]" />
-                  </div>
+                  <motion.div
+                    className="w-16 h-16 px-2 rounded-lg bg-[#f1f5f9]  flex items-center justify-center"
+                    animate={
+                      activeTab === index ? { rotate: [0, 5, -5, 0] } : {}
+                    }
+                    transition={{ duration: 0.4 }}
+                  >
+                    <div className="rounded " >
+                      {/* Placeholder for logo */}
+                      <img src={exp.logo} alt={exp.company} className="w-full h-full" />
+                    </div>
+                    
+                  </motion.div>
 
                   {/* Company Info */}
                   <div>
@@ -116,30 +227,48 @@ export default function Experience() {
                     </p>
                   </div>
                 </div>
-              </button>
+              </motion.button>
             ))}
-          </div>
+          </motion.div>
 
           {/* Content */}
-          <div className="bg-white dark:bg-[#0e0e0f] rounded-xl p-8 transition-colors duration-300">
-            <h3 className="text-[#1f1f24] dark:text-[#e5e5e6] text-2xl font-semibold mb-6">
-              {activeExperience.role}
-            </h3>
-            <p className="text-[#5e5e65] dark:text-[#9999a1] text-base leading-relaxed mb-8">
-              {activeExperience.description}
-            </p>
+          <div className="animated-border bg-white dark:bg-[#0e0e0f] rounded-xl p-8 transition-colors duration-300">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                variants={contentVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <h3 className="text-[#1f1f24] dark:text-[#e5e5e6] text-2xl font-semibold mb-6">
+                  {activeExperience.role}
+                </h3>
+                <p className="text-[#5e5e65] dark:text-[#9999a1] text-base leading-relaxed mb-8">
+                  {activeExperience.description}
+                </p>
 
-            {/* Skills */}
-            <div className="flex flex-wrap gap-2">
-              {activeExperience.skills.map((skill, index) => (
-                <span
-                  key={index}
-                  className="px-4 py-2 bg-[#f1f5f9] dark:bg-[#1a1a1a] text-[#1f1f24] dark:text-[#e5e5e6] text-base rounded-lg"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
+                {/* Skills */}
+                <div className="flex flex-wrap gap-2">
+                  {activeExperience.skills.map((skill, index) => (
+                    <motion.span
+                      key={skill}
+                      custom={index}
+                      variants={skillVariants}
+                      initial="hidden"
+                      animate="visible"
+                      whileHover={{
+                        scale: 1.08,
+                        backgroundColor: "rgba(18, 152, 64, 0.15)",
+                      }}
+                      className="px-4 py-2 bg-[#f1f5f9] dark:bg-[#1a1a1a] text-[#1f1f24] dark:text-[#e5e5e6] text-base rounded-lg cursor-default"
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>

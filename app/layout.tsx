@@ -20,8 +20,8 @@ const urbanist = Urbanist({
 });
 
 export const metadata: Metadata = {
-  title: "James.dev - Full Stack Developer",
-  description: "Senior Full Stack Web & App Developer Portfolio",
+  title: "Tiny.dev - Frontend Developer",
+  description: "Junior Frontend Web & App Developer Portfolio",
 };
 
 export default async function RootLayout({

@@ -1,21 +1,126 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+
+const skillsData = [
+  { name: "Node.js", icon: "/nodejs.svg", row: 1 },
+  { name: "Next.js", icon: "/nextjs.svg", row: 1 },
+  { name: "Firebase", icon: "/firebase.svg", row: 1 },
+  { name: "MongoDB", icon: "/mongodb.svg", row: 1 },
+  { name: "React", icon: "/React.svg", row: 1 },
+  { name: "Vue.js", icon: "/vuejs.svg", row: 1 },
+  { name: "Tailwind", icon: "/tailwind.svg", row: 1 },
+];
+
+const skillCategories = [
+  { label: "Front-End", value: "HTML, CSS, JavaScript, React, Vue.js" },
+  { label: "Back-End", value: "Node.js, Express" },
+  { label: "Databases", value: "MySQL, MongoDB" },
+  { label: "Tools & Platforms", value: "Git" },
+  { label: "Others", value: "RESTful APIs, GraphQL" },
+];
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.08 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring", stiffness: 200, damping: 20 } as const,
+  },
+};
+
+const textVariants = {
+  hidden: { opacity: 0, x: 40 },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: 0.3 + i * 0.1,
+      duration: 0.5,
+      ease: "easeOut",
+    } as const,
+  }),
+};
+
+function SkillIcon({
+  skill,
+  index,
+}: {
+  skill: (typeof skillsData)[0];
+  index: number;
+}) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      variants={itemVariants}
+      className="relative group"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Tooltip */}
+      <AnimatePresence>
+        {hovered && (
+          <motion.div
+            initial={{ opacity: 0, y: 8, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.9 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="absolute -top-11 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
+          >
+            <div className="bg-[#1f1f24] dark:bg-[#e5e5e6] text-white dark:text-[#1f1f24] px-3 py-1 rounded text-xs sm:text-sm whitespace-nowrap font-medium shadow-lg">
+              {skill.name}
+            </div>
+            <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#1f1f24] dark:bg-[#e5e5e6] rotate-45" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Icon Card */}
+      <motion.div
+        whileHover={{ scale: 1.1, y: -4 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        className="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] bg-white dark:bg-[#1a1a1a] rounded-lg border border-[#c0dcbc] dark:border-[#2a2a2a] flex items-center justify-center hover:border-[#129840] dark:hover:border-[#33a381] hover:shadow-[0_0_20px_rgba(18,152,64,0.15)] dark:hover:shadow-[0_0_20px_rgba(51,163,129,0.15)] transition-all duration-300 cursor-pointer"
+      >
+        <Image
+          src={skill.icon}
+          alt={skill.name}
+          width={48}
+          height={48}
+          className="w-8 h-8 sm:w-12 sm:h-12 object-contain select-none"
+          draggable={false}
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export default function Skills() {
-  const skills = [
-    { name: "Node.js", row: 1, col: 1 },
-    { name: "Next.js", row: 1, col: 2 },
-    { name: "Firebase", row: 1, col: 3 },
-    { name: "MongoDB", row: 1, col: 4 },
-    { name: "React", row: 1, col: 5 },
-    { name: "Vue.js", row: 2, col: 1 },
-    { name: "Angular", row: 2, col: 2 },
-    { name: "Laravel", row: 2, col: 3 },
-    { name: "Tailwind", row: 2, col: 4 },
-  ];
+  const row1 = skillsData.filter((s) => s.row === 1);
+  const row2 = skillsData.filter((s) => s.row === 2);
 
   return (
     <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-10 lg:p-16 relative overflow-hidden transition-colors duration-300">
       {/* Background Circle */}
       <div className="absolute right-0 top-0 w-[400px] h-[400px] pointer-events-none opacity-20">
-        <svg viewBox="0 0 377 386" fill="none" className="w-full h-full">
+        <motion.svg
+          viewBox="0 0 377 386"
+          fill="none"
+          className="w-full h-full"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+        >
           <path
             d="M127 130c0 35 28 63 63 63s63-28 63-63-28-63-63-63-63 28-63 63Z"
             stroke="currentColor"
@@ -48,7 +153,7 @@ export default function Skills() {
             fill="currentColor"
             className="text-[#129840] dark:text-[#33a381]"
           />
-        </svg>
+        </motion.svg>
       </div>
 
       <div className="relative max-w-[1314px] mx-auto">
@@ -56,9 +161,19 @@ export default function Skills() {
           {/* Left: Skills Icons */}
           <div>
             {/* Header */}
-            <div className="mb-12 text-center">
+            <motion.div
+              className="mb-12 text-center"
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
               <div className="flex items-center justify-center gap-2 mb-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#129840] dark:bg-[#33a381]" />
+                <motion.div
+                  className="w-1.5 h-1.5 rounded-full bg-[#129840] dark:bg-[#33a381]"
+                  animate={{ scale: [1, 1.5, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
                 <span className="text-[#5e5e65] dark:text-[#9999a1] text-base">
                   Projects
                 </span>
@@ -66,80 +181,66 @@ export default function Skills() {
               <h2 className="text-[#1f1f24] dark:text-[#e5e5e6] text-[32px] leading-tight font-medium">
                 My Skills
               </h2>
-            </div>
+            </motion.div>
 
             {/* Skills Grid */}
-            <div className="space-y-8">
-              {/* Tooltip */}
-              <div className="relative mx-auto w-fit">
-                <div className="bg-[#1f1f24] dark:bg-[#e5e5e6] text-white dark:text-[#1f1f24] px-4 py-1 rounded text-sm">
-                  MongoDB
-                </div>
-                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#1f1f24] dark:bg-[#e5e5e6] rotate-45" />
-              </div>
-
+            <div className="space-y-6 sm:space-y-8">
               {/* Row 1 */}
-              <div className="flex flex-wrap justify-center gap-3 sm:gap-6">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <div
-                    key={i}
-                    className="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] bg-white dark:bg-[#1a1a1a] rounded-lg border border-[#c0dcbc] dark:border-[#2a2a2a] flex items-center justify-center hover:border-[#129840] dark:hover:border-[#33a381] transition-colors"
-                  >
-                    <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-[#129840] to-[#33a381] rounded" />
-                  </div>
+              <motion.div
+                className="flex flex-wrap justify-center gap-3 sm:gap-6"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+              >
+                {row1.map((skill, i) => (
+                  <SkillIcon key={skill.name} skill={skill} index={i} />
                 ))}
-              </div>
+              </motion.div>
 
               {/* Row 2 */}
-              <div className="flex flex-wrap justify-center gap-3 sm:gap-6">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] bg-white dark:bg-[#1a1a1a] rounded-lg border border-[#c0dcbc] dark:border-[#2a2a2a] flex items-center justify-center hover:border-[#129840] dark:hover:border-[#33a381] transition-colors"
-                  >
-                    <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-[#129840] to-[#33a381] rounded" />
-                  </div>
+              {/* <motion.div
+                className="flex flex-wrap justify-center gap-3 sm:gap-6"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+              >
+                {row2.map((skill, i) => (
+                  <SkillIcon
+                    key={skill.name}
+                    skill={skill}
+                    index={i + row1.length}
+                  />
                 ))}
-              </div>
+              </motion.div> */}
             </div>
           </div>
 
           {/* Right: Skills Text */}
           <div className="flex items-center">
-            <div className="border-l-2 border-[#c0dcbc] dark:border-[#2a2a2a] pl-6 sm:pl-12">
-              <p className="text-[#5e5e65] dark:text-[#9999a1] text-base leading-relaxed space-y-4">
-                <span className="block">
-                  <strong className="text-[#1f1f24] dark:text-[#e5e5e6]">
-                    Front-End:
-                  </strong>{" "}
-                  HTML, CSS, JavaScript, React, Angular
-                </span>
-                <span className="block">
-                  <strong className="text-[#1f1f24] dark:text-[#e5e5e6]">
-                    Back-End:
-                  </strong>{" "}
-                  Node.js, Express, Python, Django
-                </span>
-                <span className="block">
-                  <strong className="text-[#1f1f24] dark:text-[#e5e5e6]">
-                    Databases:
-                  </strong>{" "}
-                  MySQL, PostgreSQL, MongoDB
-                </span>
-                <span className="block">
-                  <strong className="text-[#1f1f24] dark:text-[#e5e5e6]">
-                    Tools & Platforms:
-                  </strong>{" "}
-                  Git, Docker, AWS, Heroku
-                </span>
-                <span className="block">
-                  <strong className="text-[#1f1f24] dark:text-[#e5e5e6]">
-                    Others:
-                  </strong>{" "}
-                  RESTful APIs, GraphQL, Agile Methodologies
-                </span>
-              </p>
-            </div>
+            <motion.div
+              className="border-l-2 border-[#c0dcbc] dark:border-[#2a2a2a] pl-6 sm:pl-12"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+            >
+              <div className="text-[#5e5e65] dark:text-[#9999a1] text-base leading-relaxed space-y-4">
+                {skillCategories.map((cat, i) => (
+                  <motion.span
+                    key={cat.label}
+                    className="block"
+                    custom={i}
+                    variants={textVariants}
+                  >
+                    <strong className="text-[#1f1f24] dark:text-[#e5e5e6]">
+                      {cat.label}:
+                    </strong>{" "}
+                    {cat.value}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>

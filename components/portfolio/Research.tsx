@@ -1,22 +1,28 @@
 export default function Research() {
   const research = [
     {
+      year: "2025-2026:",
+      title: "Real-Time Video Streaming & Frontend Optimization",
+      description:
+        "Researched HLS/DASH adaptive streaming protocols and WebSocket-based real-time communication to deliver low-latency live streaming experiences on web and Smart TV platforms.",
+    },
+    {
+      year: "2024-2025:",
+      title: "Cross-Platform Smart TV App Development",
+      description:
+        "Explored building performant applications for Smart TV platforms (Tizen, WebOS) with optimized navigation, remote control UX, and adaptive rendering for large-screen devices.",
+    },
+    {
+      year: "2024:",
+      title: "OTT User Analytics & Tracking Systems",
+      description:
+        "Studied and implemented event-driven tracking SDKs for OTT platforms, including session management, offline queuing, and user behavior analytics to improve content engagement.",
+    },
+    {
       year: "2023-2024:",
-      title: "Advanced Data Analytics with Big Data Tools",
+      title: "Modern Frontend Architecture with Next.js & TypeScript",
       description:
-        "Utilized big data tools for advanced analytics and insights.",
-    },
-    {
-      year: "2021-2013:",
-      title: "Cloud-Native Application Architectures",
-      description:
-        "Studied best practices for designing cloud-native applications.",
-    },
-    {
-      year: "2019-2020:",
-      title: "AI-Driven User Experience Personalization",
-      description:
-        "Leveraged AI to personalize user experiences based on behavior.",
+        "Researched server-side rendering, static site generation, and incremental static regeneration patterns in Next.js to build scalable, SEO-friendly web applications.",
     },
   ];
 
@@ -25,12 +31,16 @@ export default function Research() {
       {/* Header */}
       <div className="flex items-center gap-3 mb-12">
         <svg
-          className="w-8 h-8 text-[#129840] dark:text-[#33a381]"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
           viewBox="0 0 32 32"
-          fill="currentColor"
+          fill="none"
         >
-          <path d="M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14 14-6.268 14-14S23.732 2 16 2zm0 26c-6.617 0-12-5.383-12-12S9.383 4 16 4s12 5.383 12 12-5.383 12-12 12z" />
-          <path d="M16 8c-.552 0-1 .448-1 1v7c0 .552.448 1 1 1s1-.448 1-1V9c0-.552-.448-1-1-1zm-5 4H9c-.552 0-1 .448-1 1s.448 1 1 1h2c.552 0 1-.448 1-1s-.448-1-1-1zm10 0h-2c-.552 0-1 .448-1 1s.448 1 1 1h2c.552 0 1-.448 1-1s-.448-1-1-1z" />
+          <path
+            d="M20 4H28V10.6667H25.3333V6.66667H20V4ZM12 4V6.66667H6.66667V10.6667H4V4H12ZM20 28V25.3333H25.3333V21.3333H28V28H20ZM12 28H4V21.3333H6.66667V25.3333H12V28ZM4 14.6667H28V17.3333H4V14.6667Z"
+            fill="#A8FF53"
+          />
         </svg>
         <h2 className="text-[#1f1f24] dark:text-[#e5e5e6] text-[24px] sm:text-[32px] font-medium">
           Researched
