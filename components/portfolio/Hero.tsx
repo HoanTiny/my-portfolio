@@ -4,6 +4,160 @@ import { ButtonSmall } from "@/components/ui/Button";
 import { RiDownloadLine } from "@/components/ui/Icons";
 import Link from "next/link";
 import Marquee from "react-fast-marquee";
+import { motion } from "framer-motion";
+import { useState, useEffect, useRef, useCallback } from "react";
+
+function Tilt3D({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [transform, setTransform] = useState(
+    "perspective(1000px) rotateX(0deg) rotateY(0deg)",
+  );
+  const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
+
+  const handleMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    const rotateY = (x - 0.5) * 20;
+    const rotateX = (0.5 - y) * 20;
+    setTransform(
+      `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03,1.03,1.03)`,
+    );
+    // setGlare({ x: x * 100, y: y * 100, opacity: 0.15 });
+  }, []);
+
+  const handleLeave = useCallback(() => {
+    setTransform(
+      "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)",
+    );
+    setGlare({ x: 50, y: 50, opacity: 0 });
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={className}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      style={{
+        transform,
+        transition: "transform 0.15s ease-out",
+        transformStyle: "preserve-3d",
+      }}
+    >
+      {children}
+      <div
+        className="absolute inset-0 rounded-2xl pointer-events-none z-10"
+        style={{
+          background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,${glare.opacity}), transparent 60%)`,
+          transition: "background 0.15s ease-out",
+        }}
+      />
+    </div>
+  );
+}
+
+function TypingText({
+  text,
+  delay = 0,
+  speed = 30,
+  className,
+}: {
+  text: string;
+  delay?: number;
+  speed?: number;
+  className?: string;
+}) {
+  const [displayed, setDisplayed] = useState("");
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setStarted(true), delay);
+    return () => clearTimeout(timeout);
+  }, [delay]);
+
+  useEffect(() => {
+    if (!started) return;
+    if (displayed.length >= text.length) return;
+    const timeout = setTimeout(
+      () => setDisplayed(text.slice(0, displayed.length + 1)),
+      speed,
+    );
+    return () => clearTimeout(timeout);
+  }, [started, displayed, text, speed]);
+
+  return (
+    <span className={className}>
+      {displayed}
+      {displayed.length < text.length && (
+        <motion.span
+          className="inline-block w-[2px] h-[1em] bg-[var(--theme-primary-1)] ml-[1px] align-middle"
+          animate={{ opacity: [1, 0] }}
+          transition={{
+            duration: 0.6,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        />
+      )}
+    </span>
+  );
+}
+
+const fadeUp = (delay: number) => ({
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay, ease: "easeOut" },
+  },
+});
+
+const letterAnimation = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      delay: 0.5 + i * 0.03,
+      ease: "easeOut",
+    } as const,
+  }),
+};
+
+function AnimatedText({
+  text,
+  className,
+}: {
+  text: string;
+  className?: string;
+}) {
+  return (
+    <span className={className}>
+      {text.split("").map((char, i) => (
+        <motion.span
+          key={i}
+          custom={i}
+          variants={letterAnimation}
+          initial="hidden"
+          animate="visible"
+          className="inline-block"
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
 
 export default function Hero() {
   return (
@@ -17,23 +171,40 @@ export default function Hero() {
 
         <div className="relative mx-auto px-4 sm:px-[36px] py-8 sm:py-[54px] flex flex-col md:flex-row gap-6 md:gap-12 bg-white dark:bg-[#0e0e0f] ">
           {/* Left Side - Image */}
-          <div className="relative w-full md:w-[320px] lg:w-[512px] h-[280px] sm:h-[350px] md:h-[461px] flex-shrink-0 mx-auto md:mx-0">
-            <div className="absolute inset-0 rounded-2xl">
-              <img
-                src="/avt.jpg"
-                className="w-full h-full object-cover rounded-2xl rounded-full"
-                alt=""
-              />
-            </div>
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[81px] h-[73px]">
+          <motion.div
+            className="relative w-full md:w-[320px] lg:w-[512px] h-[280px] sm:h-[350px] md:h-[461px] flex-shrink-0 mx-auto md:mx-0"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
+            <Tilt3D className="relative w-full h-full">
+              <div className="absolute inset-0 rounded-2xl">
+                <img
+                  src="/avt.jpg"
+                  className="w-full h-full object-cover rounded-2xl rounded-full"
+                  alt=""
+                />
+              </div>
+            </Tilt3D>
+            <motion.div
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[81px] h-[73px]"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+            >
               <img src="/dev-2.png" alt="Decorative Bottom" />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Right Side - Content */}
           <div className="flex-1 pt-0 md:pt-11">
             {/* Name Tag */}
-            <p className="font-dm-mono text-[16px] mb-2">
+            <motion.p
+              className="font-dm-mono text-[16px] mb-2"
+              variants={fadeUp(0.2) as any}
+              initial="hidden"
+              animate="visible"
+            >
               <span className="text-[var(--theme-primary-1)]">
                 &lt;span&gt;
               </span>
@@ -43,35 +214,47 @@ export default function Hero() {
               <span className="text-[var(--theme-primary-1)]">
                 &lt;/span&gt;
               </span>
-            </p>
+            </motion.p>
 
             {/* Title */}
-            <h1 className="font-urbanist font-bold text-[28px] sm:text-[36px] lg:text-[50px] leading-[1.2] mb-4 sm:mb-6">
-              <span className="text-[var(--foreground)]">Junior </span>
-              <span className="bg-[var(--gradient-primary)] bg-clip-text text-transparent">
-                {`{Full Stack}`}
-              </span>
+            <motion.h1
+              className="font-urbanist font-bold text-[28px] sm:text-[36px] lg:text-[50px] leading-[1.2] mb-4 sm:mb-6"
+              initial="hidden"
+              animate="visible"
+            >
+              <AnimatedText
+                text="Junior "
+                className="text-[var(--foreground)]"
+              />
+              <AnimatedText
+                text="{Full Stack}"
+                className="bg-[var(--gradient-primary)] bg-clip-text text-transparent"
+              />
               <br />
-              <span className="text-[var(--foreground)]">
-                Web & App developer_
-              </span>
-            </h1>
+              <AnimatedText
+                text="Web & App developer_"
+                className="text-[var(--foreground)]"
+              />
+            </motion.h1>
 
             {/* Description */}
-            <p className="font-dm-mono text-[14px] sm:text-[16px] leading-[1.5] text-[var(--neutral-300)] dark:text-[var(--secondary)] mb-6 sm:mb-8">
+            <div className="font-dm-mono text-[14px] sm:text-[16px] leading-[1.5] text-[var(--neutral-300)] dark:text-[var(--secondary)] mb-6 sm:mb-8">
               <span className="text-[var(--theme-primary-1)]">&lt;p&gt;</span>
-              With expertise in cutting-edge technologies such as{" "}
-              <span className="text-[var(--theme-primary-1)]">
-                NodeJS
-              </span>, <span className="text-(--theme-primary-1)">React</span>,{" "}
-              <span className="text-(--theme-primary-1)">Angular</span>, and{" "}
-              <span className="text-(--theme-primary-1)">Laravel</span>
-              ... I deliver web solutions that are both innovative and robust.
-              <span className="text-(--theme-primary-1)">&lt;/p&gt;</span>
-            </p>
+              <TypingText
+                text="With expertise in cutting-edge technologies such as NodeJS, React, Angular, and Laravel... I deliver web solutions that are both innovative and robust."
+                delay={1500}
+                speed={25}
+              />
+              <span className="text-[var(--theme-primary-1)]">&lt;/p&gt;</span>
+            </div>
 
             {/* Tech Stack Icons */}
-            <div className="flex gap-[8px] items-center mb-6">
+            <motion.div
+              className="flex gap-[8px] items-center mb-6"
+              variants={fadeUp(0.8) as any}
+              initial="hidden"
+              animate="visible"
+            >
               <div className="w-full max-w-[280px] sm:max-w-[400px] overflow-hidden">
                 <Marquee speed={30} gradient={false} pauseOnHover={true}>
                   <div className="size-[50px] sm:size-[67px] rounded-xl bg-gray-100 dark:bg-[#1a1a1a] flex items-center justify-center mx-1">
@@ -100,16 +283,22 @@ export default function Hero() {
               <span className="font-dm-mono text-[14px] sm:text-[16px] text-[var(--neutral-300)] dark:text-[var(--secondary)] flex-shrink-0">
                 ...and more
               </span>
-            </div>
+            </motion.div>
 
-            <button className="download_btn">
-              <div className="svg-wrapper-1">
-                <div className="svg-wrapper">
-                  <RiDownloadLine />
+            <motion.div
+              variants={fadeUp(1.0) as any}
+              initial="hidden"
+              animate="visible"
+            >
+              <button className="download_btn">
+                <div className="svg-wrapper-1">
+                  <div className="svg-wrapper">
+                    <RiDownloadLine />
+                  </div>
                 </div>
-              </div>
-              <span className="font-dm-mono">[ Download CV ]</span>
-            </button>
+                <span className="font-dm-mono">[ Download CV ]</span>
+              </button>
+            </motion.div>
             {/* Download CV Button */}
             {/* <ButtonSmall icon={<RiDownloadLine />}>[ Download CV ]</ButtonSmall> */}
           </div>

@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
 import Header from "@/components/portfolio/Header";
 import Hero from "@/components/portfolio/Hero";
 import Stats from "@/components/portfolio/Stats";
@@ -12,61 +16,95 @@ import Skills from "@/components/portfolio/Skills";
 import Blog from "@/components/portfolio/Blog";
 import Contact from "@/components/portfolio/Contact";
 import Footer from "@/components/portfolio/Footer";
+import ScrollToTop from "@/components/portfolio/ScrollToTop";
+import SplashScreen from "@/components/portfolio/SplashScreen";
 
 export default function Home() {
+  const [showSplash, setShowSplash] = useState(true);
+  const [ready, setReady] = useState(false);
+
   return (
-    <div className="min-h-screen bg-[#f5f5f5] dark:bg-[#1f1f24] transition-colors duration-300 py-3 sm:py-6 space-y-3 sm:space-y-6 relative">
-      <div className="absolute top-0 start-0 w-full  ">
-        <img className="bg-w" src="/bg.png" alt="zelio" />
-      </div>
-      {/* Header */}
-      <div className="px-3 sm:px-6 max-w-330 mx-auto">
-        <Header />
-      </div>
+    <>
+      <SplashScreen
+        onFinish={() => {
+          setShowSplash(false);
+          setReady(true);
+        }}
+      />
+      {!showSplash && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="min-h-screen bg-[#f5f5f5] dark:bg-[#1f1f24] transition-colors duration-300 py-3 sm:py-6 space-y-3 sm:space-y-6 relative"
+        >
+          <div className="absolute top-0 start-0 w-full  ">
+            <img className="bg-w" src="/bg.png" alt="zelio" />
+          </div>
 
-      {/* Main Content */}
-      <main className="max-w-330 mx-auto px-3 sm:px-6 space-y-3 sm:space-y-6">
-        {/* Hero Section */}
-        <Hero />
+          <ScrollToTop />
+          {/* Header */}
+          <div className="px-3 sm:px-6 max-w-330 mx-auto">
+            <Header />
+          </div>
 
-        {/* Statistics Section */}
-        <Stats />
+          {/* Main Content */}
+          <main className="max-w-330 mx-auto px-3 sm:px-6 space-y-3 sm:space-y-6">
+            {/* Hero Section */}
+            <div id="about">
+              <Hero />
+            </div>
 
-        {/* Cooperation & Git Journal */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6">
-          <Cooperation className="lg:col-span-2" />
-          <GitJournal className="lg:col-span-1" />
-        </div>
+            {/* Statistics Section */}
+            <Stats />
 
-        {/* Services Section */}
-        <Services />
+            {/* Cooperation & Git Journal */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6">
+              <Cooperation className="lg:col-span-2" />
+              <GitJournal className="lg:col-span-1" />
+            </div>
 
-        {/* Experience Section */}
-        <Experience />
+            {/* Services Section */}
+            <div id="services">
+              <Services />
+            </div>
 
-        {/* Education & Research */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-6">
-          <Education />
-          <Research />
-        </div>
+            {/* Experience Section */}
+            <div id="resume">
+              <Experience />
+            </div>
 
-        {/* Projects Section */}
-        <Projects />
+            {/* Education & Research */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-6">
+              <Education />
+              <Research />
+            </div>
 
-        {/* Skills Section */}
-        <Skills />
+            {/* Projects Section */}
+            <div id="portfolio">
+              <Projects />
+            </div>
 
-        {/* Blog Section */}
-        <Blog />
+            {/* Skills Section */}
+            <Skills />
 
-        {/* Contact Section */}
-        <Contact />
-      </main>
+            {/* Blog Section */}
+            <div id="blog">
+              <Blog />
+            </div>
 
-      {/* Footer */}
-      <footer className="max-w-[1920px] mx-auto px-3 sm:px-6 py-3 sm:py-6">
-        <Footer />
-      </footer>
-    </div>
+            {/* Contact Section */}
+            <div id="contact">
+              <Contact />
+            </div>
+          </main>
+
+          {/* Footer */}
+          <footer className="max-w-[1920px] mx-auto px-3 sm:px-6 py-3 sm:py-6">
+            <Footer />
+          </footer>
+        </motion.div>
+      )}
+    </>
   );
 }

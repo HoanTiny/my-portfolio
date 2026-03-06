@@ -3,6 +3,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
+
+const SkillsGlobe = dynamic(
+  () => import("@/components/portfolio/SkillsGlobe"),
+  { ssr: false },
+);
 
 const skillsData = [
   { name: "Node.js", icon: "/nodejs.svg", row: 1 },
@@ -183,38 +189,8 @@ export default function Skills() {
               </h2>
             </motion.div>
 
-            {/* Skills Grid */}
-            <div className="space-y-6 sm:space-y-8">
-              {/* Row 1 */}
-              <motion.div
-                className="flex flex-wrap justify-center gap-3 sm:gap-6"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-              >
-                {row1.map((skill, i) => (
-                  <SkillIcon key={skill.name} skill={skill} index={i} />
-                ))}
-              </motion.div>
-
-              {/* Row 2 */}
-              {/* <motion.div
-                className="flex flex-wrap justify-center gap-3 sm:gap-6"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-              >
-                {row2.map((skill, i) => (
-                  <SkillIcon
-                    key={skill.name}
-                    skill={skill}
-                    index={i + row1.length}
-                  />
-                ))}
-              </motion.div> */}
-            </div>
+            {/* 3D Skills Globe */}
+            <SkillsGlobe />
           </div>
 
           {/* Right: Skills Text */}

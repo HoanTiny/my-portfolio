@@ -27,7 +27,7 @@ export default function Header() {
               className="text-lg sm:text-2xl font-['DM_Mono'] font-medium text-[#ffff] dark:text-[#e5e5e6]"
               style={{
                 background:
-                  "linear-gradient(270deg, hsla(0, 0%, 100%, .32), #fff);",
+                  "linear-gradient(270deg, hsla(0, 0%, 100%, .32), #fff)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -38,35 +38,74 @@ export default function Header() {
 
           {/* Navigation - hidden on mobile/tablet */}
           <nav className="hidden lg:flex items-center gap-[37px] font-['DM_Mono'] text-[16px] text-[#ffff] dark:text-[#e5e5e6] leading-[1.5]">
-            <a href="#about" className="hover:opacity-100 transition-opacity">
+            <a
+              href="#about"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("about")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="hover:opacity-100 transition-opacity"
+            >
               About me
             </a>
             <a
               href="#resume"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("resume")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
               className="opacity-50 hover:opacity-100 transition-opacity"
             >
               Resume
             </a>
             <a
               href="#services"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("services")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
               className="opacity-50 hover:opacity-100 transition-opacity"
             >
               Services
             </a>
             <a
               href="#portfolio"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("portfolio")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
               className="opacity-50 hover:opacity-100 transition-opacity"
             >
               Portfolio
             </a>
             <a
               href="#blog"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("blog")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
               className="opacity-50 hover:opacity-100 transition-opacity"
             >
               Blog
             </a>
             <a
               href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("contact")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
               className="opacity-50 hover:opacity-100 transition-opacity"
             >
               Contact

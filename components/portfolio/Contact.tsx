@@ -14,13 +14,13 @@ const contactInfo = [
   {
     icon: <RiPhoneFill />,
     label: "Phone Number",
-    value: "+1-234-567-8901",
+    value: "+84-968-652-789",
     color: "bg-emerald-500/10 border-emerald-500/30 text-emerald-500",
   },
   {
     icon: <RiMailFill />,
     label: "Email",
-    value: "contact@james.dev",
+    value: "th",
     color: "bg-emerald-500/10 border-emerald-500/30 text-emerald-500",
   },
   {
