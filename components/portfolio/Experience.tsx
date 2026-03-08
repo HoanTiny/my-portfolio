@@ -1,7 +1,6 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import Image from 'next/image'
 import { AnimatePresence, motion, useInView } from 'framer-motion'
 
 export default function Experience() {
