@@ -1,7 +1,7 @@
 // Icon components from design system - using RemixIcon
 // https://remixicon.com
 
-export const RiDownloadLine = () => <img src="/ri-download-line.svg" alt="" />;
+export const RiDownloadLine = () => <img src="/ri-download-line.svg" alt="" />
 
 export const RiArrowRightLine = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -10,7 +10,7 @@ export const RiArrowRightLine = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiArrowLeftLine = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -19,7 +19,7 @@ export const RiArrowLeftLine = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiArrowRightUpLine = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -28,7 +28,7 @@ export const RiArrowRightUpLine = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiSunFill = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -37,7 +37,7 @@ export const RiSunFill = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiContrast2Fill = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -46,7 +46,7 @@ export const RiContrast2Fill = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiMenu2Line = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -55,7 +55,7 @@ export const RiMenu2Line = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiMailLine = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -64,7 +64,7 @@ export const RiMailLine = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiMailFill = () => (
   <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
@@ -73,7 +73,7 @@ export const RiMailFill = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiPhoneFill = () => (
   <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
@@ -82,7 +82,7 @@ export const RiPhoneFill = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiSkypeFill = () => (
   <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
@@ -91,7 +91,7 @@ export const RiSkypeFill = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiMap2Fill = () => (
   <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
@@ -100,7 +100,7 @@ export const RiMap2Fill = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiGithubFill = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -109,7 +109,7 @@ export const RiGithubFill = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiLinkedinFill = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -118,7 +118,7 @@ export const RiLinkedinFill = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiTwitterXFill = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -127,7 +127,7 @@ export const RiTwitterXFill = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiFacebookCircleFill = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -136,7 +136,7 @@ export const RiFacebookCircleFill = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiWindowLine = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -145,7 +145,7 @@ export const RiWindowLine = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiSpeedLine = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -154,7 +154,7 @@ export const RiSpeedLine = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiIdCardLine = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -163,7 +163,7 @@ export const RiIdCardLine = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiSpeakLine = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -172,7 +172,7 @@ export const RiSpeakLine = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiArchiveDrawerLine = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -181,7 +181,7 @@ export const RiArchiveDrawerLine = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiShoppingCart2Line = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -190,7 +190,7 @@ export const RiShoppingCart2Line = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiCloudLine = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -199,7 +199,7 @@ export const RiCloudLine = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const RiSmartphoneLine = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -208,4 +208,4 @@ export const RiSmartphoneLine = () => (
       fill="currentColor"
     />
   </svg>
-);
+)

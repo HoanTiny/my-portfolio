@@ -1,17 +1,17 @@
 export default function Education() {
   const education = [
     {
-      year: "2019-2023:",
-      school: "HAUI",
-      degree: "Ha Noi University of Industry, Sofftware Engineering ",
+      year: '2019-2023:',
+      school: 'HAUI',
+      degree: 'Ha Noi University of Industry, Sofftware Engineering ',
     },
     // THPT Cam Ly, Bac Giang, Vietnam (2016-2019)
     {
-      year: "2016-2019:",
-      school: "THPT Cam Ly",
-      degree: "High School Diploma",
+      year: '2016-2019:',
+      school: 'THPT Cam Ly',
+      degree: 'High School Diploma',
     },
-  ];
+  ]
 
   return (
     <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-8 lg:p-12 relative overflow-hidden border border-[#c0dcbc] dark:border-[#2a2a2a] transition-colors duration-300">
@@ -61,5 +61,5 @@ export default function Education() {
         ))}
       </div>
     </section>
-  );
+  )
 }

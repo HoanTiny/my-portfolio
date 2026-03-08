@@ -1,53 +1,53 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import { useState } from "react";
+import Image from 'next/image'
+import { useState } from 'react'
 import {
   AnimatePresence,
   motion,
   useMotionValue,
   useTime,
   useTransform,
-} from "framer-motion";
-import React from "react";
-import { Check, Copy, Mail, MessageCircle, Phone } from "lucide-react";
+} from 'framer-motion'
+import React from 'react'
+import { Check, Copy, Mail, MessageCircle, Phone } from 'lucide-react'
 
 const technologies = [
   {
-    category: "Frontend Frameworks",
-    items: ["React", "Next.js", "Vue.js", "TypeScript", "JavaScript"],
+    category: 'Frontend Frameworks',
+    items: ['React', 'Next.js', 'Vue.js', 'TypeScript', 'JavaScript'],
   },
   {
-    category: "Styling & UI",
-    items: ["Tailwind CSS", "CSS3/SASS", "Styled Components", "Framer Motion"],
+    category: 'Styling & UI',
+    items: ['Tailwind CSS', 'CSS3/SASS', 'Styled Components', 'Framer Motion'],
   },
   {
-    category: "Tools & Other",
-    items: ["Git", "Webpack", "Vite", "Figma", "Redux"],
+    category: 'Tools & Other',
+    items: ['Git', 'Webpack', 'Vite', 'Figma', 'Redux'],
   },
-];
+]
 export default function Cooperation({ className }: { className?: string }) {
-  const [isDropped, setIsDropped] = useState(false);
-  const [activeType, setActiveType] = useState("default"); // default, skype, phone, email
+  const [isDropped, setIsDropped] = useState(false)
+  const [activeType, setActiveType] = useState('default') // default, skype, phone, email
 
-  const time = useTime();
+  const time = useTime()
   // Tạo chuyển động xoay tròn liên tục
-  const rotate = useTransform(time, [0, 10000], [0, 360], { clamp: false });
+  const rotate = useTransform(time, [0, 10000], [0, 360], { clamp: false })
 
   // Theo dõi vị trí chuột (ví dụ đơn giản hóa)
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
 
   // Tạo hiệu ứng "parallax" ngược chiều chuột
-  const moveX = useTransform(mouseX, [-100, 100], [20, -20]);
-  const moveY = useTransform(mouseY, [-100, 100], [20, -20]);
+  const moveX = useTransform(mouseX, [-100, 100], [20, -20])
+  const moveY = useTransform(mouseY, [-100, 100], [20, -20])
 
   // Hàm giả lập cập nhật vị trí chuột trên container
   const handleMouseMove = (e: any) => {
     // (Cần tính toán vị trí tương đối chính xác hơn trong thực tế)
-    mouseX.set(e.clientX / 10);
-    mouseY.set(e.clientY / 10);
-  };
+    mouseX.set(e.clientX / 10)
+    mouseY.set(e.clientY / 10)
+  }
   return (
     <section
       className={`bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-8 lg:p-12 relative overflow-hidden transition-colors duration-300 ${className}`}
@@ -102,13 +102,13 @@ export default function Cooperation({ className }: { className?: string }) {
             <motion.div
               layout
               className={`relative w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-colors duration-300 ${
-                activeType === "default"
-                  ? "bg-emerald-500 shadow-emerald-500/50"
-                  : activeType === "email"
-                    ? "bg-blue-500 shadow-blue-500/50"
-                    : activeType === "phone"
-                      ? "bg-orange-500 shadow-orange-500/50"
-                      : "bg-sky-500 shadow-sky-500/50" // skype
+                activeType === 'default'
+                  ? 'bg-emerald-500 shadow-emerald-500/50'
+                  : activeType === 'email'
+                    ? 'bg-blue-500 shadow-blue-500/50'
+                    : activeType === 'phone'
+                      ? 'bg-orange-500 shadow-orange-500/50'
+                      : 'bg-sky-500 shadow-sky-500/50' // skype
               }`}
             >
               <AnimatePresence mode="wait">
@@ -120,16 +120,16 @@ export default function Cooperation({ className }: { className?: string }) {
                   transition={{ duration: 0.2 }}
                   className="text-black"
                 >
-                  {activeType === "default" && (
+                  {activeType === 'default' && (
                     <div className="w-3 h-3 bg-white rounded-full animate-ping" />
                   )}
-                  {activeType === "skype" && (
+                  {activeType === 'skype' && (
                     <MessageCircle size={24} strokeWidth={2.5} />
                   )}
-                  {activeType === "phone" && (
+                  {activeType === 'phone' && (
                     <Phone size={24} strokeWidth={2.5} />
                   )}
-                  {activeType === "email" && (
+                  {activeType === 'email' && (
                     <Mail size={24} strokeWidth={2.5} />
                   )}
                 </motion.div>
@@ -230,7 +230,7 @@ export default function Cooperation({ className }: { className?: string }) {
         </div>
       </div>
     </section>
-  );
+  )
 }
 
 // --- SUB COMPONENTS ---
@@ -253,13 +253,13 @@ const OrbitRing = ({ radius, duration, reverse, children }: any) => {
       <motion.div
         style={{ width: radius * 2, height: radius * 2 }}
         animate={{ rotate: reverse ? -360 : 360 }}
-        transition={{ duration: duration, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: duration, repeat: Infinity, ease: 'linear' }}
         className="relative"
       >
         {React.Children.map(children, (child, index) => {
-          const totalItems = React.Children.count(children);
-          const angleStep = 360 / totalItems;
-          const rotateAngle = angleStep * index;
+          const totalItems = React.Children.count(children)
+          const angleStep = 360 / totalItems
+          const rotateAngle = angleStep * index
 
           return (
             <div
@@ -267,7 +267,7 @@ const OrbitRing = ({ radius, duration, reverse, children }: any) => {
               style={{
                 transform: `rotate(${rotateAngle}deg) translateY(-${radius}px)`,
                 transformOrigin: `50% ${radius}px`,
-                height: "0px",
+                height: '0px',
               }}
             >
               {/* Counter-Rotation để icon luôn đứng thẳng */}
@@ -276,18 +276,18 @@ const OrbitRing = ({ radius, duration, reverse, children }: any) => {
                 transition={{
                   duration: duration,
                   repeat: Infinity,
-                  ease: "linear",
+                  ease: 'linear',
                 }}
               >
                 {child}
               </motion.div>
             </div>
-          );
+          )
         })}
       </motion.div>
     </div>
-  );
-};
+  )
+}
 
 /**
  * OrbitItem: Chi tiết từng Icon (Size nhỏ)
@@ -306,23 +306,23 @@ const OrbitItem = ({ icon, color, label }: any) => {
         {label}
       </div>
     </div>
-  );
-};
+  )
+}
 
 // Item con xử lý logic copy và hover
 const ContactItem = ({ type, value, label, setActive }: any) => {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState(false)
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(value);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+    navigator.clipboard.writeText(value)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   return (
     <motion.div
       onHoverStart={() => setActive(type)}
-      onHoverEnd={() => setActive("default")}
+      onHoverEnd={() => setActive('default')}
       onClick={handleCopy}
       className="group relative flex items-center gap-3 cursor-pointer p-2 -ml-2 rounded-lg hover:bg-zinc-900/50 transition-colors"
     >
@@ -362,5 +362,5 @@ const ContactItem = ({ type, value, label, setActive }: any) => {
         )}
       </AnimatePresence>
     </motion.div>
-  );
-};
+  )
+}

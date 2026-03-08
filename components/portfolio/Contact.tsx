@@ -1,83 +1,83 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from 'react'
+import { motion } from 'framer-motion'
 import {
   RiPhoneFill,
   RiMailFill,
   RiSkypeFill,
   RiMap2Fill,
   RiArrowRightUpLine,
-} from "@/components/ui/Icons";
+} from '@/components/ui/Icons'
 
 const contactInfo = [
   {
     icon: <RiPhoneFill />,
-    label: "Phone Number",
-    value: "+84-968-652-789",
-    color: "bg-emerald-500/10 border-emerald-500/30 text-emerald-500",
+    label: 'Phone Number',
+    value: '+84-968-652-789',
+    color: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-500',
   },
   {
     icon: <RiMailFill />,
-    label: "Email",
-    value: "th",
-    color: "bg-emerald-500/10 border-emerald-500/30 text-emerald-500",
+    label: 'Email',
+    value: 'th',
+    color: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-500',
   },
   {
     icon: <RiSkypeFill />,
-    label: "Skype",
-    value: "JamesDev24",
-    color: "bg-emerald-500/10 border-emerald-500/30 text-emerald-500",
+    label: 'Skype',
+    value: 'JamesDev24',
+    color: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-500',
   },
   {
     icon: <RiMap2Fill />,
-    label: "Address",
-    value: "0811 Erdman Prairie, Joaville CA",
-    color: "bg-emerald-500/10 border-emerald-500/30 text-emerald-500",
+    label: 'Address',
+    value: '0811 Erdman Prairie, Joaville CA',
+    color: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-500',
   },
-];
+]
 
 const containerVariants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } },
-};
+}
 
 const itemVariants = {
   hidden: { opacity: 0, x: 30 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { type: "spring", stiffness: 150, damping: 20 } as const,
+    transition: { type: 'spring', stiffness: 150, damping: 20 } as const,
   },
-};
+}
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [focused, setFocused] = useState<string | null>(null);
+    name: '',
+    phone: '',
+    email: '',
+    subject: '',
+    message: '',
+  })
+  const [focused, setFocused] = useState<string | null>(null)
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-  };
+    e.preventDefault()
+    console.log('Form submitted:', formData)
+  }
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
   const inputClass = (name: string) =>
     `w-full bg-[#1a1a1f] dark:bg-[#1a1a1f] border rounded-xl px-5 py-4 text-white placeholder:text-[#6b6b70] font-medium text-[15px] outline-none transition-all duration-300 ${
       focused === name
-        ? "border-[#a3e635] ring-1 ring-[#a3e635]/30"
-        : "border-[#2a2a2f] hover:border-[#3a3a3f]"
-    }`;
+        ? 'border-[#a3e635] ring-1 ring-[#a3e635]/30'
+        : 'border-[#2a2a2f] hover:border-[#3a3a3f]'
+    }`
 
   return (
     <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-10 lg:p-16 transition-colors duration-300">
@@ -87,7 +87,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-[#e5e5e6] text-[32px] font-urbanist font-bold mb-8 text-color">
@@ -103,9 +103,9 @@ export default function Contact() {
                     placeholder="Your name"
                     value={formData.name}
                     onChange={handleChange}
-                    onFocus={() => setFocused("name")}
+                    onFocus={() => setFocused('name')}
                     onBlur={() => setFocused(null)}
-                    className={inputClass("name")}
+                    className={inputClass('name')}
                   />
                   <input
                     name="phone"
@@ -113,9 +113,9 @@ export default function Contact() {
                     placeholder="Phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    onFocus={() => setFocused("phone")}
+                    onFocus={() => setFocused('phone')}
                     onBlur={() => setFocused(null)}
-                    className={inputClass("phone")}
+                    className={inputClass('phone')}
                   />
                 </div>
 
@@ -127,18 +127,18 @@ export default function Contact() {
                     placeholder="Emaill"
                     value={formData.email}
                     onChange={handleChange}
-                    onFocus={() => setFocused("email")}
+                    onFocus={() => setFocused('email')}
                     onBlur={() => setFocused(null)}
-                    className={inputClass("email")}
+                    className={inputClass('email')}
                   />
                   <input
                     name="subject"
                     placeholder="Subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    onFocus={() => setFocused("subject")}
+                    onFocus={() => setFocused('subject')}
                     onBlur={() => setFocused(null)}
-                    className={inputClass("subject")}
+                    className={inputClass('subject')}
                   />
                 </div>
 
@@ -149,9 +149,9 @@ export default function Contact() {
                   rows={6}
                   value={formData.message}
                   onChange={handleChange}
-                  onFocus={() => setFocused("message")}
+                  onFocus={() => setFocused('message')}
                   onBlur={() => setFocused(null)}
-                  className={`${inputClass("message")} resize-none`}
+                  className={`${inputClass('message')} resize-none`}
                 />
 
                 {/* Submit Button */}
@@ -171,14 +171,14 @@ export default function Contact() {
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, margin: '-50px' }}
               >
                 {contactInfo.map((info, index) => (
                   <motion.div
                     key={index}
                     variants={itemVariants}
                     whileHover={{ x: -4, scale: 1.02 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                     className="flex items-center gap-5 cursor-default group"
                   >
                     {/* Icon */}
@@ -202,5 +202,5 @@ export default function Contact() {
         </div>
       </div>
     </section>
-  );
+  )
 }

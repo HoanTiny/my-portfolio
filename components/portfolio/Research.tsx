@@ -1,30 +1,30 @@
 export default function Research() {
   const research = [
     {
-      year: "2025-2026:",
-      title: "Real-Time Video Streaming & Frontend Optimization",
+      year: '2025-2026:',
+      title: 'Real-Time Video Streaming & Frontend Optimization',
       description:
-        "Researched HLS/DASH adaptive streaming protocols and WebSocket-based real-time communication to deliver low-latency live streaming experiences on web and Smart TV platforms.",
+        'Researched HLS/DASH adaptive streaming protocols and WebSocket-based real-time communication to deliver low-latency live streaming experiences on web and Smart TV platforms.',
     },
     {
-      year: "2024-2025:",
-      title: "Cross-Platform Smart TV App Development",
+      year: '2024-2025:',
+      title: 'Cross-Platform Smart TV App Development',
       description:
-        "Explored building performant applications for Smart TV platforms (Tizen, WebOS) with optimized navigation, remote control UX, and adaptive rendering for large-screen devices.",
+        'Explored building performant applications for Smart TV platforms (Tizen, WebOS) with optimized navigation, remote control UX, and adaptive rendering for large-screen devices.',
     },
     {
-      year: "2024:",
-      title: "OTT User Analytics & Tracking Systems",
+      year: '2024:',
+      title: 'OTT User Analytics & Tracking Systems',
       description:
-        "Studied and implemented event-driven tracking SDKs for OTT platforms, including session management, offline queuing, and user behavior analytics to improve content engagement.",
+        'Studied and implemented event-driven tracking SDKs for OTT platforms, including session management, offline queuing, and user behavior analytics to improve content engagement.',
     },
     {
-      year: "2023-2024:",
-      title: "Modern Frontend Architecture with Next.js & TypeScript",
+      year: '2023-2024:',
+      title: 'Modern Frontend Architecture with Next.js & TypeScript',
       description:
-        "Researched server-side rendering, static site generation, and incremental static regeneration patterns in Next.js to build scalable, SEO-friendly web applications.",
+        'Researched server-side rendering, static site generation, and incremental static regeneration patterns in Next.js to build scalable, SEO-friendly web applications.',
     },
-  ];
+  ]
 
   return (
     <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-8 lg:p-12 relative overflow-hidden border border-[#c0dcbc] dark:border-[#2a2a2a] transition-colors duration-300">
@@ -74,5 +74,5 @@ export default function Research() {
         ))}
       </div>
     </section>
-  );
+  )
 }

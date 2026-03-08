@@ -1,36 +1,36 @@
 export default function Services() {
   const services = [
     {
-      title: "Web Development",
+      title: 'Web Development',
       description:
-        "Building modern web applications with React, Next.js, TypeScript, and Tailwind CSS to deliver fast, interactive user experiences.",
+        'Building modern web applications with React, Next.js, TypeScript, and Tailwind CSS to deliver fast, interactive user experiences.',
     },
     {
-      title: "UI/UX Implementation",
+      title: 'UI/UX Implementation',
       description:
-        "Translating Figma and design mockups into pixel-perfect, accessible code with clean component architecture and design systems.",
+        'Translating Figma and design mockups into pixel-perfect, accessible code with clean component architecture and design systems.',
     },
     {
-      title: "Responsive Design",
+      title: 'Responsive Design',
       description:
-        "Creating mobile-first, fully responsive layouts that look great on every screen size and work seamlessly across all modern browsers.",
+        'Creating mobile-first, fully responsive layouts that look great on every screen size and work seamlessly across all modern browsers.',
     },
     {
-      title: "Animation & Interaction",
+      title: 'Animation & Interaction',
       description:
-        "Crafting smooth animations and micro-interactions using Framer Motion and CSS to enhance user engagement and delight.",
+        'Crafting smooth animations and micro-interactions using Framer Motion and CSS to enhance user engagement and delight.',
     },
     {
-      title: "Performance Optimization",
+      title: 'Performance Optimization',
       description:
-        "Improving Core Web Vitals through lazy loading, code splitting, image optimization, and efficient rendering strategies.",
+        'Improving Core Web Vitals through lazy loading, code splitting, image optimization, and efficient rendering strategies.',
     },
     {
-      title: "API Integration",
+      title: 'API Integration',
       description:
-        "Connecting frontend applications with REST and GraphQL APIs, handling state management and data fetching with modern tools.",
+        'Connecting frontend applications with REST and GraphQL APIs, handling state management and data fetching with modern tools.',
     },
-  ];
+  ]
 
   return (
     <div className="bg-white dark:bg-[#0e0e0f] border border-[#c0dcbc] dark:border-[#2a2a2a] rounded-lg overflow-hidden relative py-8 sm:py-[60px] px-4 sm:px-8 lg:px-[64px]">
@@ -53,7 +53,7 @@ export default function Services() {
               Designing solutions
             </span>
             <span className="text-[#5e5e65] dark:text-[#9999a1]">
-              {" "}
+              {' '}
               customized to meet your requirements
             </span>
           </h2>
@@ -98,13 +98,13 @@ export default function Services() {
         {/* Call to Action */}
         <div className="text-center">
           <p className="font-['DM_Mono'] text-[16px] leading-[1.5] text-[#5e5e65] dark:text-[#9999a1]">
-            Excited to take on{" "}
+            Excited to take on{' '}
             <span className="text-[#1f1f24] dark:text-[#e5e5e6]">
               new projects
-            </span>{" "}
+            </span>{' '}
             and collaborate.
             <br />
-            Let&apos;s chat about your ideas.{" "}
+            Let&apos;s chat about your ideas.{' '}
             <span className="text-[#62a92b] dark:text-[#33a381]">
               Reach out!
             </span>
@@ -112,5 +112,5 @@ export default function Services() {
         </div>
       </div>
     </div>
-  );
+  )
 }

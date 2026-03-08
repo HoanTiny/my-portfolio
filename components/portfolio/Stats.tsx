@@ -1,40 +1,40 @@
-"use client";
+'use client'
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
 
 function CountUp({
   target,
   duration = 2,
   inView,
 }: {
-  target: number;
-  duration?: number;
-  inView: boolean;
+  target: number
+  duration?: number
+  inView: boolean
 }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
 
   useEffect(() => {
-    if (!inView) return;
-    let start = 0;
-    const startTime = performance.now();
+    if (!inView) return
+    let start = 0
+    const startTime = performance.now()
 
     const animate = (currentTime: number) => {
-      const elapsed = (currentTime - startTime) / 1000;
-      const progress = Math.min(elapsed / duration, 1);
+      const elapsed = (currentTime - startTime) / 1000
+      const progress = Math.min(elapsed / duration, 1)
       // easeOutExpo
-      const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-      const current = Math.round(eased * target);
-      setCount(current);
+      const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress)
+      const current = Math.round(eased * target)
+      setCount(current)
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animate)
       }
-    };
+    }
 
-    requestAnimationFrame(animate);
-  }, [inView, target, duration]);
+    requestAnimationFrame(animate)
+  }, [inView, target, duration])
 
-  return <>{count}</>;
+  return <>{count}</>
 }
 
 const containerVariants = {
@@ -44,7 +44,7 @@ const containerVariants = {
       staggerChildren: 0.15,
     },
   },
-};
+}
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -56,11 +56,11 @@ const itemVariants = {
       ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
-};
+}
 
 export default function Stats() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const stats = [
     {
@@ -80,7 +80,7 @@ export default function Stats() {
         </svg>
       ),
       value: 2,
-      label: "Year Experience",
+      label: 'Year Experience',
     },
     {
       icon: (
@@ -99,7 +99,7 @@ export default function Stats() {
         </svg>
       ),
       value: 10,
-      label: "Projects Completed",
+      label: 'Projects Completed',
     },
     {
       icon: (
@@ -118,7 +118,7 @@ export default function Stats() {
         </svg>
       ),
       value: 8,
-      label: "Tech Stacks",
+      label: 'Tech Stacks',
     },
     {
       icon: (
@@ -137,15 +137,16 @@ export default function Stats() {
         </svg>
       ),
       value: 500,
-      label: "GitHub Commits",
+      label: 'GitHub Commits',
     },
-  ];
+  ]
 
   return (
-    <div className="bg-white dark:bg-[#0e0e0f] border border-[#c0dcbc] dark:border-[#2a2a2a] rounded-lg overflow-hidden relative py-8 sm:py-[61px]"
-    style={{
-      backgroundImage: "url(/bg-static.png)",
-    }}
+    <div
+      className="bg-white dark:bg-[#0e0e0f] border border-[#c0dcbc] dark:border-[#2a2a2a] rounded-lg overflow-hidden relative py-8 sm:py-[61px]"
+      style={{
+        backgroundImage: 'url(/bg-static.png)',
+      }}
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10 dark:opacity-5 pointer-events-none">
@@ -157,7 +158,7 @@ export default function Stats() {
           className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-4"
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          animate={isInView ? 'visible' : 'hidden'}
         >
           {stats.map((stat, index) => (
             <motion.div
@@ -168,7 +169,10 @@ export default function Stats() {
             >
               <motion.div
                 className="text-[#1f1f24] dark:text-[#e5e5e6]"
-                whileHover={{ rotate: [0, -10, 10, -5, 0], transition: { duration: 0.5 } }}
+                whileHover={{
+                  rotate: [0, -10, 10, -5, 0],
+                  transition: { duration: 0.5 },
+                }}
               >
                 {stat.icon}
               </motion.div>
@@ -190,5 +194,5 @@ export default function Stats() {
         </motion.div>
       </div>
     </div>
-  );
+  )
 }

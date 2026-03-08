@@ -1,33 +1,40 @@
-"use client";
+'use client'
 
-import { useRef, useState } from "react";
-import Image from "next/image";
-import { AnimatePresence, motion, useInView } from "framer-motion";
+import { useRef, useState } from 'react'
+import Image from 'next/image'
+import { AnimatePresence, motion, useInView } from 'framer-motion'
 
 export default function Experience() {
-  const [activeTab, setActiveTab] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const [activeTab, setActiveTab] = useState(0)
+  const sectionRef = useRef<HTMLElement>(null)
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
   const experiences = [
     {
-      company: "FPT Software",
-      period: "2023 - 2024",
-      logo: "/fpt.png",
-      role: "Intern Software Engineer",
+      company: 'FPT Software',
+      period: '2023 - 2024',
+      logo: '/fpt.png',
+      role: 'Intern Software Engineer',
       description:
-        "Developed and deployed a machine learning model for image classification, achieving 95% accuracy. Collaborated with cross-functional teams to integrate the model into a web application, improving user experience. Optimized model performance by implementing techniques such as data augmentation and hyperparameter tuning.",
-      skills: ["JavaScript", "React"],
+        'Developed and deployed a machine learning model for image classification, achieving 95% accuracy. Collaborated with cross-functional teams to integrate the model into a web application, improving user experience. Optimized model performance by implementing techniques such as data augmentation and hyperparameter tuning.',
+      skills: ['JavaScript', 'React'],
     },
     {
-      company: "VTV Live",
-      period: "2024 - Present",
-      logo: "/vtv.png",
-      role: "Frontend Developer",
+      company: 'VTV Live',
+      period: '2024 - Present',
+      logo: '/vtv.png',
+      role: 'Frontend Developer',
       description:
-        "Designed and implemented responsive user interfaces for live streaming platforms, enhancing user engagement. Collaborated with backend developers to integrate APIs, ensuring seamless data flow and real-time updates. Optimized frontend performance, reducing load times by 30% through code splitting and lazy loading techniques.",
-      skills: ["TypeScript", "Next.js", "Tailwind CSS", "Framer Motion", "WebSocket", "MongoDB"],
-    }
+        'Designed and implemented responsive user interfaces for live streaming platforms, enhancing user engagement. Collaborated with backend developers to integrate APIs, ensuring seamless data flow and real-time updates. Optimized frontend performance, reducing load times by 30% through code splitting and lazy loading techniques.',
+      skills: [
+        'TypeScript',
+        'Next.js',
+        'Tailwind CSS',
+        'Framer Motion',
+        'WebSocket',
+        'MongoDB',
+      ],
+    },
     // {
     //   company: "Twitter (X)",
     //   period: "2012 - 2015",
@@ -62,9 +69,9 @@ export default function Experience() {
     //     "MS SQL",
     //   ],
     // },
-  ];
+  ]
 
-  const activeExperience = experiences[activeTab];
+  const activeExperience = experiences[activeTab]
 
   // Animation variants
   const headerVariants = {
@@ -72,48 +79,48 @@ export default function Experience() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" } as const,
+      transition: { duration: 0.6, ease: 'easeOut' } as const,
     },
-  };
+  }
 
   const tabContainerVariants = {
     hidden: {},
     visible: {
       transition: { staggerChildren: 0.1, delayChildren: 0.3 } as const,
     },
-  };
+  }
 
   const tabItemVariants = {
     hidden: { opacity: 0, x: -40 },
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.5, ease: "easeOut" } as const,
+      transition: { duration: 0.5, ease: 'easeOut' } as const,
     },
-  };
+  }
 
   const contentVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, ease: "easeOut" } as const,
+      transition: { duration: 0.4, ease: 'easeOut' } as const,
     },
     exit: {
       opacity: 0,
       y: -10,
       transition: { duration: 0.2 } as const,
     },
-  };
+  }
 
   const skillVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: (i: number) => ({
       opacity: 1,
       scale: 1,
-      transition: { delay: i * 0.05, duration: 0.3, ease: "easeOut" } as const,
+      transition: { delay: i * 0.05, duration: 0.3, ease: 'easeOut' } as const,
     }),
-  };
+  }
 
   return (
     <section
@@ -124,11 +131,9 @@ export default function Experience() {
       <motion.div
         className="absolute inset-0 opacity-5 dark:opacity-10"
         animate={
-          isInView
-            ? { scale: [1, 1.05, 1], opacity: [0.05, 0.08, 0.05] }
-            : {}
+          isInView ? { scale: [1, 1.05, 1], opacity: [0.05, 0.08, 0.05] } : {}
         }
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
       >
         <svg
           className="absolute top-1/4 right-1/4 w-[1106px] h-[1106px]"
@@ -151,7 +156,7 @@ export default function Experience() {
           className="mb-12"
           variants={headerVariants}
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          animate={isInView ? 'visible' : 'hidden'}
         >
           <div className="flex items-center gap-2 mb-3">
             <motion.div
@@ -160,7 +165,7 @@ export default function Experience() {
               transition={{
                 duration: 2,
                 repeat: Infinity,
-                ease: "easeInOut",
+                ease: 'easeInOut',
               }}
             />
             <span className="text-[#5e5e65] dark:text-[#9999a1] text-base">
@@ -178,7 +183,7 @@ export default function Experience() {
             className="space-y-2"
             variants={tabContainerVariants}
             initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            animate={isInView ? 'visible' : 'hidden'}
           >
             {experiences.map((exp, index) => (
               <motion.button
@@ -189,8 +194,8 @@ export default function Experience() {
                 whileTap={{ scale: 0.98 }}
                 className={`w-full p-6 rounded-lg text-left transition-colors cursor-pointer relative ${
                   activeTab === index
-                    ? "bg-white dark:bg-[#1a1a1a]"
-                    : "bg-transparent hover:bg-white/50 dark:hover:bg-[#1a1a1a]/50"
+                    ? 'bg-white dark:bg-[#1a1a1a]'
+                    : 'bg-transparent hover:bg-white/50 dark:hover:bg-[#1a1a1a]/50'
                 }`}
               >
                 {/* Animated sliding border indicator */}
@@ -198,7 +203,7 @@ export default function Experience() {
                   <motion.div
                     layoutId="activeTabBorder"
                     className="absolute left-0 top-0 bottom-0 w-1 rounded-full bg-[#129840] dark:bg-[#33a381]"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
                 <div className="flex items-center gap-4">
@@ -210,11 +215,14 @@ export default function Experience() {
                     }
                     transition={{ duration: 0.4 }}
                   >
-                    <div className="rounded " >
+                    <div className="rounded ">
                       {/* Placeholder for logo */}
-                      <img src={exp.logo} alt={exp.company} className="w-full h-full" />
+                      <img
+                        src={exp.logo}
+                        alt={exp.company}
+                        className="w-full h-full"
+                      />
                     </div>
-                    
                   </motion.div>
 
                   {/* Company Info */}
@@ -259,7 +267,7 @@ export default function Experience() {
                       animate="visible"
                       whileHover={{
                         scale: 1.08,
-                        backgroundColor: "rgba(18, 152, 64, 0.15)",
+                        backgroundColor: 'rgba(18, 152, 64, 0.15)',
                       }}
                       className="px-4 py-2 bg-[#f1f5f9] dark:bg-[#1a1a1a] text-[#1f1f24] dark:text-[#e5e5e6] text-base rounded-lg cursor-default"
                     >
@@ -278,5 +286,5 @@ export default function Experience() {
         <div className="w-px h-[216px] bg-[#c0dcbc] dark:bg-[#2a2a2a] mx-auto" />
       </div>
     </section>
-  );
+  )
 }

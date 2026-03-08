@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
 interface SidebarProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen: boolean
+  onClose: () => void
 }
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
@@ -11,7 +11,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       {/* Backdrop */}
       <div
         className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-all duration-500 ${
-          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={onClose}
       />
@@ -19,17 +19,17 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       {/* Sidebar */}
       <div
         className={`fixed sideBar__info left-0 top-0 h-full w-71.75 bg-[#1f1f24] dark:bg-[#0a0a0a] z-50 shadow-2xl  ${
-          isOpen ? "active" : ""
+          isOpen ? 'active' : ''
         }`}
         style={{
-          transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+          transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
         }}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
           className={`absolute cursor-pointer right-4 top-4 w-8 h-8 flex items-center justify-center text-white/70 hover:text-white transition-all duration-200 hover:scale-110 ${
-            isOpen ? "opacity-100 delay-300" : "opacity-0"
+            isOpen ? 'opacity-100 delay-300' : 'opacity-0'
           }`}
           aria-label="Close menu"
         >
@@ -64,8 +64,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           <div
             className={`space-y-6 transition-all duration-500 ${
               isOpen
-                ? "opacity-100 translate-x-0 delay-300"
-                : "opacity-0 -translate-x-4"
+                ? 'opacity-100 translate-x-0 delay-300'
+                : 'opacity-0 -translate-x-4'
             }`}
           >
             <div>
@@ -127,5 +127,5 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         </div>
       </div>
     </>
-  );
+  )
 }

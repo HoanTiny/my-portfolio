@@ -1,104 +1,104 @@
-"use client";
+'use client'
 
-import { title } from "process";
-import { useState } from "react";
+import { title } from 'process'
+import { useState } from 'react'
 
 export default function Projects() {
-  const [currentProject, setCurrentProject] = useState(0);
+  const [currentProject, setCurrentProject] = useState(0)
 
   const projects = [
     {
-      title: "Myshop Pro BIDV WebApp",
+      title: 'Myshop Pro BIDV WebApp',
       description:
         "A comprehensive e-commerce platform for BIDV's Myshop Pro, featuring product listings, shopping cart, and secure checkout. Built with a focus on performance and user experience.",
-      tech: "TypeScript, Next.js, Tailwind CSS, websocket, payment gateway",
-      year: "2023 - 2024",
-      role: "Frontend Developer",
-      link: "https://myshoppro.bidv.com.vn/",
+      tech: 'TypeScript, Next.js, Tailwind CSS, websocket, payment gateway',
+      year: '2023 - 2024',
+      role: 'Frontend Developer',
+      link: 'https://myshoppro.bidv.com.vn/',
       liveUrl:
-        "https://bidv.com.vn/vn/ho-kinh-doanh-tieu-thuong/san-pham-dich-vu/ngan-hang-so/bidv-smartshop",
+        'https://bidv.com.vn/vn/ho-kinh-doanh-tieu-thuong/san-pham-dich-vu/ngan-hang-so/bidv-smartshop',
     },
     {
-      title: "Movie Streaming App",
+      title: 'Movie Streaming App',
       description:
-        "A Netflix-inspired movie browsing application with search, filtering, and detailed movie information. Features responsive layout and smooth animations for an immersive experience.",
-      tech: "TypeScript, Next.js, TMDB API",
-      year: "2024",
-      role: "Frontend Developer",
-      github: "https://github.com/HoanTiny/Movie-App",
-      liveUrl: "https://netflop.vercel.app/",
+        'A Netflix-inspired movie browsing application with search, filtering, and detailed movie information. Features responsive layout and smooth animations for an immersive experience.',
+      tech: 'TypeScript, Next.js, TMDB API',
+      year: '2024',
+      role: 'Frontend Developer',
+      github: 'https://github.com/HoanTiny/Movie-App',
+      liveUrl: 'https://netflop.vercel.app/',
     },
     {
-      title: "CMS Club Management Swimming",
+      title: 'CMS Club Management Swimming',
       description:
-        "A content management system for managing swimming club activities, events, and member information. Features a user-friendly interface for club administrators to create and manage content.",
-      tech: "TypeScript, Next.js, Tailwind CSS",
-      year: "2024",
-      role: "Frontend Developer",
-      github: "https://github.com/HoanTiny/cms-landing-swimming",
-      liveUrl: "https://cms-landing-swimming.vercel.app",
+        'A content management system for managing swimming club activities, events, and member information. Features a user-friendly interface for club administrators to create and manage content.',
+      tech: 'TypeScript, Next.js, Tailwind CSS',
+      year: '2024',
+      role: 'Frontend Developer',
+      github: 'https://github.com/HoanTiny/cms-landing-swimming',
+      liveUrl: 'https://cms-landing-swimming.vercel.app',
     },
     {
-      title: "Landing Page for Swimming Club",
+      title: 'Landing Page for Swimming Club',
       description:
-        "A visually appealing landing page for a swimming club, showcasing club information, upcoming events, and membership benefits. Designed with a focus on aesthetics and user engagement.",
-      tech: "TypeScript, Next.js, Tailwind CSS",
-      year: "2025",
-      role: "Frontend Developer",
-      liveUrl: "https://www.clbthudo.com/",
+        'A visually appealing landing page for a swimming club, showcasing club information, upcoming events, and membership benefits. Designed with a focus on aesthetics and user engagement.',
+      tech: 'TypeScript, Next.js, Tailwind CSS',
+      year: '2025',
+      role: 'Frontend Developer',
+      liveUrl: 'https://www.clbthudo.com/',
     },
     {
-      title: "TikTok Website Clone",
+      title: 'TikTok Website Clone',
       description:
         "A pixel-perfect clone of TikTok's web interface featuring video feeds, user interactions, and dynamic content rendering. One of the largest personal projects with rich UI/UX.",
-      tech: "JavaScript, React, SCSS",
-      year: "2023 - 2025",
-      role: "Frontend Developer",
-      github: "https://github.com/HoanTiny/Tiktok-Website",
-      liveUrl: "https://toptoptv.vercel.app/",
+      tech: 'JavaScript, React, SCSS',
+      year: '2023 - 2025',
+      role: 'Frontend Developer',
+      github: 'https://github.com/HoanTiny/Tiktok-Website',
+      liveUrl: 'https://toptoptv.vercel.app/',
     },
     {
-      title: "Infinity Network App",
+      title: 'Infinity Network App',
       description:
-        "A full-featured social networking platform with user profiles, real-time feeds, and interactive community features. Built with modern frontend architecture and responsive design.",
-      tech: "TypeScript, Next.js, Tailwind CSS",
-      year: "2024 - 2025",
-      role: "Frontend Developer",
-      github: "https://github.com/HoanTiny/Infinity-Network-App",
-      liveUrl: "https://infinity-network-app.vercel.app",
+        'A full-featured social networking platform with user profiles, real-time feeds, and interactive community features. Built with modern frontend architecture and responsive design.',
+      tech: 'TypeScript, Next.js, Tailwind CSS',
+      year: '2024 - 2025',
+      role: 'Frontend Developer',
+      github: 'https://github.com/HoanTiny/Infinity-Network-App',
+      liveUrl: 'https://infinity-network-app.vercel.app',
     },
 
     {
-      title: "Chat Realtime",
+      title: 'Chat Realtime',
       description:
-        "A real-time messaging application with instant message delivery, online status, and conversation management. Powered by WebSocket for seamless bidirectional communication.",
-      tech: "TypeScript, Next.js, Socket.IO, MongoDB",
-      year: "2024",
-      role: "Full Stack Developer",
-      github: "https://github.com/HoanTiny/Chat-realtime",
-      liveUrl: "https://chat-realtime-nu.vercel.app",
+        'A real-time messaging application with instant message delivery, online status, and conversation management. Powered by WebSocket for seamless bidirectional communication.',
+      tech: 'TypeScript, Next.js, Socket.IO, MongoDB',
+      year: '2024',
+      role: 'Full Stack Developer',
+      github: 'https://github.com/HoanTiny/Chat-realtime',
+      liveUrl: 'https://chat-realtime-nu.vercel.app',
     },
     {
-      title: "Budget Management App",
+      title: 'Budget Management App',
       description:
-        "A personal finance tracker to manage income, expenses, and budgets with visual charts and analytics. Clean UI with dark mode support and data persistence.",
-      tech: "TypeScript, React, Vercel",
-      year: "2025 - 2026",
-      role: "Full Stack Developer",
-      github: "https://github.com/HoanTiny/Quan-ly-chi-tieu",
-      liveUrl: "https://v0-reactjs-budget-app.vercel.app",
+        'A personal finance tracker to manage income, expenses, and budgets with visual charts and analytics. Clean UI with dark mode support and data persistence.',
+      tech: 'TypeScript, React, Vercel',
+      year: '2025 - 2026',
+      role: 'Full Stack Developer',
+      github: 'https://github.com/HoanTiny/Quan-ly-chi-tieu',
+      liveUrl: 'https://v0-reactjs-budget-app.vercel.app',
     },
-  ];
+  ]
 
-  const project = projects[currentProject];
+  const project = projects[currentProject]
 
   const nextProject = () => {
-    setCurrentProject((prev) => (prev + 1) % projects.length);
-  };
+    setCurrentProject(prev => (prev + 1) % projects.length)
+  }
 
   const prevProject = () => {
-    setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
-  };
+    setCurrentProject(prev => (prev - 1 + projects.length) % projects.length)
+  }
 
   return (
     <section className="bg-[#f5f5f5] dark:bg-[#0a0a0a] rounded-2xl p-6 sm:p-10 lg:p-16 relative overflow-hidden transition-colors duration-300">
@@ -147,7 +147,7 @@ export default function Projects() {
                 </div>
                 <div className="flex-1 ml-2">
                   <div className="bg-[#1a1a1a] rounded-md px-3 py-1 text-[#9999a1] text-xs font-mono truncate">
-                    {project.liveUrl.replace(/^https?:\/\//, "")}
+                    {project.liveUrl.replace(/^https?:\/\//, '')}
                   </div>
                 </div>
               </div>
@@ -163,7 +163,7 @@ export default function Projects() {
                 />
                 {/* Overlay to click through to live site */}
                 <button
-                  onClick={() => window.open(project.liveUrl, "_blank")}
+                  onClick={() => window.open(project.liveUrl, '_blank')}
                   className="absolute inset-0 bg-transparent hover:bg-black/20 transition-colors cursor-pointer group"
                 >
                   <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-black/70 text-white px-4 py-2 rounded-lg text-sm font-medium">
@@ -221,7 +221,7 @@ export default function Projects() {
               {/* Action Buttons */}
               <div className="flex gap-6">
                 <button
-                  onClick={() => window.open(project.liveUrl, "_blank")}
+                  onClick={() => window.open(project.liveUrl, '_blank')}
                   className="flex items-center gap-2 text-[#1f1f24] dark:text-[#e5e5e6] hover:text-[#129840] dark:hover:text-[#33a381] transition-colors cursor-pointer"
                 >
                   <svg
@@ -236,7 +236,7 @@ export default function Projects() {
                 </button>
 
                 <button
-                  onClick={() => window.open(project.github, "_blank")}
+                  onClick={() => window.open(project.github, '_blank')}
                   className="flex items-center gap-2 text-[#1f1f24] dark:text-[#e5e5e6] hover:text-[#129840] dark:hover:text-[#33a381] transition-colors cursor-pointer"
                 >
                   <svg
@@ -281,5 +281,5 @@ export default function Projects() {
         <div className="w-px h-[216px] bg-[#c0dcbc] dark:bg-[#2a2a2a] mx-auto" />
       </div>
     </section>
-  );
+  )
 }

@@ -1,41 +1,41 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import Header from "@/components/portfolio/Header";
-import Hero from "@/components/portfolio/Hero";
-import Stats from "@/components/portfolio/Stats";
-import Cooperation from "@/components/portfolio/Cooperation";
-import GitJournal from "@/components/portfolio/GitJournal";
-import Services from "@/components/portfolio/Services";
-import Experience from "@/components/portfolio/Experience";
-import Education from "@/components/portfolio/Education";
-import Research from "@/components/portfolio/Research";
-import Projects from "@/components/portfolio/Projects";
-import Skills from "@/components/portfolio/Skills";
-import Blog from "@/components/portfolio/Blog";
-import Contact from "@/components/portfolio/Contact";
-import Footer from "@/components/portfolio/Footer";
-import ScrollToTop from "@/components/portfolio/ScrollToTop";
-import SplashScreen from "@/components/portfolio/SplashScreen";
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import Header from '@/components/portfolio/Header'
+import Hero from '@/components/portfolio/Hero'
+import Stats from '@/components/portfolio/Stats'
+import Cooperation from '@/components/portfolio/Cooperation'
+import GitJournal from '@/components/portfolio/GitJournal'
+import Services from '@/components/portfolio/Services'
+import Experience from '@/components/portfolio/Experience'
+import Education from '@/components/portfolio/Education'
+import Research from '@/components/portfolio/Research'
+import Projects from '@/components/portfolio/Projects'
+import Skills from '@/components/portfolio/Skills'
+import Blog from '@/components/portfolio/Blog'
+import Contact from '@/components/portfolio/Contact'
+import Footer from '@/components/portfolio/Footer'
+import ScrollToTop from '@/components/portfolio/ScrollToTop'
+import SplashScreen from '@/components/portfolio/SplashScreen'
 
 export default function Home() {
-  const [showSplash, setShowSplash] = useState(true);
-  const [ready, setReady] = useState(false);
+  const [showSplash, setShowSplash] = useState(true)
+  const [ready, setReady] = useState(false)
 
   return (
     <>
       <SplashScreen
         onFinish={() => {
-          setShowSplash(false);
-          setReady(true);
+          setShowSplash(false)
+          setReady(true)
         }}
       />
       {!showSplash && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
           className="min-h-screen bg-[#f5f5f5] dark:bg-[#1f1f24] transition-colors duration-300 py-3 sm:py-6 space-y-3 sm:space-y-6 relative"
         >
           <div className="absolute top-0 start-0 w-full  ">
@@ -106,5 +106,5 @@ export default function Home() {
         </motion.div>
       )}
     </>
-  );
+  )
 }

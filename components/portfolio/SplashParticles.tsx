@@ -1,38 +1,38 @@
-"use client";
+'use client'
 
-import { useRef, useMemo } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import * as THREE from "three";
+import { useRef, useMemo } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import * as THREE from 'three'
 
 function WarpParticles({ count = 800 }: { count?: number }) {
-  const mesh = useRef<THREE.Points>(null!);
-  const materialRef = useRef<THREE.ShaderMaterial>(null!);
+  const mesh = useRef<THREE.Points>(null!)
+  const materialRef = useRef<THREE.ShaderMaterial>(null!)
 
   const { positions, speeds, offsets } = useMemo(() => {
-    const positions = new Float32Array(count * 3);
-    const speeds = new Float32Array(count);
-    const offsets = new Float32Array(count);
+    const positions = new Float32Array(count * 3)
+    const speeds = new Float32Array(count)
+    const offsets = new Float32Array(count)
 
     for (let i = 0; i < count; i++) {
       // Distribute in a cylinder around the camera
-      const angle = Math.random() * Math.PI * 2;
-      const radius = 0.5 + Math.random() * 3;
-      positions[i * 3] = Math.cos(angle) * radius;
-      positions[i * 3 + 1] = Math.sin(angle) * radius;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
-      speeds[i] = 0.5 + Math.random() * 1.5;
-      offsets[i] = Math.random() * Math.PI * 2;
+      const angle = Math.random() * Math.PI * 2
+      const radius = 0.5 + Math.random() * 3
+      positions[i * 3] = Math.cos(angle) * radius
+      positions[i * 3 + 1] = Math.sin(angle) * radius
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 20
+      speeds[i] = 0.5 + Math.random() * 1.5
+      offsets[i] = Math.random() * Math.PI * 2
     }
 
-    return { positions, speeds, offsets };
-  }, [count]);
+    return { positions, speeds, offsets }
+  }, [count])
 
   const shader = useMemo(
     () => ({
       uniforms: {
         uTime: { value: 0 },
-        uColor1: { value: new THREE.Color("#33a381") },
-        uColor2: { value: new THREE.Color("#129840") },
+        uColor1: { value: new THREE.Color('#33a381') },
+        uColor2: { value: new THREE.Color('#129840') },
         uOpacity: { value: 0.7 },
       },
       vertexShader: `
@@ -85,14 +85,14 @@ function WarpParticles({ count = 800 }: { count?: number }) {
       }
     `,
     }),
-    [],
-  );
+    []
+  )
 
-  useFrame((state) => {
+  useFrame(state => {
     if (materialRef.current) {
-      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
+      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime
     }
-  });
+  })
 
   return (
     <points ref={mesh}>
@@ -121,7 +121,7 @@ function WarpParticles({ count = 800 }: { count?: number }) {
         blending={THREE.AdditiveBlending}
       />
     </points>
-  );
+  )
 }
 
 export default function SplashParticles() {
@@ -129,12 +129,12 @@ export default function SplashParticles() {
     <div className="absolute inset-0 z-0">
       <Canvas
         camera={{ position: [0, 0, 5], fov: 60 }}
-        style={{ background: "transparent" }}
+        style={{ background: 'transparent' }}
         dpr={[1, 1.5]}
         gl={{ alpha: true, antialias: false }}
       >
         <WarpParticles />
       </Canvas>
     </div>
-  );
+  )
 }

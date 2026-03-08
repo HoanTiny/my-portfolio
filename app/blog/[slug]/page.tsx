@@ -1,42 +1,42 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import Link from "next/link";
-import { useParams } from "next/navigation";
-import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, Clock } from "lucide-react";
-import ReactMarkdown from "react-markdown";
-import postsData from "@/lib/blog-posts.json";
+import Image from 'next/image'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
+import { motion } from 'framer-motion'
+import { ArrowLeft, Calendar, Clock } from 'lucide-react'
+import ReactMarkdown from 'react-markdown'
+import postsData from '@/lib/blog-posts.json'
 
 type BlogPost = {
-  slug: string;
-  tag: string;
-  date: string;
-  readTime: string;
-  title: string;
-  excerpt: string;
-  image: string;
-  gradient: string;
-  content: string;
-};
+  slug: string
+  tag: string
+  date: string
+  readTime: string
+  title: string
+  excerpt: string
+  image: string
+  gradient: string
+  content: string
+}
 
 const posts: Record<string, BlogPost> = Object.fromEntries(
-  postsData.map((post) => [post.slug, post]),
-);
+  postsData.map(post => [post.slug, post])
+)
 
 const tagColors: Record<string, string> = {
   Performance:
-    "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
+    'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
   Development:
-    "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300",
+    'bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300',
   Trending:
-    "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
-};
+    'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
+}
 
 export default function BlogDetailPage() {
-  const params = useParams();
-  const slug = params.slug as string;
-  const post = posts[slug];
+  const params = useParams()
+  const slug = params.slug as string
+  const post = posts[slug]
 
   if (!post) {
     return (
@@ -57,7 +57,7 @@ export default function BlogDetailPage() {
           </Link>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -96,7 +96,7 @@ export default function BlogDetailPage() {
           )}
           <div className="absolute top-4 left-4">
             <span
-              className={`px-3 py-1 text-xs font-medium rounded-full backdrop-blur-sm ${tagColors[post.tag] || "bg-white/90 text-gray-700"}`}
+              className={`px-3 py-1 text-xs font-medium rounded-full backdrop-blur-sm ${tagColors[post.tag] || 'bg-white/90 text-gray-700'}`}
             >
               {post.tag}
             </span>
@@ -138,5 +138,5 @@ export default function BlogDetailPage() {
         </motion.div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,39 +1,39 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import dynamic from "next/dynamic";
+import { useState } from 'react'
+import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
+import dynamic from 'next/dynamic'
 
 const SkillsGlobe = dynamic(
-  () => import("@/components/portfolio/SkillsGlobe"),
-  { ssr: false },
-);
+  () => import('@/components/portfolio/SkillsGlobe'),
+  { ssr: false }
+)
 
 const skillsData = [
-  { name: "Node.js", icon: "/nodejs.svg", row: 1 },
-  { name: "Next.js", icon: "/nextjs.svg", row: 1 },
-  { name: "Firebase", icon: "/firebase.svg", row: 1 },
-  { name: "MongoDB", icon: "/mongodb.svg", row: 1 },
-  { name: "React", icon: "/React.svg", row: 1 },
-  { name: "Vue.js", icon: "/vuejs.svg", row: 1 },
-  { name: "Tailwind", icon: "/tailwind.svg", row: 1 },
-];
+  { name: 'Node.js', icon: '/nodejs.svg', row: 1 },
+  { name: 'Next.js', icon: '/nextjs.svg', row: 1 },
+  { name: 'Firebase', icon: '/firebase.svg', row: 1 },
+  { name: 'MongoDB', icon: '/mongodb.svg', row: 1 },
+  { name: 'React', icon: '/React.svg', row: 1 },
+  { name: 'Vue.js', icon: '/vuejs.svg', row: 1 },
+  { name: 'Tailwind', icon: '/tailwind.svg', row: 1 },
+]
 
 const skillCategories = [
-  { label: "Front-End", value: "HTML, CSS, JavaScript, React, Vue.js" },
-  { label: "Back-End", value: "Node.js, Express" },
-  { label: "Databases", value: "MySQL, MongoDB" },
-  { label: "Tools & Platforms", value: "Git" },
-  { label: "Others", value: "RESTful APIs, GraphQL" },
-];
+  { label: 'Front-End', value: 'HTML, CSS, JavaScript, React, Vue.js' },
+  { label: 'Back-End', value: 'Node.js, Express' },
+  { label: 'Databases', value: 'MySQL, MongoDB' },
+  { label: 'Tools & Platforms', value: 'Git' },
+  { label: 'Others', value: 'RESTful APIs, GraphQL' },
+]
 
 const containerVariants = {
   hidden: {},
   visible: {
     transition: { staggerChildren: 0.08 },
   },
-};
+}
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30, scale: 0.8 },
@@ -41,9 +41,9 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { type: "spring", stiffness: 200, damping: 20 } as const,
+    transition: { type: 'spring', stiffness: 200, damping: 20 } as const,
   },
-};
+}
 
 const textVariants = {
   hidden: { opacity: 0, x: 40 },
@@ -53,19 +53,19 @@ const textVariants = {
     transition: {
       delay: 0.3 + i * 0.1,
       duration: 0.5,
-      ease: "easeOut",
+      ease: 'easeOut',
     } as const,
   }),
-};
+}
 
 function SkillIcon({
   skill,
   index,
 }: {
-  skill: (typeof skillsData)[0];
-  index: number;
+  skill: (typeof skillsData)[0]
+  index: number
 }) {
-  const [hovered, setHovered] = useState(false);
+  const [hovered, setHovered] = useState(false)
 
   return (
     <motion.div
@@ -81,7 +81,7 @@ function SkillIcon({
             initial={{ opacity: 0, y: 8, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.9 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
             className="absolute -top-11 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
           >
             <div className="bg-[#1f1f24] dark:bg-[#e5e5e6] text-white dark:text-[#1f1f24] px-3 py-1 rounded text-xs sm:text-sm whitespace-nowrap font-medium shadow-lg">
@@ -96,7 +96,7 @@ function SkillIcon({
       <motion.div
         whileHover={{ scale: 1.1, y: -4 }}
         whileTap={{ scale: 0.95 }}
-        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         className="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] bg-white dark:bg-[#1a1a1a] rounded-lg border border-[#c0dcbc] dark:border-[#2a2a2a] flex items-center justify-center hover:border-[#129840] dark:hover:border-[#33a381] hover:shadow-[0_0_20px_rgba(18,152,64,0.15)] dark:hover:shadow-[0_0_20px_rgba(51,163,129,0.15)] transition-all duration-300 cursor-pointer"
       >
         <Image
@@ -109,12 +109,12 @@ function SkillIcon({
         />
       </motion.div>
     </motion.div>
-  );
+  )
 }
 
 export default function Skills() {
-  const row1 = skillsData.filter((s) => s.row === 1);
-  const row2 = skillsData.filter((s) => s.row === 2);
+  const row1 = skillsData.filter(s => s.row === 1)
+  const row2 = skillsData.filter(s => s.row === 2)
 
   return (
     <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-10 lg:p-16 relative overflow-hidden transition-colors duration-300">
@@ -125,7 +125,7 @@ export default function Skills() {
           fill="none"
           className="w-full h-full"
           animate={{ rotate: 360 }}
-          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
         >
           <path
             d="M127 130c0 35 28 63 63 63s63-28 63-63-28-63-63-63-63 28-63 63Z"
@@ -171,8 +171,8 @@ export default function Skills() {
               className="mb-12 text-center"
               initial={{ opacity: 0, y: -20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
             >
               <div className="flex items-center justify-center gap-2 mb-3">
                 <motion.div
@@ -199,7 +199,7 @@ export default function Skills() {
               className="border-l-2 border-[#c0dcbc] dark:border-[#2a2a2a] pl-6 sm:pl-12"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: '-50px' }}
             >
               <div className="text-[#5e5e65] dark:text-[#9999a1] text-base leading-relaxed space-y-4">
                 {skillCategories.map((cat, i) => (
@@ -211,7 +211,7 @@ export default function Skills() {
                   >
                     <strong className="text-[#1f1f24] dark:text-[#e5e5e6]">
                       {cat.label}:
-                    </strong>{" "}
+                    </strong>{' '}
                     {cat.value}
                   </motion.span>
                 ))}
@@ -221,5 +221,5 @@ export default function Skills() {
         </div>
       </div>
     </section>
-  );
+  )
 }

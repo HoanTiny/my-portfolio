@@ -1,35 +1,35 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowUpRight, Calendar, Clock } from "lucide-react";
-import posts from "@/lib/blog-posts.json";
+import Image from 'next/image'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { ArrowUpRight, Calendar, Clock } from 'lucide-react'
+import posts from '@/lib/blog-posts.json'
 
 const tagColors: Record<string, string> = {
   Performance:
-    "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
+    'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
   Development:
-    "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300",
+    'bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300',
   Trending:
-    "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
-};
+    'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
+}
 
 const containerVariants = {
   hidden: {},
   visible: {
     transition: { staggerChildren: 0.15 },
   },
-};
+}
 
 const cardVariants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 150, damping: 20 } as const,
+    transition: { type: 'spring', stiffness: 150, damping: 20 } as const,
   },
-};
+}
 
 export default function Blog() {
   return (
@@ -40,7 +40,7 @@ export default function Blog() {
           className="text-center mb-12"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.6 }}
         >
           <div className="flex items-center justify-center gap-2 mb-3">
@@ -64,14 +64,14 @@ export default function Blog() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: true, margin: '-80px' }}
         >
           {posts.map((post, index) => (
             <motion.article
               key={index}
               variants={cardVariants}
               whileHover={{ y: -6 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               className="bg-[#f5f5f5] dark:bg-[#1a1a1a] rounded-2xl p-4 group cursor-pointer hover:shadow-xl dark:hover:shadow-[0_8px_30px_rgba(51,163,129,0.08)] transition-shadow duration-300"
             >
               <Link href={`/blog/${post.slug}`} className="block">
@@ -91,7 +91,7 @@ export default function Blog() {
                   {/* Tag */}
                   <div className="absolute top-4 left-4">
                     <span
-                      className={`px-3 py-1 text-xs font-medium rounded-full backdrop-blur-sm ${tagColors[post.tag] || "bg-white/90 text-gray-700"}`}
+                      className={`px-3 py-1 text-xs font-medium rounded-full backdrop-blur-sm ${tagColors[post.tag] || 'bg-white/90 text-gray-700'}`}
                     >
                       {post.tag}
                     </span>
@@ -141,5 +141,5 @@ export default function Blog() {
         </motion.div>
       </div>
     </section>
-  );
+  )
 }

@@ -1,6 +1,6 @@
 // Brand icon components from design system
 
-export const BrandFigma = ({ className = "" }: { className?: string }) => (
+export const BrandFigma = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <svg
       className="absolute inset-[21.11%_31.11%_21.11%_30.37%]"
@@ -29,9 +29,9 @@ export const BrandFigma = ({ className = "" }: { className?: string }) => (
       />
     </svg>
   </div>
-);
+)
 
-export const BrandReact = ({ className = "" }: { className?: string }) => (
+export const BrandReact = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <svg className="absolute inset-[25%]" viewBox="0 0 50 50" fill="none">
       <circle cx="25" cy="25" r="5" fill="#61DAFB" />
@@ -66,9 +66,9 @@ export const BrandReact = ({ className = "" }: { className?: string }) => (
       />
     </svg>
   </div>
-);
+)
 
-export const BrandNextjs = ({ className = "" }: { className?: string }) => (
+export const BrandNextjs = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <svg className="absolute inset-[20%]" viewBox="0 0 54 54" fill="none">
       <path
@@ -77,9 +77,9 @@ export const BrandNextjs = ({ className = "" }: { className?: string }) => (
       />
     </svg>
   </div>
-);
+)
 
-export const BrandVuejs = ({ className = "" }: { className?: string }) => (
+export const BrandVuejs = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <svg className="absolute inset-[24%]" viewBox="0 0 50 44" fill="none">
       <path
@@ -92,9 +92,9 @@ export const BrandVuejs = ({ className = "" }: { className?: string }) => (
       />
     </svg>
   </div>
-);
+)
 
-export const BrandAngular = ({ className = "" }: { className?: string }) => (
+export const BrandAngular = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <svg className="absolute inset-[20%]" viewBox="0 0 54 58" fill="none">
       <path
@@ -108,9 +108,9 @@ export const BrandAngular = ({ className = "" }: { className?: string }) => (
       />
     </svg>
   </div>
-);
+)
 
-export const BrandTailwind = ({ className = "" }: { className?: string }) => (
+export const BrandTailwind = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <svg className="absolute inset-[28%]" viewBox="0 0 40 24" fill="none">
       <path
@@ -121,9 +121,9 @@ export const BrandTailwind = ({ className = "" }: { className?: string }) => (
       />
     </svg>
   </div>
-);
+)
 
-export const BrandLaravel = ({ className = "" }: { className?: string }) => (
+export const BrandLaravel = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <svg className="absolute inset-[23%]" viewBox="0 0 50 50" fill="none">
       <path
@@ -133,9 +133,9 @@ export const BrandLaravel = ({ className = "" }: { className?: string }) => (
       <path d="M28.5 12.5V37.5L20 45V20L28.5 12.5Z" fill="#FF5D4F" />
     </svg>
   </div>
-);
+)
 
-export const BrandMongodb = ({ className = "" }: { className?: string }) => (
+export const BrandMongodb = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <svg className="absolute inset-[19%]" viewBox="0 0 28 60" fill="none">
       <path
@@ -152,9 +152,9 @@ export const BrandMongodb = ({ className = "" }: { className?: string }) => (
       />
     </svg>
   </div>
-);
+)
 
-export const BrandNodejs = ({ className = "" }: { className?: string }) => (
+export const BrandNodejs = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <svg className="absolute inset-[21%]" viewBox="0 0 52 58" fill="none">
       <path d="M26 0L0 14.5V43.5L26 58L52 43.5V14.5L26 0Z" fill="#8CC84B" />
@@ -164,9 +164,9 @@ export const BrandNodejs = ({ className = "" }: { className?: string }) => (
       />
     </svg>
   </div>
-);
+)
 
-export const BrandFirebase = ({ className = "" }: { className?: string }) => (
+export const BrandFirebase = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <svg className="absolute inset-[22%]" viewBox="0 0 50 70" fill="none">
       <path
@@ -177,37 +177,37 @@ export const BrandFirebase = ({ className = "" }: { className?: string }) => (
       <path d="M41.5 62.5L25 42.5L8.5 62.5L25 70L41.5 62.5Z" fill="#FFCA28" />
     </svg>
   </div>
-);
+)
 
-export const BrandPhotoshop = ({ className = "" }: { className?: string }) => (
+export const BrandPhotoshop = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <div className="absolute inset-[6.67%_5.56%] bg-[#001E36] rounded-[4px] flex items-center justify-center">
       <span className="text-[#31A8FF] font-bold text-[28px]">Ps</span>
     </div>
   </div>
-);
+)
 
 export const BrandIllustrator = ({
-  className = "",
+  className = '',
 }: {
-  className?: string;
+  className?: string
 }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <div className="absolute inset-[6.67%_5.56%] bg-[#330000] rounded-[4px] flex items-center justify-center">
       <span className="text-[#FF9A00] font-bold text-[28px]">Ai</span>
     </div>
   </div>
-);
+)
 
-export const BrandAdobeXd = ({ className = "" }: { className?: string }) => (
+export const BrandAdobeXd = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <div className="absolute inset-[5.55%] bg-[#470137] rounded-[4px] flex items-center justify-center">
       <span className="text-[#FF61F6] font-bold text-[28px]">Xd</span>
     </div>
   </div>
-);
+)
 
-export const BrandSketch = ({ className = "" }: { className?: string }) => (
+export const BrandSketch = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <svg className="absolute inset-[21%]" viewBox="0 0 50 45" fill="none">
       <path d="M25 45L0 15L12.5 0H37.5L50 15L25 45Z" fill="#FDB300" />
@@ -216,9 +216,9 @@ export const BrandSketch = ({ className = "" }: { className?: string }) => (
       <path d="M25 15L12.5 15L25 0L37.5 15H25Z" fill="#FDD231" />
     </svg>
   </div>
-);
+)
 
-export const BrandWebflow = ({ className = "" }: { className?: string }) => (
+export const BrandWebflow = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <svg className="absolute inset-[5.56%]" viewBox="0 0 80 80" fill="none">
       <path
@@ -227,9 +227,9 @@ export const BrandWebflow = ({ className = "" }: { className?: string }) => (
       />
     </svg>
   </div>
-);
+)
 
-export const BrandFramer = ({ className = "" }: { className?: string }) => (
+export const BrandFramer = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <div className="absolute inset-[5.56%] bg-[#000008] rounded-[8px] overflow-hidden">
       <svg className="absolute inset-[25%]" viewBox="0 0 33 50" fill="none">
@@ -241,9 +241,9 @@ export const BrandFramer = ({ className = "" }: { className?: string }) => (
       </svg>
     </div>
   </div>
-);
+)
 
-export const BrandShopify = ({ className = "" }: { className?: string }) => (
+export const BrandShopify = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <svg className="absolute inset-[10%]" viewBox="0 0 70 80" fill="none">
       <path
@@ -257,18 +257,18 @@ export const BrandShopify = ({ className = "" }: { className?: string }) => (
       <path d="M35 25C35 25 32 26 30 30L35 32L35 25Z" fill="white" />
     </svg>
   </div>
-);
+)
 
-export const BrandProcreate = ({ className = "" }: { className?: string }) => (
+export const BrandProcreate = ({ className = '' }: { className?: string }) => (
   <div className={`relative w-[90px] h-[90px] ${className}`}>
     <div className="absolute inset-[4.04%_5.91%_7.14%_5.2%] bg-[#242424] rounded-[16px]">
       <div
         className="absolute inset-[15%] rounded-full"
         style={{
           background:
-            "conic-gradient(from 0deg, #FF9A00 0deg, #F24E1E 90deg, #A259FF 180deg, #1ABCFE 270deg, #0ACF83 360deg)",
+            'conic-gradient(from 0deg, #FF9A00 0deg, #F24E1E 90deg, #A259FF 180deg, #1ABCFE 270deg, #0ACF83 360deg)',
         }}
       />
     </div>
   </div>
-);
+)

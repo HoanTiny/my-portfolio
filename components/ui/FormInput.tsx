@@ -1,16 +1,16 @@
-"use client";
+'use client'
 
-import React, { useState } from "react";
-import { cn } from "@/lib/utils";
+import React, { useState } from 'react'
+import { cn } from '@/lib/utils'
 
 export interface FormInputProps extends React.InputHTMLAttributes<
   HTMLInputElement | HTMLTextAreaElement
 > {
-  label: string;
-  required?: boolean;
-  error?: string;
-  isTextarea?: boolean;
-  rows?: number;
+  label: string
+  required?: boolean
+  error?: string
+  isTextarea?: boolean
+  rows?: number
 }
 
 export const FormInput = React.forwardRef<
@@ -19,19 +19,19 @@ export const FormInput = React.forwardRef<
 >(
   (
     { className, label, required, error, isTextarea, rows = 4, ...props },
-    ref,
+    ref
   ) => {
-    const [isFocused, setIsFocused] = useState(false);
+    const [isFocused, setIsFocused] = useState(false)
 
     const inputStyles = cn(
-      "w-full bg-[var(--neutral-800)] dark:bg-[var(--neutral-900)] border border-[var(--neutral-600)] dark:border-[var(--border)] rounded-[10px] px-[22px] py-[17px]",
-      "font-urbanist font-medium text-[16px] leading-[1.5]",
-      "text-[var(--foreground)] placeholder:text-[var(--neutral-400)]",
-      "transition-all duration-300",
-      "focus:outline-none focus:border-[var(--theme-primary-1)] focus:ring-2 focus:ring-[var(--theme-primary-1)]/20",
-      error && "border-[var(--system-danger)]",
-      className,
-    );
+      'w-full bg-[var(--neutral-800)] dark:bg-[var(--neutral-900)] border border-[var(--neutral-600)] dark:border-[var(--border)] rounded-[10px] px-[22px] py-[17px]',
+      'font-urbanist font-medium text-[16px] leading-[1.5]',
+      'text-[var(--foreground)] placeholder:text-[var(--neutral-400)]',
+      'transition-all duration-300',
+      'focus:outline-none focus:border-[var(--theme-primary-1)] focus:ring-2 focus:ring-[var(--theme-primary-1)]/20',
+      error && 'border-[var(--system-danger)]',
+      className
+    )
 
     return (
       <div className="flex flex-col gap-3 w-full">
@@ -67,18 +67,18 @@ export const FormInput = React.forwardRef<
           </p>
         )}
       </div>
-    );
-  },
-);
+    )
+  }
+)
 
-FormInput.displayName = "FormInput";
+FormInput.displayName = 'FormInput'
 
 // Checkbox component from design system
 export interface CheckboxProps extends Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
-  "type"
+  'type'
 > {
-  label: string;
+  label: string
 }
 
 export const Checkbox: React.FC<CheckboxProps> = ({
@@ -97,5 +97,5 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         {label}
       </span>
     </label>
-  );
-};
+  )
+}

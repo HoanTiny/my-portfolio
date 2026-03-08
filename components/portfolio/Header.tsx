@@ -1,11 +1,11 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { ThemeSwitch } from "@/components/ui/ThemeSwitch";
-import Sidebar from "./Sidebar";
+import { useState } from 'react'
+import { ThemeSwitch } from '@/components/ui/ThemeSwitch'
+import Sidebar from './Sidebar'
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
     <>
@@ -27,9 +27,9 @@ export default function Header() {
               className="text-lg sm:text-2xl font-['DM_Mono'] font-medium text-[#ffff] dark:text-[#e5e5e6]"
               style={{
                 background:
-                  "linear-gradient(270deg, hsla(0, 0%, 100%, .32), #fff)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                  'linear-gradient(270deg, hsla(0, 0%, 100%, .32), #fff)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
               }}
             >
               Tiny.dev
@@ -40,11 +40,11 @@ export default function Header() {
           <nav className="hidden lg:flex items-center gap-[37px] font-['DM_Mono'] text-[16px] text-[#ffff] dark:text-[#e5e5e6] leading-[1.5]">
             <a
               href="#about"
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={e => {
+                e.preventDefault()
                 document
-                  .getElementById("about")
-                  ?.scrollIntoView({ behavior: "smooth" });
+                  .getElementById('about')
+                  ?.scrollIntoView({ behavior: 'smooth' })
               }}
               className="hover:opacity-100 transition-opacity"
             >
@@ -52,11 +52,11 @@ export default function Header() {
             </a>
             <a
               href="#resume"
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={e => {
+                e.preventDefault()
                 document
-                  .getElementById("resume")
-                  ?.scrollIntoView({ behavior: "smooth" });
+                  .getElementById('resume')
+                  ?.scrollIntoView({ behavior: 'smooth' })
               }}
               className="opacity-50 hover:opacity-100 transition-opacity"
             >
@@ -64,11 +64,11 @@ export default function Header() {
             </a>
             <a
               href="#services"
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={e => {
+                e.preventDefault()
                 document
-                  .getElementById("services")
-                  ?.scrollIntoView({ behavior: "smooth" });
+                  .getElementById('services')
+                  ?.scrollIntoView({ behavior: 'smooth' })
               }}
               className="opacity-50 hover:opacity-100 transition-opacity"
             >
@@ -76,11 +76,11 @@ export default function Header() {
             </a>
             <a
               href="#portfolio"
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={e => {
+                e.preventDefault()
                 document
-                  .getElementById("portfolio")
-                  ?.scrollIntoView({ behavior: "smooth" });
+                  .getElementById('portfolio')
+                  ?.scrollIntoView({ behavior: 'smooth' })
               }}
               className="opacity-50 hover:opacity-100 transition-opacity"
             >
@@ -88,11 +88,11 @@ export default function Header() {
             </a>
             <a
               href="#blog"
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={e => {
+                e.preventDefault()
                 document
-                  .getElementById("blog")
-                  ?.scrollIntoView({ behavior: "smooth" });
+                  .getElementById('blog')
+                  ?.scrollIntoView({ behavior: 'smooth' })
               }}
               className="opacity-50 hover:opacity-100 transition-opacity"
             >
@@ -100,11 +100,11 @@ export default function Header() {
             </a>
             <a
               href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={e => {
+                e.preventDefault()
                 document
-                  .getElementById("contact")
-                  ?.scrollIntoView({ behavior: "smooth" });
+                  .getElementById('contact')
+                  ?.scrollIntoView({ behavior: 'smooth' })
               }}
               className="opacity-50 hover:opacity-100 transition-opacity"
             >
@@ -135,5 +135,5 @@ export default function Header() {
         </div>
       </div>
     </>
-  );
+  )
 }

@@ -1,45 +1,46 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
-"use client";
-import { ButtonSmall } from "@/components/ui/Button";
-import { RiDownloadLine } from "@/components/ui/Icons";
-import Link from "next/link";
-import Marquee from "react-fast-marquee";
-import { motion } from "framer-motion";
-import { useState, useEffect, useRef, useCallback } from "react";
+'use client'
+import { ButtonSmall } from '@/components/ui/Button'
+import { RiDownloadLine } from '@/components/ui/Icons'
+import Link from 'next/link'
+import Marquee from 'react-fast-marquee'
+import { motion } from 'framer-motion'
+import { useState, useEffect, useRef, useCallback } from 'react'
 
 function Tilt3D({
   children,
   className,
 }: {
-  children: React.ReactNode;
-  className?: string;
+  children: React.ReactNode
+  className?: string
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null)
   const [transform, setTransform] = useState(
-    "perspective(1000px) rotateX(0deg) rotateY(0deg)",
-  );
-  const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
+    'perspective(1000px) rotateX(0deg) rotateY(0deg)'
+  )
+  const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 })
 
   const handleMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top) / rect.height;
-    const rotateY = (x - 0.5) * 20;
-    const rotateX = (0.5 - y) * 20;
+    const el = ref.current
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    const x = (e.clientX - rect.left) / rect.width
+    const y = (e.clientY - rect.top) / rect.height
+    const rotateY = (x - 0.5) * 20
+    const rotateX = (0.5 - y) * 20
     setTransform(
-      `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03,1.03,1.03)`,
-    );
+      `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03,1.03,1.03)`
+    )
     // setGlare({ x: x * 100, y: y * 100, opacity: 0.15 });
-  }, []);
+  }, [])
 
   const handleLeave = useCallback(() => {
     setTransform(
-      "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)",
-    );
-    setGlare({ x: 50, y: 50, opacity: 0 });
-  }, []);
+      'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)'
+    )
+    setGlare({ x: 50, y: 50, opacity: 0 })
+  }, [])
 
   return (
     <div
@@ -49,8 +50,8 @@ function Tilt3D({
       onMouseLeave={handleLeave}
       style={{
         transform,
-        transition: "transform 0.15s ease-out",
-        transformStyle: "preserve-3d",
+        transition: 'transform 0.15s ease-out',
+        transformStyle: 'preserve-3d',
       }}
     >
       {children}
@@ -58,11 +59,11 @@ function Tilt3D({
         className="absolute inset-0 rounded-2xl pointer-events-none z-10"
         style={{
           background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,${glare.opacity}), transparent 60%)`,
-          transition: "background 0.15s ease-out",
+          transition: 'background 0.15s ease-out',
         }}
       />
     </div>
-  );
+  )
 }
 
 function TypingText({
@@ -71,28 +72,28 @@ function TypingText({
   speed = 30,
   className,
 }: {
-  text: string;
-  delay?: number;
-  speed?: number;
-  className?: string;
+  text: string
+  delay?: number
+  speed?: number
+  className?: string
 }) {
-  const [displayed, setDisplayed] = useState("");
-  const [started, setStarted] = useState(false);
+  const [displayed, setDisplayed] = useState('')
+  const [started, setStarted] = useState(false)
 
   useEffect(() => {
-    const timeout = setTimeout(() => setStarted(true), delay);
-    return () => clearTimeout(timeout);
-  }, [delay]);
+    const timeout = setTimeout(() => setStarted(true), delay)
+    return () => clearTimeout(timeout)
+  }, [delay])
 
   useEffect(() => {
-    if (!started) return;
-    if (displayed.length >= text.length) return;
+    if (!started) return
+    if (displayed.length >= text.length) return
     const timeout = setTimeout(
       () => setDisplayed(text.slice(0, displayed.length + 1)),
-      speed,
-    );
-    return () => clearTimeout(timeout);
-  }, [started, displayed, text, speed]);
+      speed
+    )
+    return () => clearTimeout(timeout)
+  }, [started, displayed, text, speed])
 
   return (
     <span className={className}>
@@ -104,12 +105,12 @@ function TypingText({
           transition={{
             duration: 0.6,
             repeat: Infinity,
-            repeatType: "reverse",
+            repeatType: 'reverse',
           }}
         />
       )}
     </span>
-  );
+  )
 }
 
 const fadeUp = (delay: number) => ({
@@ -117,9 +118,9 @@ const fadeUp = (delay: number) => ({
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay, ease: "easeOut" },
+    transition: { duration: 0.6, delay, ease: 'easeOut' },
   },
-});
+})
 
 const letterAnimation = {
   hidden: { opacity: 0, y: 20 },
@@ -129,21 +130,21 @@ const letterAnimation = {
     transition: {
       duration: 0.4,
       delay: 0.5 + i * 0.03,
-      ease: "easeOut",
+      ease: 'easeOut',
     } as const,
   }),
-};
+}
 
 function AnimatedText({
   text,
   className,
 }: {
-  text: string;
-  className?: string;
+  text: string
+  className?: string
 }) {
   return (
     <span className={className}>
-      {text.split("").map((char, i) => (
+      {text.split('').map((char, i) => (
         <motion.span
           key={i}
           custom={i}
@@ -152,11 +153,11 @@ function AnimatedText({
           animate="visible"
           className="inline-block"
         >
-          {char === " " ? "\u00A0" : char}
+          {char === ' ' ? '\u00A0' : char}
         </motion.span>
       ))}
     </span>
-  );
+  )
 }
 
 export default function Hero() {
@@ -175,7 +176,7 @@ export default function Hero() {
             className="relative w-full md:w-[320px] lg:w-[512px] h-[280px] sm:h-[350px] md:h-[461px] flex-shrink-0 mx-auto md:mx-0"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
           >
             <Tilt3D className="relative w-full h-full">
               <div className="absolute inset-0 rounded-2xl">
@@ -241,7 +242,7 @@ export default function Hero() {
             <div className="font-dm-mono text-[14px] sm:text-[16px] leading-[1.5] text-[var(--neutral-300)] dark:text-[var(--secondary)] mb-6 sm:mb-8">
               <span className="text-[var(--theme-primary-1)]">&lt;p&gt;</span>
               <TypingText
-                text="With expertise in cutting-edge technologies such as NodeJS, React, Angular, and Laravel... I deliver web solutions that are both innovative and robust."
+                text="With expertise in cutting-edge technologies such as NodeJS, React, Nextjs, and Vue... I deliver web solutions that are both innovative and robust."
                 delay={1500}
                 speed={25}
               />
@@ -308,5 +309,5 @@ export default function Hero() {
         <div className="absolute top-[133.5px] right-0 w-[164px] h-[163.5px] bg-gradient-to-br from-emerald-400/20 to-green-500/20 rounded-tl-full" />
       </div>
     </div>
-  );
+  )
 }

@@ -1,39 +1,39 @@
-"use client";
+'use client'
 
-import { useRef, useMemo, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import * as THREE from "three";
+import { useRef, useMemo, useEffect } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import * as THREE from 'three'
 
 // --- Small floating particles ---
 function SmallParticles({ count = 80 }: { count?: number }) {
-  const mesh = useRef<THREE.Points>(null!);
-  const materialRef = useRef<THREE.ShaderMaterial>(null!);
-  const mouseRef = useRef({ x: 0, y: 0 });
+  const mesh = useRef<THREE.Points>(null!)
+  const materialRef = useRef<THREE.ShaderMaterial>(null!)
+  const mouseRef = useRef({ x: 0, y: 0 })
 
   const { positions, randoms } = useMemo(() => {
-    const positions = new Float32Array(count * 3);
-    const randoms = new Float32Array(count * 3);
+    const positions = new Float32Array(count * 3)
+    const randoms = new Float32Array(count * 3)
 
     for (let i = 0; i < count; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 14;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 8;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 4;
+      positions[i * 3] = (Math.random() - 0.5) * 14
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 8
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 4
 
-      randoms[i * 3] = Math.random();
-      randoms[i * 3 + 1] = Math.random();
-      randoms[i * 3 + 2] = 0.3 + Math.random() * 0.7;
+      randoms[i * 3] = Math.random()
+      randoms[i * 3 + 1] = Math.random()
+      randoms[i * 3 + 2] = 0.3 + Math.random() * 0.7
     }
 
-    return { positions, randoms };
-  }, [count]);
+    return { positions, randoms }
+  }, [count])
 
   const shader = useMemo(
     () => ({
       uniforms: {
         uTime: { value: 0 },
         uMouse: { value: new THREE.Vector2(0, 0) },
-        uColor1: { value: new THREE.Color("#33a381") },
-        uColor2: { value: new THREE.Color("#a3e635") },
+        uColor1: { value: new THREE.Color('#33a381') },
+        uColor2: { value: new THREE.Color('#a3e635') },
       },
       vertexShader: `
       attribute vec3 aRandom;
@@ -80,26 +80,26 @@ function SmallParticles({ count = 80 }: { count?: number }) {
       }
     `,
     }),
-    [],
-  );
+    []
+  )
 
   useEffect(() => {
     const handlePointerMove = (e: MouseEvent) => {
-      mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    };
-    window.addEventListener("mousemove", handlePointerMove, { passive: true });
-    return () => window.removeEventListener("mousemove", handlePointerMove);
-  }, []);
-
-  useFrame((state) => {
-    if (materialRef.current) {
-      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
-      const u = materialRef.current.uniforms.uMouse.value;
-      u.x += (mouseRef.current.x - u.x) * 0.05;
-      u.y += (mouseRef.current.y - u.y) * 0.05;
+      mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1
+      mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1
     }
-  });
+    window.addEventListener('mousemove', handlePointerMove, { passive: true })
+    return () => window.removeEventListener('mousemove', handlePointerMove)
+  }, [])
+
+  useFrame(state => {
+    if (materialRef.current) {
+      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime
+      const u = materialRef.current.uniforms.uMouse.value
+      u.x += (mouseRef.current.x - u.x) * 0.05
+      u.y += (mouseRef.current.y - u.y) * 0.05
+    }
+  })
 
   return (
     <points ref={mesh}>
@@ -123,34 +123,34 @@ function SmallParticles({ count = 80 }: { count?: number }) {
         blending={THREE.AdditiveBlending}
       />
     </points>
-  );
+  )
 }
 
 // --- Large bokeh-style floating orbs ---
 function BokehOrbs() {
-  const count = 6;
-  const mesh = useRef<THREE.Points>(null!);
-  const materialRef = useRef<THREE.ShaderMaterial>(null!);
+  const count = 6
+  const mesh = useRef<THREE.Points>(null!)
+  const materialRef = useRef<THREE.ShaderMaterial>(null!)
 
   const { positions, randoms } = useMemo(() => {
-    const positions = new Float32Array(count * 3);
-    const randoms = new Float32Array(count);
+    const positions = new Float32Array(count * 3)
+    const randoms = new Float32Array(count)
 
     for (let i = 0; i < count; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 12;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 7;
-      positions[i * 3 + 2] = -1 + Math.random() * 2;
-      randoms[i] = Math.random();
+      positions[i * 3] = (Math.random() - 0.5) * 12
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 7
+      positions[i * 3 + 2] = -1 + Math.random() * 2
+      randoms[i] = Math.random()
     }
 
-    return { positions, randoms };
-  }, []);
+    return { positions, randoms }
+  }, [])
 
   const shader = useMemo(
     () => ({
       uniforms: {
         uTime: { value: 0 },
-        uColor: { value: new THREE.Color("#33a381") },
+        uColor: { value: new THREE.Color('#33a381') },
       },
       vertexShader: `
       attribute float aRandom;
@@ -191,14 +191,14 @@ function BokehOrbs() {
       }
     `,
     }),
-    [],
-  );
+    []
+  )
 
-  useFrame((state) => {
+  useFrame(state => {
     if (materialRef.current) {
-      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
+      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime
     }
-  });
+  })
 
   return (
     <points ref={mesh}>
@@ -222,20 +222,26 @@ function BokehOrbs() {
         blending={THREE.AdditiveBlending}
       />
     </points>
-  );
+  )
 }
 
 // --- Connection lines between nearby particles ---
 function ConnectionLines() {
-  const lineRef = useRef<THREE.LineSegments>(null!);
-  const materialRef = useRef<THREE.ShaderMaterial>(null!);
-  const particleCount = 30;
-  const maxConnections = particleCount * (particleCount - 1) / 2;
-  const connectionDistance = 3.5;
+  const lineRef = useRef<THREE.LineSegments>(null!)
+  const materialRef = useRef<THREE.ShaderMaterial>(null!)
+  const particleCount = 30
+  const maxConnections = (particleCount * (particleCount - 1)) / 2
+  const connectionDistance = 3.5
 
   const { basePositions, speeds } = useMemo(() => {
-    const basePositions: { x: number; y: number; z: number; sx: number; sy: number }[] = [];
-    const speeds: number[] = [];
+    const basePositions: {
+      x: number
+      y: number
+      z: number
+      sx: number
+      sy: number
+    }[] = []
+    const speeds: number[] = []
 
     for (let i = 0; i < particleCount; i++) {
       basePositions.push({
@@ -244,27 +250,33 @@ function ConnectionLines() {
         z: (Math.random() - 0.5) * 3,
         sx: (Math.random() - 0.5) * 0.3,
         sy: (Math.random() - 0.5) * 0.3,
-      });
-      speeds.push(0.5 + Math.random());
+      })
+      speeds.push(0.5 + Math.random())
     }
 
-    return { basePositions, speeds };
-  }, []);
+    return { basePositions, speeds }
+  }, [])
 
-  const linePositions = useMemo(() => new Float32Array(maxConnections * 6), [maxConnections]);
-  const lineAlphas = useMemo(() => new Float32Array(maxConnections * 2), [maxConnections]);
+  const linePositions = useMemo(
+    () => new Float32Array(maxConnections * 6),
+    [maxConnections]
+  )
+  const lineAlphas = useMemo(
+    () => new Float32Array(maxConnections * 2),
+    [maxConnections]
+  )
 
   const lineGeometry = useMemo(() => {
-    const geom = new THREE.BufferGeometry();
-    geom.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
-    geom.setAttribute("aAlpha", new THREE.BufferAttribute(lineAlphas, 1));
-    return geom;
-  }, [linePositions, lineAlphas]);
+    const geom = new THREE.BufferGeometry()
+    geom.setAttribute('position', new THREE.BufferAttribute(linePositions, 3))
+    geom.setAttribute('aAlpha', new THREE.BufferAttribute(lineAlphas, 1))
+    return geom
+  }, [linePositions, lineAlphas])
 
   const shader = useMemo(
     () => ({
       uniforms: {
-        uColor: { value: new THREE.Color("#33a381") },
+        uColor: { value: new THREE.Color('#33a381') },
       },
       vertexShader: `
       attribute float aAlpha;
@@ -284,63 +296,67 @@ function ConnectionLines() {
       }
     `,
     }),
-    [],
-  );
+    []
+  )
 
-  useFrame((state) => {
-    const t = state.clock.elapsedTime * 0.2;
-    const current: { x: number; y: number; z: number }[] = [];
+  useFrame(state => {
+    const t = state.clock.elapsedTime * 0.2
+    const current: { x: number; y: number; z: number }[] = []
 
     // Update positions
     for (let i = 0; i < particleCount; i++) {
-      const bp = basePositions[i];
+      const bp = basePositions[i]
       current.push({
         x: bp.x + Math.sin(t * speeds[i] + i) * 1.2,
         y: bp.y + Math.cos(t * speeds[i] * 0.8 + i * 0.5) * 0.8,
         z: bp.z,
-      });
+      })
     }
 
     // Build connection lines
-    let lineIdx = 0;
-    const posAttr = lineGeometry.getAttribute("position") as THREE.BufferAttribute;
-    const alphaAttr = lineGeometry.getAttribute("aAlpha") as THREE.BufferAttribute;
+    let lineIdx = 0
+    const posAttr = lineGeometry.getAttribute(
+      'position'
+    ) as THREE.BufferAttribute
+    const alphaAttr = lineGeometry.getAttribute(
+      'aAlpha'
+    ) as THREE.BufferAttribute
 
     for (let i = 0; i < particleCount; i++) {
       for (let j = i + 1; j < particleCount; j++) {
-        const dx = current[i].x - current[j].x;
-        const dy = current[i].y - current[j].y;
-        const dz = current[i].z - current[j].z;
-        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        const dx = current[i].x - current[j].x
+        const dy = current[i].y - current[j].y
+        const dz = current[i].z - current[j].z
+        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz)
 
         if (dist < connectionDistance) {
-          const alpha = (1 - dist / connectionDistance) * 0.12;
+          const alpha = (1 - dist / connectionDistance) * 0.12
 
-          posAttr.array[lineIdx * 6] = current[i].x;
-          posAttr.array[lineIdx * 6 + 1] = current[i].y;
-          posAttr.array[lineIdx * 6 + 2] = current[i].z;
-          posAttr.array[lineIdx * 6 + 3] = current[j].x;
-          posAttr.array[lineIdx * 6 + 4] = current[j].y;
-          posAttr.array[lineIdx * 6 + 5] = current[j].z;
+          posAttr.array[lineIdx * 6] = current[i].x
+          posAttr.array[lineIdx * 6 + 1] = current[i].y
+          posAttr.array[lineIdx * 6 + 2] = current[i].z
+          posAttr.array[lineIdx * 6 + 3] = current[j].x
+          posAttr.array[lineIdx * 6 + 4] = current[j].y
+          posAttr.array[lineIdx * 6 + 5] = current[j].z
 
-          alphaAttr.array[lineIdx * 2] = alpha;
-          alphaAttr.array[lineIdx * 2 + 1] = alpha;
+          alphaAttr.array[lineIdx * 2] = alpha
+          alphaAttr.array[lineIdx * 2 + 1] = alpha
 
-          lineIdx++;
+          lineIdx++
         }
       }
     }
 
     // Hide unused lines
     for (let k = lineIdx; k < maxConnections; k++) {
-      alphaAttr.array[k * 2] = 0;
-      alphaAttr.array[k * 2 + 1] = 0;
+      alphaAttr.array[k * 2] = 0
+      alphaAttr.array[k * 2 + 1] = 0
     }
 
-    posAttr.needsUpdate = true;
-    alphaAttr.needsUpdate = true;
-    lineGeometry.setDrawRange(0, lineIdx * 2);
-  });
+    posAttr.needsUpdate = true
+    alphaAttr.needsUpdate = true
+    lineGeometry.setDrawRange(0, lineIdx * 2)
+  })
 
   return (
     <lineSegments ref={lineRef} geometry={lineGeometry}>
@@ -352,7 +368,7 @@ function ConnectionLines() {
         blending={THREE.AdditiveBlending}
       />
     </lineSegments>
-  );
+  )
 }
 
 export default function HeroParticles() {
@@ -360,7 +376,7 @@ export default function HeroParticles() {
     <div className="absolute inset-0 z-0 pointer-events-none">
       <Canvas
         camera={{ position: [0, 0, 6], fov: 50 }}
-        style={{ background: "transparent", pointerEvents: "none" }}
+        style={{ background: 'transparent', pointerEvents: 'none' }}
         dpr={[1, 1.5]}
         gl={{ alpha: true, antialias: false }}
       >
@@ -369,5 +385,5 @@ export default function HeroParticles() {
         <ConnectionLines />
       </Canvas>
     </div>
-  );
+  )
 }

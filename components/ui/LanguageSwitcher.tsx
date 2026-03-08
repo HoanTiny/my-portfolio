@@ -1,31 +1,31 @@
-"use client";
+'use client'
 
-import { useLocale } from "next-intl";
-import { useRouter } from "next/navigation";
-import { useTransition, useState } from "react";
+import { useLocale } from 'next-intl'
+import { useRouter } from 'next/navigation'
+import { useTransition, useState } from 'react'
 
 const locales = [
-  { code: "en", name: "EN", flag: "🇺🇸" },
-  { code: "vi", name: "VI", flag: "🇻🇳" },
-  { code: "zh", name: "ZH", flag: "🇨🇳" },
-] as const;
+  { code: 'en', name: 'EN', flag: '🇺🇸' },
+  { code: 'vi', name: 'VI', flag: '🇻🇳' },
+  { code: 'zh', name: 'ZH', flag: '🇨🇳' },
+] as const
 
 export function LanguageSwitcher() {
-  const locale = useLocale();
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-  const [isOpen, setIsOpen] = useState(false);
+  const locale = useLocale()
+  const router = useRouter()
+  const [isPending, startTransition] = useTransition()
+  const [isOpen, setIsOpen] = useState(false)
 
-  const currentLocale = locales.find((l) => l.code === locale) || locales[1];
+  const currentLocale = locales.find(l => l.code === locale) || locales[1]
 
   const handleLocaleChange = (newLocale: string) => {
     // Set cookie for locale
-    document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=31536000`;
-    setIsOpen(false);
+    document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=31536000`
+    setIsOpen(false)
     startTransition(() => {
-      router.refresh();
-    });
-  };
+      router.refresh()
+    })
+  }
 
   return (
     <div className="language-switcher">
@@ -37,15 +37,15 @@ export function LanguageSwitcher() {
       >
         <span className="flag">{currentLocale.flag}</span>
         <span className="code">{currentLocale.name}</span>
-        <span className="arrow">{isOpen ? "▲" : "▼"}</span>
+        <span className="arrow">{isOpen ? '▲' : '▼'}</span>
       </button>
 
       {isOpen && (
         <div className="language-dropdown">
-          {locales.map((l) => (
+          {locales.map(l => (
             <button
               key={l.code}
-              className={`language-option ${locale === l.code ? "active" : ""}`}
+              className={`language-option ${locale === l.code ? 'active' : ''}`}
               onClick={() => handleLocaleChange(l.code)}
               disabled={isPending}
             >
@@ -56,5 +56,5 @@ export function LanguageSwitcher() {
         </div>
       )}
     </div>
-  );
+  )
 }
