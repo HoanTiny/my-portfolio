@@ -6,7 +6,8 @@ import { RiDownloadLine } from '@/components/ui/Icons'
 import Link from 'next/link'
 import Marquee from 'react-fast-marquee'
 import { motion } from 'framer-motion'
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import { getProfile } from '@/services/profile'
 
 function Tilt3D({
   children,
@@ -161,6 +162,49 @@ function AnimatedText({
 }
 
 export default function Hero() {
+  const [profile, setProfile] = useState<any>(null)
+
+  const titleParts = useMemo(() => {
+    const rawTitle = profile?.profile?.title?.trim()
+
+    if (!rawTitle) {
+      return {
+        level: 'Junior',
+        stack: 'Full Stack',
+        role: 'Web & App Developer',
+      }
+    }
+
+    const normalized = rawTitle.replace(/FullStack/gi, 'Full Stack')
+    const parts = normalized.split(' ')
+    const level = parts[0] ?? 'Junior'
+    const rest = normalized.slice(level.length).trim()
+    const roleMatch = rest.match(/(Web\s*&\s*App\s*Developer)$/i)
+    const role = roleMatch?.[1]?.replace(/\s+/g, ' ') ?? 'Web & App Developer'
+    const stack = rest.replace(/Web\s*&\s*App\s*Developer$/i, '').trim()
+
+    return {
+      level,
+      stack: stack || 'Full Stack',
+      role,
+    }
+  }, [profile])
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const data = await getProfile()
+        console.log('Fetched profile:', data)
+        setProfile(data)
+      } catch (error) {
+        console.error('Failed to fetch profile:', error)
+      }
+    }
+
+    fetchProfile()
+  }, [])
+  console.log('Profile state:', profile)
+  // Simulate fetching profile data
   return (
     <div className="bg-white border-animation dark:bg-[#0e0e0f] border border-[#d0d0d0] dark:border-[#272730] rounded-lg overflow-hidden relative min-h-0 md:min-h-143.5 transition-colors duration-300">
       {/* Background Pattern */}
@@ -210,7 +254,7 @@ export default function Hero() {
                 &lt;span&gt;
               </span>
               <span className="text-[var(--foreground)] text-[20px]">
-                Hey, I&apos;m Hoàn
+                Hey, I&apos;m {profile?.profile.name}
               </span>
               <span className="text-[var(--theme-primary-1)]">
                 &lt;/span&gt;
@@ -224,16 +268,16 @@ export default function Hero() {
               animate="visible"
             >
               <AnimatedText
-                text="Junior "
+                text={`${titleParts.level} `}
                 className="text-[var(--foreground)]"
               />
               <AnimatedText
-                text="{Full Stack}"
+                text={`{${titleParts.stack}}`}
                 className="bg-[var(--gradient-primary)] bg-clip-text text-transparent"
               />
               <br />
               <AnimatedText
-                text="Web & App developer_"
+                text={`${titleParts.role}_`}
                 className="text-[var(--foreground)]"
               />
             </motion.h1>
