@@ -10,8 +10,7 @@ const SplashParticles = dynamic(
 )
 
 export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
-  const text =
-    "Welcome to my portfolio!\nI'm Hoàn, a passionate frontend developer with a love for crafting beautiful"
+  const text = "Welcome to my portfolio!\nI'm Hoàn"
   const [displayed, setDisplayed] = useState('')
   const [done, setDone] = useState(false)
 
