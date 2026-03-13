@@ -20,19 +20,19 @@ const contactInfo = [
   {
     icon: <RiMailFill />,
     label: 'Email',
-    value: 'th',
+    value: 'thedevil0903@gmail.com',
     color: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-500',
   },
   {
     icon: <RiSkypeFill />,
-    label: 'Skype',
-    value: 'JamesDev24',
+    label: 'Facebook',
+    value: 'https://www.facebook.com/hoandz93/',
     color: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-500',
   },
   {
     icon: <RiMap2Fill />,
     label: 'Address',
-    value: '0811 Erdman Prairie, Joaville CA',
+    value: 'Hanoi, Vietnam',
     color: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-500',
   },
 ]
