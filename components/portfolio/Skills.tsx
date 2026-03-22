@@ -1,16 +1,28 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
+import { getSkills } from '@/services'
 
 const SkillsGlobe = dynamic(
   () => import('@/components/portfolio/SkillsGlobe'),
   { ssr: false }
 )
 
-const skillsData = [
+type SkillIconItem = {
+  name: string
+  icon: string
+  row?: number
+}
+
+type SkillCategory = {
+  label: string
+  value: string
+}
+
+const fallbackSkillsData: SkillIconItem[] = [
   { name: 'Node.js', icon: '/nodejs.svg', row: 1 },
   { name: 'Next.js', icon: '/nextjs.svg', row: 1 },
   { name: 'Firebase', icon: '/firebase.svg', row: 1 },
@@ -20,7 +32,7 @@ const skillsData = [
   { name: 'Tailwind', icon: '/tailwind.svg', row: 1 },
 ]
 
-const skillCategories = [
+const fallbackSkillCategories: SkillCategory[] = [
   { label: 'Front-End', value: 'HTML, CSS, JavaScript, React, Vue.js' },
   { label: 'Back-End', value: 'Node.js, Express' },
   { label: 'Databases', value: 'MySQL, MongoDB' },
@@ -58,13 +70,7 @@ const textVariants = {
   }),
 }
 
-function SkillIcon({
-  skill,
-  index,
-}: {
-  skill: (typeof skillsData)[0]
-  index: number
-}) {
+function SkillIcon({ skill }: { skill: SkillIconItem }) {
   const [hovered, setHovered] = useState(false)
 
   return (
@@ -113,8 +119,60 @@ function SkillIcon({
 }
 
 export default function Skills() {
-  const row1 = skillsData.filter(s => s.row === 1)
-  const row2 = skillsData.filter(s => s.row === 2)
+  const [skillsData, setSkillsData] =
+    useState<SkillIconItem[]>(fallbackSkillsData)
+  const [skillCategories, setSkillCategories] = useState<SkillCategory[]>(
+    fallbackSkillCategories
+  )
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const data = await getSkills<unknown>()
+        const payload = data as
+          | SkillIconItem[]
+          | {
+              icons?: SkillIconItem[]
+              skills?: SkillIconItem[]
+              categories?: SkillCategory[]
+              grouped?: SkillCategory[]
+            }
+
+        const icons = Array.isArray(payload)
+          ? payload
+          : Array.isArray(payload.skills)
+            ? payload.skills
+            : Array.isArray(payload.icons)
+              ? payload.icons
+              : []
+
+        const categories =
+          !Array.isArray(payload) &&
+          (Array.isArray(payload.categories)
+            ? payload.categories
+            : Array.isArray(payload.grouped)
+              ? payload.grouped
+              : [])
+
+        if (icons.length > 0) {
+          setSkillsData(
+            icons.map((skill, index) => ({
+              ...skill,
+              row: skill.row ?? (index < Math.ceil(icons.length / 2) ? 1 : 2),
+            }))
+          )
+        }
+
+        if (categories && categories.length > 0) {
+          setSkillCategories(categories)
+        }
+      } catch (error) {
+        console.error('Failed to fetch skills:', error)
+      }
+    }
+
+    fetchSkills()
+  }, [])
 
   return (
     <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-10 lg:p-16 relative overflow-hidden transition-colors duration-300">

@@ -2,9 +2,79 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Calendar, Clock } from 'lucide-react'
-import posts from '@/lib/blog-posts.json'
+import { getPosts } from '@/services'
+import fallbackPosts from '@/lib/blog-posts.json'
+
+type BlogPost = {
+  slug: string
+  tag: string
+  date: string
+  readTime: string
+  title: string
+  excerpt: string
+  image: string | undefined
+  gradient: string
+  content: string | undefined
+}
+
+const getTagName = (value: unknown): string => {
+  if (typeof value === 'string') {
+    return value
+  }
+
+  if (value && typeof value === 'object') {
+    const category = value as { name?: string; slug?: string }
+    return category.name ?? category.slug ?? 'Development'
+  }
+
+  return 'Development'
+}
+
+const normalizePosts = (payload: unknown): BlogPost[] => {
+  const source = Array.isArray(payload)
+    ? payload
+    : Array.isArray((payload as { posts?: unknown[] } | null)?.posts)
+      ? ((payload as { posts: unknown[] }).posts ?? [])
+      : []
+
+  return source
+    .map(item => {
+      const post = item as {
+        slug?: string
+        tag?: string | { name?: string; slug?: string }
+        category?: string | { name?: string; slug?: string }
+        date?: string
+        readTime?: string
+        title?: string
+        excerpt?: string
+        summary?: string
+        image?: string
+        thumbnail?: string
+        gradient?: string
+        content?: string
+      }
+
+      if (!post.slug || !post.title) {
+        return null
+      }
+
+      return {
+        slug: post.slug,
+        tag: getTagName(post.tag ?? post.category),
+        date: post.date ?? '',
+        readTime: post.readTime ?? '5 min read',
+        title: post.title,
+        excerpt: post.excerpt ?? post.summary ?? '',
+        image: post.image ?? post.thumbnail,
+        gradient: post.gradient ?? 'from-emerald-400/40 to-cyan-500/40',
+        content: post.content,
+      }
+    })
+    .filter((item): item is BlogPost => item !== null)
+}
 
 const tagColors: Record<string, string> = {
   Performance:
@@ -32,6 +102,24 @@ const cardVariants = {
 }
 
 export default function Blog() {
+  const [posts, setPosts] = useState<BlogPost[]>(fallbackPosts)
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const data = await getPosts<unknown>()
+        const normalized = normalizePosts(data)
+        if (normalized.length > 0) {
+          setPosts(normalized)
+        }
+      } catch (error) {
+        console.error('Failed to fetch posts:', error)
+      }
+    }
+
+    fetchPosts()
+  }, [])
+
   return (
     <section className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-10 lg:p-16 transition-colors duration-300">
       <div className="max-w-[1305px] mx-auto">

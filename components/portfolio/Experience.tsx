@@ -1,74 +1,116 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useInView } from 'framer-motion'
+import { getExperiences } from '@/services'
+
+type ExperienceItem = {
+  company: string
+  period: string
+  logo: string
+  role: string
+  description: string
+  skills: string[]
+}
+
+const FALLBACK_EXPERIENCES: ExperienceItem[] = [
+  {
+    company: 'FPT Software',
+    period: '2023 - 2024',
+    logo: '/fpt.png',
+    role: 'Intern Software Engineer',
+    description:
+      'Developed and deployed a machine learning model for image classification, achieving 95% accuracy. Collaborated with cross-functional teams to integrate the model into a web application, improving user experience. Optimized model performance by implementing techniques such as data augmentation and hyperparameter tuning.',
+    skills: ['JavaScript', 'React'],
+  },
+  {
+    company: 'VTV Live',
+    period: '2024 - Present',
+    logo: '/vtv.png',
+    role: 'Frontend Developer',
+    description:
+      'Designed and implemented responsive user interfaces for live streaming platforms, enhancing user engagement. Collaborated with backend developers to integrate APIs, ensuring seamless data flow and real-time updates. Optimized frontend performance, reducing load times by 30% through code splitting and lazy loading techniques.',
+    skills: [
+      'TypeScript',
+      'Next.js',
+      'Tailwind CSS',
+      'Framer Motion',
+      'WebSocket',
+      'MongoDB',
+    ],
+  },
+]
+
+const normalizeExperiences = (payload: unknown): ExperienceItem[] => {
+  const source = Array.isArray(payload)
+    ? payload
+    : Array.isArray(
+          (payload as { experiences?: unknown[] } | null)?.experiences
+        )
+      ? ((payload as { experiences: unknown[] }).experiences ?? [])
+      : []
+
+  return source
+    .map(item => {
+      const experience = item as {
+        company?: string
+        period?: string
+        duration?: string
+        logo?: string
+        image?: string
+        role?: string
+        title?: string
+        description?: string
+        skills?: string[]
+        technologies?: string[]
+      }
+
+      const company = experience.company
+      const period = experience.period ?? experience.duration
+      const logo = experience.logo ?? experience.image ?? '/window.svg'
+      const role = experience.role ?? experience.title
+      const description = experience.description
+      const skills = experience.skills ?? experience.technologies ?? []
+
+      if (!company || !period || !role || !description) {
+        return null
+      }
+
+      return {
+        company,
+        period,
+        logo,
+        role,
+        description,
+        skills: Array.isArray(skills) ? skills : [],
+      }
+    })
+    .filter((item): item is ExperienceItem => item !== null)
+}
 
 export default function Experience() {
   const [activeTab, setActiveTab] = useState(0)
+  const [experiences, setExperiences] =
+    useState<ExperienceItem[]>(FALLBACK_EXPERIENCES)
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
-  const experiences = [
-    {
-      company: 'FPT Software',
-      period: '2023 - 2024',
-      logo: '/fpt.png',
-      role: 'Intern Software Engineer',
-      description:
-        'Developed and deployed a machine learning model for image classification, achieving 95% accuracy. Collaborated with cross-functional teams to integrate the model into a web application, improving user experience. Optimized model performance by implementing techniques such as data augmentation and hyperparameter tuning.',
-      skills: ['JavaScript', 'React'],
-    },
-    {
-      company: 'VTV Live',
-      period: '2024 - Present',
-      logo: '/vtv.png',
-      role: 'Frontend Developer',
-      description:
-        'Designed and implemented responsive user interfaces for live streaming platforms, enhancing user engagement. Collaborated with backend developers to integrate APIs, ensuring seamless data flow and real-time updates. Optimized frontend performance, reducing load times by 30% through code splitting and lazy loading techniques.',
-      skills: [
-        'TypeScript',
-        'Next.js',
-        'Tailwind CSS',
-        'Framer Motion',
-        'WebSocket',
-        'MongoDB',
-      ],
-    },
-    // {
-    //   company: "Twitter (X)",
-    //   period: "2012 - 2015",
-    //   logo: "twitter",
-    //   role: "Backend Engineer",
-    //   description:
-    //     "Optimized server-side operations and database management, ensuring reliable and fast tweet processing. Implemented caching mechanisms to reduce server load. Enhanced data security measures to protect user information.",
-    //   skills: ["Scala", "Redis", "PostgreSQL", "Docker", "Apache Kafka"],
-    // },
-    // {
-    //   company: "Amazon",
-    //   period: "2018 - Present",
-    //   logo: "amazon",
-    //   role: "Software Development Engineer",
-    //   description:
-    //     "Developed and maintained e-commerce platform features, enhancing functionality and efficiency. Designed APIs to streamline communication between services. Optimized database queries, reducing latency and improving load times.",
-    //   skills: ["Java", "AWS", "DynamoDB", "Node.js", "React"],
-    // },
-    // {
-    //   company: "PayPal",
-    //   period: "2010 - 2012",
-    //   logo: "paypal",
-    //   role: "Database Engineer",
-    //   description:
-    //     "Designed and optimized database schemas to support high-volume transaction processing. Developed and maintained data migration scripts to ensure data integrity and consistency. Implemented database security measures to protect sensitive user information.",
-    //   skills: [
-    //     "MySQL",
-    //     "PL/SQL",
-    //     "MongoDB",
-    //     "PostgreSQL",
-    //     "ETL Processes",
-    //     "MS SQL",
-    //   ],
-    // },
-  ]
+  useEffect(() => {
+    const fetchExperiences = async () => {
+      try {
+        const data = await getExperiences<unknown>()
+        const normalized = normalizeExperiences(data)
+        if (normalized.length > 0) {
+          setExperiences(normalized)
+          setActiveTab(0)
+        }
+      } catch (error) {
+        console.error('Failed to fetch experiences:', error)
+      }
+    }
+
+    fetchExperiences()
+  }, [])
 
   const activeExperience = experiences[activeTab]
 

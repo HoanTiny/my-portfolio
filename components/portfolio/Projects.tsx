@@ -1,94 +1,126 @@
 'use client'
 
-import { title } from 'process'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { getProjects } from '@/services'
+
+type ProjectItem = {
+  title: string
+  description: string
+  tech: string
+  year: string
+  role: string
+  github?: string
+  liveUrl: string
+}
+
+const FALLBACK_PROJECTS: ProjectItem[] = [
+  {
+    title: 'Myshop Pro BIDV WebApp',
+    description:
+      "A comprehensive e-commerce platform for BIDV's Myshop Pro, featuring product listings, shopping cart, and secure checkout. Built with a focus on performance and user experience.",
+    tech: 'TypeScript, Next.js, Tailwind CSS, websocket, payment gateway',
+    year: '2023 - 2024',
+    role: 'Frontend Developer',
+    liveUrl:
+      'https://bidv.com.vn/vn/ho-kinh-doanh-tieu-thuong/san-pham-dich-vu/ngan-hang-so/bidv-smartshop',
+  },
+  {
+    title: 'Movie Streaming App',
+    description:
+      'A Netflix-inspired movie browsing application with search, filtering, and detailed movie information. Features responsive layout and smooth animations for an immersive experience.',
+    tech: 'TypeScript, Next.js, TMDB API',
+    year: '2024',
+    role: 'Frontend Developer',
+    github: 'https://github.com/HoanTiny/Movie-App',
+    liveUrl: 'https://netflop.vercel.app/',
+  },
+  {
+    title: 'CMS Club Management Swimming',
+    description:
+      'A content management system for managing swimming club activities, events, and member information. Features a user-friendly interface for club administrators to create and manage content.',
+    tech: 'TypeScript, Next.js, Tailwind CSS',
+    year: '2024',
+    role: 'Frontend Developer',
+    github: 'https://github.com/HoanTiny/cms-landing-swimming',
+    liveUrl: 'https://cms-landing-swimming.vercel.app',
+  },
+]
+
+const normalizeProjects = (payload: unknown): ProjectItem[] => {
+  const source = Array.isArray(payload)
+    ? payload
+    : Array.isArray((payload as { projects?: unknown[] } | null)?.projects)
+      ? ((payload as { projects: unknown[] }).projects ?? [])
+      : []
+
+  return source
+    .map(item => {
+      const project = item as {
+        title?: string
+        name?: string
+        description?: string
+        tech?: string
+        technologies?: string[] | string
+        year?: string
+        period?: string
+        role?: string
+        github?: string
+        githubUrl?: string
+        liveUrl?: string
+        demoUrl?: string
+        url?: string
+      }
+
+      const technologies = Array.isArray(project.technologies)
+        ? project.technologies.join(', ')
+        : project.technologies
+
+      const normalized: ProjectItem = {
+        title: project.title ?? project.name ?? '',
+        description: project.description ?? '',
+        tech: project.tech ?? technologies ?? '',
+        year: project.year ?? project.period ?? '',
+        role: project.role ?? '',
+        github: project.github ?? project.githubUrl,
+        liveUrl: project.liveUrl ?? project.demoUrl ?? project.url ?? '',
+      }
+
+      if (
+        !normalized.title ||
+        !normalized.description ||
+        !normalized.tech ||
+        !normalized.year ||
+        !normalized.role ||
+        !normalized.liveUrl
+      ) {
+        return null
+      }
+
+      return normalized
+    })
+    .filter((item): item is ProjectItem => item !== null)
+}
 
 export default function Projects() {
   const [currentProject, setCurrentProject] = useState(0)
+  const [projects, setProjects] = useState<ProjectItem[]>(FALLBACK_PROJECTS)
 
-  const projects = [
-    {
-      title: 'Myshop Pro BIDV WebApp',
-      description:
-        "A comprehensive e-commerce platform for BIDV's Myshop Pro, featuring product listings, shopping cart, and secure checkout. Built with a focus on performance and user experience.",
-      tech: 'TypeScript, Next.js, Tailwind CSS, websocket, payment gateway',
-      year: '2023 - 2024',
-      role: 'Frontend Developer',
-      link: 'https://myshoppro.bidv.com.vn/',
-      liveUrl:
-        'https://bidv.com.vn/vn/ho-kinh-doanh-tieu-thuong/san-pham-dich-vu/ngan-hang-so/bidv-smartshop',
-    },
-    {
-      title: 'Movie Streaming App',
-      description:
-        'A Netflix-inspired movie browsing application with search, filtering, and detailed movie information. Features responsive layout and smooth animations for an immersive experience.',
-      tech: 'TypeScript, Next.js, TMDB API',
-      year: '2024',
-      role: 'Frontend Developer',
-      github: 'https://github.com/HoanTiny/Movie-App',
-      liveUrl: 'https://netflop.vercel.app/',
-    },
-    {
-      title: 'CMS Club Management Swimming',
-      description:
-        'A content management system for managing swimming club activities, events, and member information. Features a user-friendly interface for club administrators to create and manage content.',
-      tech: 'TypeScript, Next.js, Tailwind CSS',
-      year: '2024',
-      role: 'Frontend Developer',
-      github: 'https://github.com/HoanTiny/cms-landing-swimming',
-      liveUrl: 'https://cms-landing-swimming.vercel.app',
-    },
-    {
-      title: 'Landing Page for Swimming Club',
-      description:
-        'A visually appealing landing page for a swimming club, showcasing club information, upcoming events, and membership benefits. Designed with a focus on aesthetics and user engagement.',
-      tech: 'TypeScript, Next.js, Tailwind CSS',
-      year: '2025',
-      role: 'Frontend Developer',
-      liveUrl: 'https://www.clbthudo.com/',
-    },
-    {
-      title: 'TikTok Website Clone',
-      description:
-        "A pixel-perfect clone of TikTok's web interface featuring video feeds, user interactions, and dynamic content rendering. One of the largest personal projects with rich UI/UX.",
-      tech: 'JavaScript, React, SCSS',
-      year: '2023 - 2025',
-      role: 'Frontend Developer',
-      github: 'https://github.com/HoanTiny/Tiktok-Website',
-      liveUrl: 'https://toptoptv.vercel.app/',
-    },
-    {
-      title: 'Infinity Network App',
-      description:
-        'A full-featured social networking platform with user profiles, real-time feeds, and interactive community features. Built with modern frontend architecture and responsive design.',
-      tech: 'TypeScript, Next.js, Tailwind CSS',
-      year: '2024 - 2025',
-      role: 'Frontend Developer',
-      github: 'https://github.com/HoanTiny/Infinity-Network-App',
-      liveUrl: 'https://infinity-network-app.vercel.app',
-    },
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const data = await getProjects<unknown>()
+        const normalized = normalizeProjects(data)
+        if (normalized.length > 0) {
+          setProjects(normalized)
+          setCurrentProject(0)
+        }
+      } catch (error) {
+        console.error('Failed to fetch projects:', error)
+      }
+    }
 
-    {
-      title: 'Chat Realtime',
-      description:
-        'A real-time messaging application with instant message delivery, online status, and conversation management. Powered by WebSocket for seamless bidirectional communication.',
-      tech: 'TypeScript, Next.js, Socket.IO, MongoDB',
-      year: '2024',
-      role: 'Full Stack Developer',
-      github: 'https://github.com/HoanTiny/Chat-realtime',
-      liveUrl: 'https://chat-realtime-nu.vercel.app',
-    },
-    {
-      title: 'Budget Management App',
-      description:
-        'A personal finance tracker to manage income, expenses, and budgets with visual charts and analytics. Clean UI with dark mode support and data persistence.',
-      tech: 'TypeScript, React, Vercel',
-      year: '2025 - 2026',
-      role: 'Full Stack Developer',
-      github: 'https://github.com/HoanTiny/Quan-ly-chi-tieu',
-      liveUrl: 'https://v0-reactjs-budget-app.vercel.app',
-    },
-  ]
+    fetchProjects()
+  }, [])
 
   const project = projects[currentProject]
 
@@ -236,8 +268,13 @@ export default function Projects() {
                 </button>
 
                 <button
-                  onClick={() => window.open(project.github, '_blank')}
-                  className="flex items-center gap-2 text-[#1f1f24] dark:text-[#e5e5e6] hover:text-[#129840] dark:hover:text-[#33a381] transition-colors cursor-pointer"
+                  onClick={() => {
+                    if (project.github) {
+                      window.open(project.github, '_blank')
+                    }
+                  }}
+                  disabled={!project.github}
+                  className="flex items-center gap-2 text-[#1f1f24] dark:text-[#e5e5e6] hover:text-[#129840] dark:hover:text-[#33a381] disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
                 >
                   <svg
                     className="w-6 h-6"

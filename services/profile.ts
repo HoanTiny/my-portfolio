@@ -1,9 +1,8 @@
-import { axiosClient } from '@/services'
+import { getProfile as getProfileContent } from '@/services/content'
 
-export const getProfile = async () => {
+export const getProfile = async <T>() => {
   try {
-    const res = await axiosClient.get('/profile')
-    return res.data.data
+    return await getProfileContent<T>()
   } catch (error) {
     console.error('Error fetching profile:', error)
     throw error

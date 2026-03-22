@@ -1,3 +1,5 @@
+import { RiGithubFill, RiTwitterXFill } from '../ui/Icons'
+
 export default function Footer() {
   return (
     <div className="relative pt-[44px] pb-[44px]">
@@ -33,7 +35,7 @@ export default function Footer() {
               target="__blank"
               className="size-[24px] opacity-80 hover:opacity-100 transition-opacity"
             >
-              <img src="/X.png" alt="Twitter" />
+              <RiTwitterXFill className="text-[#1f1f24] dark:text-[#e5e5e6]" />
             </a>
             <a
               href="https://www.linkedin.com/in/hoantiny/"
@@ -47,7 +49,7 @@ export default function Footer() {
               target="__blank"
               className="size-[24px] opacity-80 hover:opacity-100 transition-opacity"
             >
-              <img src="/github.png" alt="GitHub" />
+              <RiGithubFill className="text-[#1f1f24] dark:text-[#e5e5e6]" />
             </a>
           </div>
 

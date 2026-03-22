@@ -1,36 +1,92 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { getServices } from '@/services'
+
+type ServiceItem = {
+  title: string
+  description: string
+}
+
+const FALLBACK_SERVICES: ServiceItem[] = [
+  {
+    title: 'Web Development',
+    description:
+      'Building modern web applications with React, Next.js, TypeScript, and Tailwind CSS to deliver fast, interactive user experiences.',
+  },
+  {
+    title: 'UI/UX Implementation',
+    description:
+      'Translating Figma and design mockups into pixel-perfect, accessible code with clean component architecture and design systems.',
+  },
+  {
+    title: 'Responsive Design',
+    description:
+      'Creating mobile-first, fully responsive layouts that look great on every screen size and work seamlessly across all modern browsers.',
+  },
+  {
+    title: 'Animation & Interaction',
+    description:
+      'Crafting smooth animations and micro-interactions using Framer Motion and CSS to enhance user engagement and delight.',
+  },
+  {
+    title: 'Performance Optimization',
+    description:
+      'Improving Core Web Vitals through lazy loading, code splitting, image optimization, and efficient rendering strategies.',
+  },
+  {
+    title: 'API Integration',
+    description:
+      'Connecting frontend applications with REST and GraphQL APIs, handling state management and data fetching with modern tools.',
+  },
+]
+
+const normalizeServices = (payload: unknown): ServiceItem[] => {
+  const source = Array.isArray(payload)
+    ? payload
+    : Array.isArray((payload as { services?: unknown[] } | null)?.services)
+      ? ((payload as { services: unknown[] }).services ?? [])
+      : []
+
+  return source
+    .map(item => {
+      const service = item as {
+        title?: string
+        name?: string
+        description?: string
+        content?: string
+      }
+
+      const title = service.title ?? service.name
+      const description = service.description ?? service.content
+
+      if (!title || !description) {
+        return null
+      }
+
+      return { title, description }
+    })
+    .filter((item): item is ServiceItem => item !== null)
+}
+
 export default function Services() {
-  const services = [
-    {
-      title: 'Web Development',
-      description:
-        'Building modern web applications with React, Next.js, TypeScript, and Tailwind CSS to deliver fast, interactive user experiences.',
-    },
-    {
-      title: 'UI/UX Implementation',
-      description:
-        'Translating Figma and design mockups into pixel-perfect, accessible code with clean component architecture and design systems.',
-    },
-    {
-      title: 'Responsive Design',
-      description:
-        'Creating mobile-first, fully responsive layouts that look great on every screen size and work seamlessly across all modern browsers.',
-    },
-    {
-      title: 'Animation & Interaction',
-      description:
-        'Crafting smooth animations and micro-interactions using Framer Motion and CSS to enhance user engagement and delight.',
-    },
-    {
-      title: 'Performance Optimization',
-      description:
-        'Improving Core Web Vitals through lazy loading, code splitting, image optimization, and efficient rendering strategies.',
-    },
-    {
-      title: 'API Integration',
-      description:
-        'Connecting frontend applications with REST and GraphQL APIs, handling state management and data fetching with modern tools.',
-    },
-  ]
+  const [services, setServices] = useState<ServiceItem[]>(FALLBACK_SERVICES)
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const data = await getServices<unknown>()
+        const normalized = normalizeServices(data)
+        if (normalized.length > 0) {
+          setServices(normalized)
+        }
+      } catch (error) {
+        console.error('Failed to fetch services:', error)
+      }
+    }
+
+    fetchServices()
+  }, [])
 
   return (
     <div className="bg-white dark:bg-[#0e0e0f] border border-[#c0dcbc] dark:border-[#2a2a2a] rounded-lg overflow-hidden relative py-8 sm:py-[60px] px-4 sm:px-8 lg:px-[64px]">

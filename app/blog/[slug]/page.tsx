@@ -2,10 +2,12 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Calendar, Clock } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
+import { getPosts } from '@/services'
 import postsData from '@/lib/blog-posts.json'
 
 type BlogPost = {
@@ -20,9 +22,62 @@ type BlogPost = {
   content: string
 }
 
-const posts: Record<string, BlogPost> = Object.fromEntries(
+const getTagName = (value: unknown): string => {
+  if (typeof value === 'string') {
+    return value
+  }
+
+  if (value && typeof value === 'object') {
+    const category = value as { name?: string; slug?: string }
+    return category.name ?? category.slug ?? 'Development'
+  }
+
+  return 'Development'
+}
+
+const fallbackPosts: Record<string, BlogPost> = Object.fromEntries(
   postsData.map(post => [post.slug, post])
 )
+
+const normalizePosts = (payload: unknown): Record<string, BlogPost> => {
+  const source = Array.isArray(payload)
+    ? payload
+    : Array.isArray((payload as { posts?: unknown[] } | null)?.posts)
+      ? ((payload as { posts: unknown[] }).posts ?? [])
+      : []
+
+  return Object.fromEntries(
+    source
+      .map(item => {
+        const post = item as Partial<BlogPost> & {
+          tag?: string | { name?: string; slug?: string }
+          category?: string | { name?: string; slug?: string }
+          summary?: string
+          thumbnail?: string
+        }
+
+        if (!post.slug || !post.title) {
+          return null
+        }
+
+        return [
+          post.slug,
+          {
+            slug: post.slug,
+            tag: getTagName(post.tag ?? post.category),
+            date: post.date ?? '',
+            readTime: post.readTime ?? '5 min read',
+            title: post.title,
+            excerpt: post.excerpt ?? post.summary ?? '',
+            image: post.image ?? post.thumbnail ?? '',
+            gradient: post.gradient ?? 'from-emerald-400/40 to-cyan-500/40',
+            content: post.content ?? '',
+          },
+        ] as const
+      })
+      .filter((item): item is readonly [string, BlogPost] => item !== null)
+  )
+}
 
 const tagColors: Record<string, string> = {
   Performance:
@@ -36,6 +91,24 @@ const tagColors: Record<string, string> = {
 export default function BlogDetailPage() {
   const params = useParams()
   const slug = params.slug as string
+  const [posts, setPosts] = useState<Record<string, BlogPost>>(fallbackPosts)
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const data = await getPosts<unknown>()
+        const normalized = normalizePosts(data)
+        if (Object.keys(normalized).length > 0) {
+          setPosts(normalized)
+        }
+      } catch (error) {
+        console.error('Failed to fetch posts:', error)
+      }
+    }
+
+    fetchPosts()
+  }, [])
+
   const post = posts[slug]
 
   if (!post) {

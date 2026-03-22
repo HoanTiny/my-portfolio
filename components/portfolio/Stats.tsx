@@ -2,6 +2,109 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { getStats } from '@/services'
+
+type StatItem = {
+  value: number
+  label: string
+}
+
+const FALLBACK_STATS: StatItem[] = [
+  { value: 2, label: 'Year Experience' },
+  { value: 10, label: 'Projects Completed' },
+  { value: 8, label: 'Tech Stacks' },
+  { value: 500, label: 'GitHub Commits' },
+]
+
+const STAT_ICONS = [
+  <svg
+    key="experience"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    className="size-6"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
+    />
+  </svg>,
+  <svg
+    key="projects"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    className="size-6"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+    />
+  </svg>,
+  <svg
+    key="tech"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    className="size-6"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+    />
+  </svg>,
+  <svg
+    key="commits"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    className="size-6"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+    />
+  </svg>,
+]
+
+const normalizeStats = (payload: unknown): StatItem[] => {
+  const source = Array.isArray(payload)
+    ? payload
+    : Array.isArray((payload as { stats?: unknown[] } | null)?.stats)
+      ? ((payload as { stats: unknown[] }).stats ?? [])
+      : []
+
+  return source
+    .map(item => {
+      const stat = item as {
+        value?: number | string
+        count?: number | string
+        total?: number | string
+        label?: string
+        title?: string
+        name?: string
+      }
+
+      const rawValue = stat.value ?? stat.count ?? stat.total
+      const value = Number(rawValue)
+      const label = stat.label ?? stat.title ?? stat.name
+
+      if (!Number.isFinite(value) || !label) {
+        return null
+      }
+
+      return { value, label }
+    })
+    .filter((item): item is StatItem => item !== null)
+}
 
 function CountUp({
   target,
@@ -61,85 +164,23 @@ const itemVariants = {
 export default function Stats() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const [stats, setStats] = useState<StatItem[]>(FALLBACK_STATS)
 
-  const stats = [
-    {
-      icon: (
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          className="size-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
-          />
-        </svg>
-      ),
-      value: 2,
-      label: 'Year Experience',
-    },
-    {
-      icon: (
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          className="size-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-          />
-        </svg>
-      ),
-      value: 10,
-      label: 'Projects Completed',
-    },
-    {
-      icon: (
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          className="size-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-          />
-        </svg>
-      ),
-      value: 8,
-      label: 'Tech Stacks',
-    },
-    {
-      icon: (
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          className="size-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-          />
-        </svg>
-      ),
-      value: 500,
-      label: 'GitHub Commits',
-    },
-  ]
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const data = await getStats<unknown>()
+        const normalized = normalizeStats(data)
+        if (normalized.length > 0) {
+          setStats(normalized)
+        }
+      } catch (error) {
+        console.error('Failed to fetch stats:', error)
+      }
+    }
+
+    fetchStats()
+  }, [])
 
   return (
     <div
@@ -162,7 +203,7 @@ export default function Stats() {
         >
           {stats.map((stat, index) => (
             <motion.div
-              key={index}
+              key={`${stat.label}-${index}`}
               className="flex flex-col gap-2 sm:gap-[13px] items-start group cursor-default"
               variants={itemVariants}
               whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
@@ -174,7 +215,7 @@ export default function Stats() {
                   transition: { duration: 0.5 },
                 }}
               >
-                {stat.icon}
+                {STAT_ICONS[index] ?? STAT_ICONS[STAT_ICONS.length - 1]}
               </motion.div>
               <div className="flex flex-col pb-px">
                 <div className="flex items-center font-['DM_Mono'] font-medium text-[32px] sm:text-[50px] leading-[1.2] -mb-px">

@@ -5,9 +5,9 @@ import { motion } from 'framer-motion'
 import {
   RiPhoneFill,
   RiMailFill,
-  RiSkypeFill,
   RiMap2Fill,
   RiArrowRightUpLine,
+  FacebookIcon,
 } from '@/components/ui/Icons'
 
 const contactInfo = [
@@ -24,7 +24,9 @@ const contactInfo = [
     color: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-500',
   },
   {
-    icon: <RiSkypeFill />,
+    icon: (
+      <FacebookIcon className="w-6 h-6 text-[#33a381] dark:text-[#33a381]" />
+    ),
     label: 'Facebook',
     value: 'https://www.facebook.com/hoandz93/',
     color: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-500',
@@ -73,7 +75,7 @@ export default function Contact() {
   }
 
   const inputClass = (name: string) =>
-    `w-full bg-[#1a1a1f] dark:bg-[#1a1a1f] border rounded-xl px-5 py-4 text-white placeholder:text-[#6b6b70] font-medium text-[15px] outline-none transition-all duration-300 ${
+    `w-full bg-[#ffffff] dark:bg-[#1a1a1f] text-[#33a381] border rounded-xl px-5 py-4  placeholder:text-[#6b6b70] font-medium text-[15px] outline-none transition-all duration-300 ${
       focused === name
         ? 'border-[#a3e635] ring-1 ring-[#a3e635]/30'
         : 'border-[#2a2a2f] hover:border-[#3a3a3f]'

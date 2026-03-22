@@ -9,6 +9,15 @@ import { motion } from 'framer-motion'
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { getProfile } from '@/services/profile'
 
+type ProfileResponse = {
+  profile?: {
+    name?: string
+    title?: string
+    description?: string
+    cvLink?: string
+  }
+}
+
 function Tilt3D({
   children,
   className,
@@ -162,7 +171,7 @@ function AnimatedText({
 }
 
 export default function Hero() {
-  const [profile, setProfile] = useState<any>(null)
+  const [profile, setProfile] = useState<ProfileResponse | null>(null)
 
   const titleParts = useMemo(() => {
     const rawTitle = profile?.profile?.title?.trim()
@@ -193,8 +202,7 @@ export default function Hero() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const data = await getProfile()
-        console.log('Fetched profile:', data)
+        const data = await getProfile<ProfileResponse>()
         setProfile(data)
       } catch (error) {
         console.error('Failed to fetch profile:', error)
@@ -203,8 +211,7 @@ export default function Hero() {
 
     fetchProfile()
   }, [])
-  console.log('Profile state:', profile)
-  // Simulate fetching profile data
+
   return (
     <div className="bg-white border-animation dark:bg-[#0e0e0f] border border-[#d0d0d0] dark:border-[#272730] rounded-lg overflow-hidden relative min-h-0 md:min-h-143.5 transition-colors duration-300">
       {/* Background Pattern */}
@@ -254,7 +261,7 @@ export default function Hero() {
                 &lt;span&gt;
               </span>
               <span className="text-[var(--foreground)] text-[20px]">
-                Hey, I&apos;m {profile?.profile.name}
+                Hey, I&apos;m {profile?.profile?.name ?? 'Tiny.dev'}
               </span>
               <span className="text-[var(--theme-primary-1)]">
                 &lt;/span&gt;
@@ -286,7 +293,10 @@ export default function Hero() {
             <div className="font-dm-mono text-[14px] sm:text-[16px] leading-[1.5] text-[var(--neutral-300)] dark:text-[var(--secondary)] mb-6 sm:mb-8">
               <span className="text-[var(--theme-primary-1)]">&lt;p&gt;</span>
               <TypingText
-                text="With expertise in cutting-edge technologies such as NodeJS, React, Nextjs, and Vue... I deliver web solutions that are both innovative and robust."
+                text={
+                  profile?.profile?.description ??
+                  'With expertise in cutting-edge technologies such as NodeJS, React, Nextjs, and Vue... I deliver web solutions that are both innovative and robust.'
+                }
                 delay={1500}
                 speed={25}
               />
@@ -335,7 +345,14 @@ export default function Hero() {
               initial="hidden"
               animate="visible"
             >
-              <button className="download_btn">
+              <button
+                className="download_btn"
+                onClick={() => {
+                  const cvLink = profile?.profile?.cvLink
+                  if (!cvLink) return
+                  window.open(cvLink, '_blank', 'noopener,noreferrer')
+                }}
+              >
                 <div className="svg-wrapper-1">
                   <div className="svg-wrapper">
                     <RiDownloadLine />

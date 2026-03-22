@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { ThemeSwitch } from '@/components/ui/ThemeSwitch'
 import Sidebar from './Sidebar'
+import { FacebookIcon } from '../ui/Icons'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -13,18 +14,22 @@ export default function Header() {
 
       <div className="bg-[#333A32] dark:bg-[#010101] border border-[#c0dcbc] dark:border-[#2a2a2a] rounded-lg relative overflow-hidden flex justify-center h-[60px] sm:h-[80px]">
         <div
-          className="absolute -left-px -top-px cursor-pointer bg-[#FFFFFF0D]"
+          className="absolute left-0 top-0 h-[60px] w-[60px] sm:h-[80px] sm:w-[80px] cursor-pointer bg-[#FFFFFF0D] flex items-center justify-center border-r border-white/5"
           onClick={() => setIsMenuOpen(true)}
         >
-          <img src="/menu.png" alt="" />
+          <img
+            src="/menu.png"
+            alt=""
+            className="w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] object-cover"
+          />
         </div>
         {/* Main Content */}
-        <div className="w-full max-w-262.5 h-full flex items-center justify-between px-14 sm:px-16 lg:px-4">
+        <div className="w-full xl:max-w-260.5 md:max-w-150 sm:max-w-120 max-w-200 h-full flex items-center justify-between px-[76px] sm:px-16 lg:px-4">
           {/* Logo */}
-          <div className="flex items-center gap-4 sm:gap-9">
+          <div className="flex min-w-0 items-center gap-3 sm:gap-9">
             <img src="/dev.png" alt="dev" className="w-8 sm:w-auto" />
             <p
-              className="text-lg sm:text-2xl font-['DM_Mono'] font-medium text-[#ffff] dark:text-[#e5e5e6]"
+              className="truncate text-base sm:text-2xl font-['DM_Mono'] font-medium text-[#ffff] dark:text-[#e5e5e6]"
               style={{
                 background:
                   'linear-gradient(270deg, hsla(0, 0%, 100%, .32), #fff)',
@@ -37,7 +42,7 @@ export default function Header() {
           </div>
 
           {/* Navigation - hidden on mobile/tablet */}
-          <nav className="hidden lg:flex items-center gap-[37px] font-['DM_Mono'] text-[16px] text-[#ffff] dark:text-[#e5e5e6] leading-[1.5]">
+          <nav className="hidden xl:flex items-center gap-[37px] font-['DM_Mono'] text-[16px] text-[#ffff] dark:text-[#e5e5e6] leading-[1.5]">
             <a
               href="#about"
               onClick={e => {
@@ -119,13 +124,7 @@ export default function Header() {
               className="w-6 h-6 hover:opacity-80 transition-opacity"
               target="__blank"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="text-[#1f1f24] dark:text-[#e5e5e6]"
-              >
-                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z" />
-              </svg>
+              <FacebookIcon className="w-6 h-6 text-[#33a381] dark:text-[#33a381]" />
             </a>
             <a
               href="https://x.com/HoanTiny"
@@ -152,7 +151,7 @@ export default function Header() {
         </div>
 
         {/* Theme Switch Button (top right corner) */}
-        <div className="absolute -right-px -top-px cursor-pointer bg-[#FFFFFF0D]">
+        <div className="absolute right-0 top-0 h-[60px] sm:h-[80px] cursor-pointer bg-[#FFFFFF0D] border-l border-white/5">
           <ThemeSwitch />
         </div>
       </div>

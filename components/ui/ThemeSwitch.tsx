@@ -16,7 +16,7 @@ export function ThemeSwitch() {
   if (!mounted) {
     return (
       <button
-        className="w-[80px] h-[80px] bg-[rgba(0,0,0,0.05)] dark:bg-[rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-[rgba(0,0,0,0.08)] dark:hover:bg-[rgba(255,255,255,0.08)] transition-colors"
+        className="w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] bg-[rgba(0,0,0,0.05)] dark:bg-[rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-[rgba(0,0,0,0.08)] dark:hover:bg-[rgba(255,255,255,0.08)] transition-colors"
         aria-label="Toggle theme"
       >
         <svg
@@ -34,14 +34,22 @@ export function ThemeSwitch() {
 
   return (
     <button
-      className="w-[80px] h-[80px] cursor-pointer bg-[rgba(0,0,0,0.05)] dark:bg-[rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-[rgba(0,0,0,0.08)] dark:hover:bg-[rgba(255,255,255,0.08)] transition-colors"
+      className="w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] cursor-pointer bg-[rgba(0,0,0,0.05)] dark:bg-[rgba(255,255,255,0.05)] flex items-center justify-center hover:bg-[rgba(0,0,0,0.08)] dark:hover:bg-[rgba(255,255,255,0.08)] transition-colors"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
     >
       {isDark ? (
-        <img src="/dark-mode.png" alt="" />
+        <img
+          src="/dark-mode.png"
+          alt=""
+          className="w-6 h-6 sm:w-auto sm:h-auto"
+        />
       ) : (
-        <img src="/light-mode.png" alt="" />
+        <img
+          src="/light-mode.png"
+          alt=""
+          className="w-6 h-6 sm:w-auto sm:h-auto"
+        />
       )}
     </button>
   )
