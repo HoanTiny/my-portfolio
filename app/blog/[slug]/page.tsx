@@ -6,20 +6,34 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Calendar, Clock } from 'lucide-react'
-import ReactMarkdown from 'react-markdown'
 import { getPosts } from '@/services'
 import postsData from '@/lib/blog-posts.json'
 
-type BlogPost = {
+type BlogCategory = {
+  _id: string
+  name: string
   slug: string
-  tag: string
-  date: string
-  readTime: string
+}
+
+type BlogAuthor = {
+  _id: string
+  username: string
+  email: string
+  avatar: string
+}
+
+type BlogPost = {
+  _id: string
+  slug: string
   title: string
-  excerpt: string
-  image: string
-  gradient: string
   content: string
+  thumbnail: string
+  category: BlogCategory
+  tags: string[]
+  author: BlogAuthor
+  status: string
+  createdAt: string
+  updatedAt: string
 }
 
 const getTagName = (value: unknown): string => {
@@ -35,9 +49,27 @@ const getTagName = (value: unknown): string => {
   return 'Development'
 }
 
-const fallbackPosts: Record<string, BlogPost> = Object.fromEntries(
-  postsData.map(post => [post.slug, post])
-)
+const stripHtml = (value: string): string =>
+  value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+
+const getReadTime = (content: string): string => {
+  const words = stripHtml(content).split(/\s+/).filter(Boolean).length
+  const minutes = Math.max(1, Math.ceil(words / 220))
+  return `${minutes} min read`
+}
+
+const formatBlogDate = (value: string): string => {
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) {
+    return value
+  }
+
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+  })
+}
 
 const normalizePosts = (payload: unknown): Record<string, BlogPost> => {
   const source = Array.isArray(payload)
@@ -49,29 +81,69 @@ const normalizePosts = (payload: unknown): Record<string, BlogPost> => {
   return Object.fromEntries(
     source
       .map(item => {
-        const post = item as Partial<BlogPost> & {
-          tag?: string | { name?: string; slug?: string }
-          category?: string | { name?: string; slug?: string }
-          summary?: string
+        const post = item as {
+          _id?: string
+          slug?: string
+          title?: string
+          content?: string
+          image?: string
           thumbnail?: string
+          category?: string | { _id?: string; name?: string; slug?: string }
+          tag?: string | { name?: string; slug?: string }
+          tags?: string[]
+          author?: {
+            _id?: string
+            username?: string
+            email?: string
+            avatar?: string
+          }
+          status?: string
+          createdAt?: string
+          updatedAt?: string
         }
 
         if (!post.slug || !post.title) {
           return null
         }
 
+        const normalizedCategory = post.category
+        const tagName = getTagName(post.tag ?? post.category)
+        const category: BlogCategory =
+          normalizedCategory && typeof normalizedCategory === 'object'
+            ? {
+                _id: normalizedCategory._id ?? '',
+                name: normalizedCategory.name ?? tagName,
+                slug:
+                  normalizedCategory.slug ??
+                  tagName.toLowerCase().replace(/\s+/g, '-'),
+              }
+            : {
+                _id: '',
+                name: tagName,
+                slug: tagName.toLowerCase().replace(/\s+/g, '-'),
+              }
+
+        const now = new Date().toISOString()
+
         return [
           post.slug,
           {
+            _id: post._id ?? post.slug,
             slug: post.slug,
-            tag: getTagName(post.tag ?? post.category),
-            date: post.date ?? '',
-            readTime: post.readTime ?? '5 min read',
             title: post.title,
-            excerpt: post.excerpt ?? post.summary ?? '',
-            image: post.image ?? post.thumbnail ?? '',
-            gradient: post.gradient ?? 'from-emerald-400/40 to-cyan-500/40',
             content: post.content ?? '',
+            thumbnail: post.thumbnail ?? post.image ?? '/dev_logo_icon.webp',
+            category,
+            tags: Array.isArray(post.tags) ? post.tags : tagName ? [tagName] : [],
+            author: {
+              _id: post.author?._id ?? '',
+              username: post.author?.username ?? 'editor',
+              email: post.author?.email ?? '',
+              avatar: post.author?.avatar ?? '',
+            },
+            status: post.status ?? 'published',
+            createdAt: post.createdAt ?? now,
+            updatedAt: post.updatedAt ?? post.createdAt ?? now,
           },
         ] as const
       })
@@ -91,7 +163,9 @@ const tagColors: Record<string, string> = {
 export default function BlogDetailPage() {
   const params = useParams()
   const slug = params.slug as string
-  const [posts, setPosts] = useState<Record<string, BlogPost>>(fallbackPosts)
+  const [posts, setPosts] = useState<Record<string, BlogPost>>(
+    normalizePosts(postsData)
+  )
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -110,32 +184,37 @@ export default function BlogDetailPage() {
   }, [])
 
   const post = posts[slug]
+  const postTag = post ? getTagName(post.category) : 'Development'
+  const postGradient =
+    postTag === 'Performance'
+      ? 'from-emerald-600 to-cyan-500'
+      : postTag === 'Trending'
+        ? 'from-amber-500 to-orange-600'
+        : 'from-violet-600 to-indigo-500'
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-[#f5f5f5] dark:bg-[#1f1f24] flex items-center justify-center transition-colors duration-300">
-        <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold text-[#1f1f24] dark:text-[#e5e5e6]">
-            404
-          </h1>
-          <p className="text-[#5e5e65] dark:text-[#9999a1]">
-            Bài viết không tồn tại.
-          </p>
+      <div className="min-h-screen bg-[#f5f5f5] dark:bg-[#1f1f24] transition-colors duration-300 py-6 sm:py-10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-[#129840] dark:text-[#33a381] font-medium hover:underline"
+            className="inline-flex items-center gap-2 text-[#5e5e65] dark:text-[#9999a1] hover:text-[#129840] dark:hover:text-[#33a381] font-medium transition-colors duration-300 mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
-            Quay lại trang chủ
+            Quay lại
           </Link>
+          <div className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-10 text-[#5e5e65] dark:text-[#9999a1]">
+            Bài viết không tồn tại hoặc đang được cập nhật.
+          </div>
         </div>
       </div>
     )
   }
 
+
   return (
     <div className="min-h-screen bg-[#f5f5f5] dark:bg-[#1f1f24] transition-colors duration-300 py-6 sm:py-10">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -156,22 +235,22 @@ export default function BlogDetailPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className={`relative h-[250px] sm:h-[400px] rounded-2xl overflow-hidden mb-8 bg-gradient-to-br ${post.gradient}`}
+          className={`relative h-62.5 sm:h-100 rounded-2xl overflow-hidden mb-8 bg-linear-to-br `}
         >
-          {post.image && (
+          {post.thumbnail && (
             <Image
-              src={post.image}
+              src={post.thumbnail}
               alt={post.title}
               fill
-              className="object-cover mix-blend-overlay opacity-60"
+              className="object-cover "
               priority
             />
           )}
           <div className="absolute top-4 left-4">
             <span
-              className={`px-3 py-1 text-xs font-medium rounded-full backdrop-blur-sm ${tagColors[post.tag] || 'bg-white/90 text-gray-700'}`}
+              className={`px-3 py-1 text-xs font-medium rounded-full backdrop-blur-sm ${tagColors[postTag] || 'bg-white/90 text-gray-700'}`}
             >
-              {post.tag}
+              {postTag}
             </span>
           </div>
         </motion.div>
@@ -189,11 +268,11 @@ export default function BlogDetailPage() {
           <div className="flex items-center gap-4 text-[#5e5e65] dark:text-[#9999a1] text-sm">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4" />
-              {post.date}
+              {formatBlogDate(post.updatedAt || post.createdAt)}
             </span>
             <span className="flex items-center gap-1.5">
               <Clock className="w-4 h-4" />
-              {post.readTime}
+              {getReadTime(post.content)}
             </span>
           </div>
         </motion.div>
@@ -205,9 +284,10 @@ export default function BlogDetailPage() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="bg-white dark:bg-[#0e0e0f] rounded-2xl p-6 sm:p-10"
         >
-          <article className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-[#1f1f24] dark:prose-headings:text-[#e5e5e6] prose-p:text-[#5e5e65] dark:prose-p:text-[#9999a1] prose-a:text-[#129840] dark:prose-a:text-[#33a381] prose-strong:text-[#1f1f24] dark:prose-strong:text-[#e5e5e6] prose-code:text-[#129840] dark:prose-code:text-[#33a381] prose-pre:bg-[#1a1a1a] dark:prose-pre:bg-[#111] prose-li:text-[#5e5e65] dark:prose-li:text-[#9999a1]">
-            <ReactMarkdown>{post.content}</ReactMarkdown>
-          </article>
+          <div
+            className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-[#1f1f24] dark:prose-headings:text-[#e5e5e6] prose-p:text-[#5e5e65] dark:prose-p:text-[#9999a1] prose-a:text-[#129840] dark:prose-a:text-[#33a381] prose-strong:text-[#1f1f24] dark:prose-strong:text-[#e5e5e6] prose-li:text-[#5e5e65] dark:prose-li:text-[#9999a1] prose-code:before:content-none prose-code:after:content-none [&_code]:font-mono [&_code]:text-[0.95em] [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_:not(pre)>code]:rounded-md [&_:not(pre)>code]:bg-cyan-100 [&_:not(pre)>code]:text-cyan-800 dark:[&_:not(pre)>code]:bg-cyan-900/30 dark:[&_:not(pre)>code]:text-cyan-200 [&_pre]:rounded-2xl [&_pre]:px-5 [&_pre]:py-4 [&_pre]:bg-slate-200 [&_pre]:text-slate-700 dark:[&_pre]:bg-slate-800 dark:[&_pre]:text-slate-100 [&_pre]:overflow-x-auto [&_pre_code]:bg-transparent [&_pre_code]:text-inherit [&_pre_code]:p-0"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
         </motion.div>
       </div>
     </div>

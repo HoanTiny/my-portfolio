@@ -16,6 +16,23 @@ const nextConfig: NextConfig = {
     }
     return config
   },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'files.f8.edu.vn',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'holetex.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
 }
 
 export default withNextIntl(nextConfig)
